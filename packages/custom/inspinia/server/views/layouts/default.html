@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+{% include '../includes/head.html' %}
+
+<body data-ng-controller="ThemeController" ng-cloak class="ng-cloak" ng-class="state">
+    
+    <div id="wrapper">
+
+        <div ng-include="'/inspinia/views/navigation.html'"></div> 
+
+        <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+            <div ng-include="'/inspinia/views/header.html'"></div>
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <section class="content">
+                    <section class="container">
+                        {% block content %}{% endblock %}
+                    </section>
+                </section>
+            </div>
+        </div>
+    {% include '../includes/foot.html' %}
+    </div>
+</body>
+
+</html>

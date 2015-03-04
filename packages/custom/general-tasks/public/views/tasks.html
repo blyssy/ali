@@ -1,0 +1,72 @@
+<section data-ng-controller="GeneralTasksController">
+    <!-- <form id="task-add-form" class="row-fluid form-inline" name="addTaskForm" data-ng-submit="add()">
+        <div class="">
+            <span data-ng-repeat="field in gtasksSchema">
+                <input data-ng-if="(field['type'] == 'text' || field['type'] == 'password')" type="{{field['type']}}" class="span2" data-ng-model="user[field['schemaKey']]" placeholder="{{field['title']}}" id="user-add-title" />
+                <select data-ng-if="field['type'] == 'select'" data-ng-model="user[field['schemaKey']]" ng-multiple="true" multiple ng-options="option for option in field['options']">
+                    <option value="">-- Choose Role --</option>
+                </select>
+            </span>
+            <input type="submit" class="btn span1" value="Add" />
+        </div> 
+    </form> -->
+
+    <h1>General Tasks</h1>
+    <!-- <div class="loader" data-ng-init="init()" data-ng-hide="generalTasks.length"></div> -->
+    <div class="loader" data-ng-init="init()"></div>
+    <ul class="articles unstyled">
+    <li data-ng-repeat="task in GeneralTasks">
+      <span>{{task.task_code}}</span> /
+      <span>{{task.task_name}}</span>
+    </li>
+    </ul>
+
+    <table class="table table-striped table-bordered table-hover editable-table" data-ng-show="tasks.length">
+        <tr>
+            <th data-ng-show="edit">
+                Edit
+            </th>
+            <th data-ng-repeat="field in gtasksSchema" data-ng-if="field.inTable">{{field.title}}</th>
+        </tr>
+        <tr data-ng-repeat="task in tasks">
+            <td data-ng-show="edit">
+                <button class="glyphicon glyphicon-trash" data-ng-click="remove(task)" value="del">
+                    <i class="icon-trash icon-white"></i>
+                </button>
+            </td>
+            <td class="table-editable-cell" data-ng-repeat="field in GeneralTaskSchema" data-ng-if="field.inTable">
+                <span data-ng-if="(field['type'] == 'text')" class="editable-span" data-ng-editable="update(user)" data-ng-editable-model="task[field['schemaKey']]"></span>
+                <span data-ng-click="beforeSelect(field['schemaKey'], task)" data-ng-if="(field['type'] == 'select')" class="editable-span" data-ng-editable-select="update(task, field['schemaKey'])" data-ng-editable-select-model="task[field['schemaKey']]" data-ng-editable-select-options="field['options']">
+                </span>
+            </td>
+        </tr>
+    </table>
+
+
+
+<!--    <div class="loader" data-ng-init="init()" data-ng-hide="tasks.length"></div>
+    <div class="actions-bar" data-ng-show="tasks.length">
+        <input type="button" class="btn btn-danger" data-ng-hide="edit" data-ng-click="edit=!edit" value="Edit">
+        <input type="button" class="btn btn-primary" data-ng-show="edit" data-ng-click="edit=!edit" value="Done">
+    </div>
+    <table class="table table-striped table-bordered table-hover editable-table" data-ng-show="tasks.length">
+        <tr>
+            <th data-ng-show="edit">
+                Edit
+            </th>
+            <th data-ng-repeat="field in gtasksSchema" data-ng-if="field.inTable">{{field.title}}</th>
+        </tr>
+        <tr data-ng-repeat="task in tasks">
+            <td data-ng-show="edit">
+                <button class="glyphicon glyphicon-trash" data-ng-click="remove(task)" value="del">
+                    <i class="icon-trash icon-white"></i>
+                </button>
+            </td>
+            <td class="table-editable-cell" data-ng-repeat="field in GeneralTaskSchema" data-ng-if="field.inTable">
+                <span data-ng-if="(field['type'] == 'text')" class="editable-span" data-ng-editable="update(user)" data-ng-editable-model="task[field['schemaKey']]"></span>
+                <span data-ng-click="beforeSelect(field['schemaKey'], task)" data-ng-if="(field['type'] == 'select')" class="editable-span" data-ng-editable-select="update(task, field['schemaKey'])" data-ng-editable-select-model="task[field['schemaKey']]" data-ng-editable-select-options="field['options']">
+                </span>
+            </td>
+        </tr>
+    </table> -->
+</section>
