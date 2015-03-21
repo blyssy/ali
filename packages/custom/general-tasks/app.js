@@ -23,13 +23,15 @@ GeneralTasks.register(function(app, auth, database) {
     roles: ['authenticated'],
     menu: 'main'
   });
+
+  //GeneralTasks.angularDependencies(['ngTable']);
   
   //GeneralTasks.aggregateAsset('css', 'style.css', {global:true});
   //GeneralTasks.aggregateAsset('css', 'animate.css', {global:true});
   //GeneralTasks.aggregateAsset('css', 'dataTables/dataTables.bootstrap.css');
   //GeneralTasks.aggregateAsset('css', 'dataTables/dataTables.responsive.css');
-  //GeneralTasks.aggregateAsset('css', 'dataTables/dataTables.tableTools.min.css');
-  //GeneralTasks.aggregateAsset('js', 'dataTables/dataTables.bootstrap.js');
+  GeneralTasks.aggregateAsset('css', '../lib/ng-table-master/dist/ng-table.css');
+  GeneralTasks.aggregateAsset('js', '../lib/ng-table-master/dist/ng-table.js');
   //GeneralTasks.aggregateAsset('js', 'dataTables/dataTables.responsive.js');
   //GeneralTasks.aggregateAsset('js', 'dataTables/dataTables.tableTools.min.js');
   //GeneralTasks.aggregateAsset('js', 'dataTables/jquery.dataTables.js');
@@ -55,6 +57,7 @@ GeneralTasks.register(function(app, auth, database) {
         //you now have the settings object
     });
     */
+    GeneralTasks.angularDependencies(['ngTable']);
 
   return GeneralTasks;
 });

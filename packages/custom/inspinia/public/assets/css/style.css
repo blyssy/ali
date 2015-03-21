@@ -1131,6 +1131,32 @@ button.dim:active:before {
   position: relative;
   text-decoration: none;
 }
+/* TABLEPAGINATIN */
+.pagination.ng-table-pagination,
+.pagination.ng-table-pagination > a,
+.pagination.ng-table-pagination > span,
+.pagination.ng-table-pagination > a:hover,
+.pagination.ng-table-pagination > span:hover,
+.pagination.ng-table-pagination > a:focus,
+.pagination.ng-table-pagination > span:focus {
+  background-color: #f4f4f4;
+  border-color: #DDDDDD;
+  color: inherit;
+  cursor: default;
+  z-index: 2;
+}
+.pagination.ng-table-pagination > li > a,
+.pagination.ng-table-pagination > li > span {
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  color: inherit;
+  float: left;
+  line-height: 1.42857;
+  margin-left: -1px;
+  padding: 4px 10px;
+  position: relative;
+  text-decoration: none;
+}
 /* TOOLTIPS */
 .tooltip-inner {
   background-color: #2F4050;

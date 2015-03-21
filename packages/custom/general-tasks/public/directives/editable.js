@@ -1,6 +1,6 @@
-/*'use strict';
-
-angular.module('mean.general-tasks').directive('ngEnter', function() {
+'use strict';
+/*
+angular.module('mean.general-tasks').directive('ngTEnter', function() {
     return function(scope, elm, attrs) {
         elm.bind('keypress', function(e) {
             if (e.charCode === 13 && !e.ctrlKey) scope.$apply(attrs.ngEnter);
@@ -8,7 +8,7 @@ angular.module('mean.general-tasks').directive('ngEnter', function() {
     };
 });
 
-angular.module('mean.general-tasks').directive('ngEditable', function() {
+angular.module('mean.general-tasks').directive('ngTEditable', function() {
     return {
         // can be in-lined or async loaded by xhr
         // or inlined as JS string (using template property)
@@ -33,7 +33,7 @@ angular.module('mean.general-tasks').directive('ngEditable', function() {
     };
 });
 
-angular.module('mean.general-tasks').directive('ngEditableParagraph', function() {
+angular.module('mean.general-tasks').directive('ngTEditableParagraph', function() {
     return {
         // can be in-lined or async loaded by xhr
         // or inlined as JS string (using template property)
@@ -58,7 +58,7 @@ angular.module('mean.general-tasks').directive('ngEditableParagraph', function()
     };
 });
 
-angular.module('mean.general-tasks').directive('ngEditableSelect', function() {
+angular.module('mean.general-tasks').directive('ngTEditableSelect', function() {
     return {
         template: '<span class="editable-wrapper">' + '<span data-ng-hide="edit" data-ng-click="edit=true;value=model;"><span data-ng-repeat="m in model">{{m}};</span></span>' + '<select data-ng-model="value" data-ng-show="edit" data-ng-multiple="true" multiple data-ng-options="option for option in options" data-ng-change="model=value;edit=false;">' + '<option value="">Choose Option</option>' + '</select>' + '</span>',
         scope: {
