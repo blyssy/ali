@@ -1,30 +1,39 @@
 <section data-ng-controller="GeneralTasksController">
-    <form id="task-add-form" class="row-fluid form-inline" name="addTaskForm" data-ng-submit="add()">
+    <!-- <form id="task-add-form" class="row-fluid form-inline" name="addTaskForm" data-ng-submit="add()">
         <div class="">
             <span>
-                <input type="text" class="span2" data-ng-model="task_code" placeholder="Task Code" id="task-add-code" />
+                <input type="text" class="span2" size="10" data-ng-model="task_code" placeholder="Task Code" id="task-add-code" />
             </span>
             <span>
-                <input type="text" class="span2" data-ng-model="task_name" placeholder="Task Name" id="task-add-name" />
+                <input type="text" class="span2" size="6" data-ng-model="trade" placeholder="Trade" id="task-add-trade" />
+            </span>
+            <span>
+                <input type="text" class="span2" size="6" data-ng-model="task" placeholder="Task" id="task-add-task" />
+            </span>
+            <span>
+                <input type="text" class="span2" size="60" data-ng-model="task_name" placeholder="Task Name" id="task-add-name" />
             </span>
             <input type="submit" class="btn span1" value="Add" />
         </div> 
-    </form> 
+    </form> -->
 
     <h1>General Tasks</h1>
-    <div class="loader" data-ng-init="init()"></div> 
+    
     <table ng-table="tableParams" class="table">
         <tbody ng-repeat="p in $data">
-        <tr id="tr{{p._id}}" ng-class-odd="'odd'" ng-class-even="'even'">
-            <td class="rowTd" data-title="'Task Code'"   sortable="'task_code'">{{p.task_code}}</td>
-            <td class="rowTd" data-title="'Task Name'"    sortable="'task_name'">{{p.task_name}}</td>
+        <tr id="tr{{p._id}}">
+            <td class="rowTd" data-title="'Task Code'" sortable="'task_code'">{{p.task_code}}</td>
+            <td class="rowTd" data-title="'Task Name'" sortable="'task_name'">{{p.task_name}}</td>
             <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
                                       ng-click="setEditId(p._id)"></td>
+            <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"
+                                      ng-click="remove(p)"></td>                          
         </tr>
         <tr ng-show="editId===p._id" ng-if="editId===p._id">
-            <td colspan="7" ng-include src="'editRow.html'"></td>
+            <td colspan="3" ng-include src="'/general-tasks/views/editRow.html'"></td>
         </tr>
         </tbody>
     </table>
+    
 
 </section>

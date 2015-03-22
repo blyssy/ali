@@ -62,6 +62,9 @@ exports.update = function(req, res) {
     var task = req.task;
     task = _.extend(task, req.body);
 
+    console.log(task);
+    console.log(req.body);
+
     task.save(function(err) {
         res.json(task);
     });

@@ -1,0 +1,39 @@
+<table class="noborder">
+    <tr>
+        <td rowspan="2"><input type="hidden" name="id" value="{{p._id}}"></td>
+        <td>Task Code:</td>
+        <td><input type="text" ng-model="p.task_code" class="w100" value="{{p.task_code}}"></td>
+        <td>Trade:</td>
+        <td><input type="text" ng-model="p.trade" class="w100" value="{{p.trade}}"></td>
+        <td>Task:</td>
+        <td><input type="text" ng-model="p.task" class="w100" value="{{p.task}}"></td>
+        <!--<td><input type="button" value=" save " ng-click="update(p, p.task_name)"></td>-->
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td><input type="text" ng-model="p.task_name" class="w300" size="60" value="{{p.task_name}}"></td>
+        <td><input type="button" value=" cancel" ng-click="setEditId(-1)"></td>
+        <td><input type="button" value=" save " ng-click="update(p)"></td>
+    </tr>
+</table>
+
+<!-- <table class="noborder">
+    <tr>
+        <td rowspan="2">ID: {{p._id}}<input type="hidden" name="id" value="{{p._id}}"></td>
+        <td>Task Code:</td>
+        <td><input type="text" name="task_code" class="w100" value="{{p.task_code}}"></td>
+        <td>Description: </td>
+        <td>Email:</td>
+        <td><input type="text" name="em" class="w180" value="{{p.em}}"></td>
+        <td><input type="button" value=" save " onclick="alert('Save :)')"></td>
+    </tr>
+    <tr>
+        <td>Lastname:</td>
+        <td><input type="text" name="ln" class="w100" value="{{p.ln}}"></td>
+        <td><input type="text" name="dc" class="w180" value="{{p.dc}}"></td>
+        <td>Phone: </td>
+        <td><input type="text" name="ph" class="w120" value="{{p.ph}}"></td>
+        <td><input type="button" value=" cancel" ng-click="setEditId(-1)"></td>
+    </tr>
+</table> -->
+<!--  class="editRowTd" -->

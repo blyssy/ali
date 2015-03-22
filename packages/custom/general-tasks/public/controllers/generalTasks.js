@@ -10,21 +10,18 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
 
         $scope.init = function() {
             GeneralTasks.query({}, function(tasks) {
-                console.log(tasks);
                 $scope.tasks = tasks;
-                console.log('size of task list is ' + $scope.tasks.length);
             });
         };
 
         $scope.add = function() {
             if (!$scope.tasks) $scope.tasks = [];
 
-            console.log('in the add function with ' + $scope.task);
             var task = new GeneralTasks({
-                task_code: $scope.task.task_code,
-                trade: $scope.task.trade,
-                task: $scope.task.task,
-                task_name: $scope.task.task_name
+                task_code: $scope.task_code,
+                trade: $scope.trade,
+                task: $scope.task,
+                task_name: $scope.task_name
             });
 
             task.$save(function(response) {
@@ -45,12 +42,12 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         };
 
         $scope.update = function(task, taskField) {
-            console.log('task value: ' + task);
-            console.log('taskField value: ' + taskField);
             task.$update();
+            $scope.editId = -1;
         };
 
         var data = GeneralTasks.query();
+        $scope.editId = -1;
     
         $scope.tableParams = new ngTableParams({
             page: 1,
@@ -58,6 +55,8 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         },{
             total: data.length,
             getData: function($defer, params) {
+                params.total(data.length);
+                //var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
                 $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
@@ -66,6 +65,10 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
 
         $scope.setEditId =  function(pid) {
             $scope.editId = pid;
+        };
+
+        $scope.doSearch = function () {
+            $scope.tableParams.reload();
         };
     }
 ]);

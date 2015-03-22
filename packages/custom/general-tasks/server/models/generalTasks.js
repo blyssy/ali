@@ -7,6 +7,10 @@ var mongoose = require('mongoose'),
 //general task schema
 
 var GeneralTaskSchema = new Schema({
+    order: {
+        type: Number,
+        required: true
+    },
     task_code: {
         type: String,
         required: true
