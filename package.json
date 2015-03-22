@@ -6,6 +6,7 @@
   "author": "Linnovate <mean@linnovate.net>",
   "contributors": "https://github.com/linnovate/mean/graphs/contributors",
   "mean": "0.4.3",
+  "package-name": "git+https://ef7955fd2430b1dde0a06b8642998c8cd5d94744:x-oauth-basic@github.com/blyssy/ali.git",
   "repository": {
     "type": "git",
     "url": "https://github.com/linnovate/mean.git"
