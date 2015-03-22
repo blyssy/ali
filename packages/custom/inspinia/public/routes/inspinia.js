@@ -11,6 +11,7 @@ angular.module('mean.inspinia').config(['$stateProvider',
 
 angular.module('mean.inspinia', ['mean.system'])
 .config(['$viewPathProvider', function($viewPathProvider) {
+  $viewPathProvider.override('system/views/index.html', 'inspinia/views/index.html');
   $viewPathProvider.override('users/views/login.html', 'inspinia/views/login.html');
   $viewPathProvider.override('users/views/index.html', 'inspinia/views/or.html');
   $viewPathProvider.override('users/views/forgot-password.html', 'inspinia/views/forgot-password.html');

@@ -20,12 +20,12 @@ Profile.register(function(system, app, auth, database) {
   Profile.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
-  Profile.menus.add({
-    title: 'profile example page',
-    link: 'profile example page',
-    roles: ['authenticated'],
-    menu: 'main'
-  });
+  //Profile.menus.add({
+  //  title: 'profile example page',
+  //  link: 'profile example page',
+  //  roles: ['authenticated'],
+  //  menu: 'main'
+  //});
   
   Profile.aggregateAsset('css', 'profile.css');
 
