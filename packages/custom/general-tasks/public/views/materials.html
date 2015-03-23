@@ -1,1 +1,46 @@
-<h1>Materials</h1>
+
+<section data-ng-controller="MaterialsController">
+     <form id="material-add-form" class="row-fluid form-inline" name="addMaterialForm" data-ng-submit="add()">
+        <div class="">
+            <span>
+                <input type="text" class="span2" size="50" data-ng-model="name" placeholder="Material Name" id="material-add-name" />
+            </span>
+            <span>
+            	<!-- <select data-ng-model="unit"
+                	ng-options="obj.id as obj.unit for obj in units">
+        		</select> -->
+				<select data-ng-model="unit"
+                	ng-options="obj._id as obj.unit for obj in units">
+        		</select>
+            </span>
+            <span>
+            	<select data-ng-model="delivery_offset">
+            		<option value="-2">Two Days Prior</option>
+            		<option value="-1">One Day Prior</option>
+            		<option value="0">Same Day</option>
+        		</select>
+            <input type="submit" class="btn span1" value="Add" />
+        </div> 
+    </form> 
+
+    <h1>Materials</h1>
+    
+    <table ng-table="tableMaterialsParams" class="table">
+        <tbody ng-repeat="p in $data">
+        <tr id="tr{{p._id}}">
+            <td class="rowTd" data-title="'Name'" sortable="'name'">{{p.name}}</td>
+            <td class="rowTd" data-title="'Units'" sortable="'name'">{{p.unit}}</td>
+            <td class="rowTd" data-title="'Days Offset'" sortable="'name'">{{p.delivery_offset}}</td>
+            <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
+                                      ng-click="setMaterialsEditId(p._id)"></td>
+            <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"
+                                      ng-click="remove(p)"></td>                          
+        </tr>
+        <tr ng-show="materialsEditId===p._id" ng-if="materialsEditId===p._id">
+            <td colspan="5" ng-include src="'/general-tasks/views/editRow/materials.html'"></td>
+        </tr>
+        </tbody>
+    </table>
+    
+
+</section>

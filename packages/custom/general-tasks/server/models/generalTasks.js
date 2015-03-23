@@ -4,27 +4,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-//var UnitSchema = new Schema({
-//    units: [{
-//        type: String,
-//       required: true
-//    }]
-//});
-
-//var MaterialSchema = new Schema({
-//    name: {
-//        type: String,
-//        required: true
-//    },
-//    unit: {
-//        type: mongoose.Schema.ObjectId,
-//        ref: 'units'
-//    },
-//    delivery_offset: {
-//        type: Number
-//    }
-//});
-
 //general task schema
 
 var GeneralTaskSchema = new Schema({
