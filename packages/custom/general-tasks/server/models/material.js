@@ -10,11 +10,10 @@ var MaterialSchema = new Schema({
         required: true
     },
     unit: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Unit'
+        type: String
     },
     delivery_offset: {
-        type: Number
+        type: String
     }
 });
 

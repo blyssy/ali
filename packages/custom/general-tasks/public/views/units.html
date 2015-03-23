@@ -1,11 +1,17 @@
 
 <section data-ng-controller="UnitsController">
-     <form id="unit-add-form" class="row-fluid form-inline" name="addUnitForm" data-ng-submit="add()">
-        <div class="">
-            <span>
-                <input type="text" class="span2" size="20" data-ng-model="unit" placeholder="Unit Type" id="unit-add-unit" />
+     <form id="unit-add-form" class="form-group" name="addUnitForm" data-ng-submit="add()">
+        <div class="row">
+            <label class="col-sm-4 control-label text-muted">Add New Unit Type</label>
+        </div>
+        <div class="row">
+            <span class="col-sm-5">
+                <input type="text" data-ng-model="unit" placeholder="Unit Type" class="form-control m-b" />
             </span>
-            <input type="submit" class="btn span1" value="Add" />
+            <button class="btn btn-primary " type="button">
+                <i class="fa fa-check"></i>
+                  Add
+            </button>
         </div> 
     </form> 
 

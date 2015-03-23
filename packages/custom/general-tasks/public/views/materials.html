@@ -1,25 +1,31 @@
 
 <section data-ng-controller="MaterialsController">
-     <form id="material-add-form" class="row-fluid form-inline" name="addMaterialForm" data-ng-submit="add()">
-        <div class="">
-            <span>
-                <input type="text" class="span2" size="50" data-ng-model="name" placeholder="Material Name" id="material-add-name" />
+     <form id="material-add-form" class="form-group" name="addMaterialForm" data-ng-submit="add()">
+        <div class="row">
+        	<label class="col-sm-4 control-label text-muted">Add New Material Type</label>
+        </div>
+        <div class="row">
+            <span class="col-sm-5">
+                <input type="text" data-ng-model="name" placeholder="Material Name" class="form-control m-b"/>
             </span>
-            <span>
-            	<!-- <select data-ng-model="unit"
-                	ng-options="obj.id as obj.unit for obj in units">
-        		</select> -->
-				<select data-ng-model="unit"
-                	ng-options="obj._id as obj.unit for obj in units">
+            <span class="col-sm-2">
+				<select data-ng-model="unit" class="form-control m-b" 
+                	ng-options="obj.unit as obj.unit for obj in units">
+                	<option value="" disabled selected>Unit of Measure</option>
         		</select>
             </span>
-            <span>
-            	<select data-ng-model="delivery_offset">
-            		<option value="-2">Two Days Prior</option>
-            		<option value="-1">One Day Prior</option>
-            		<option value="0">Same Day</option>
+            <span class="col-sm-2">
+            	<select data-ng-model="delivery_offset" class="form-control m-b">
+            		<option value="" disabled selected>Delivery Offset</option>
+            		<option value="Two Days Prior">Two Days Prior</option>
+            		<option value="One Day Prior">One Day Prior</option>
+            		<option value="Same Day">Same Day</option>
         		</select>
-            <input type="submit" class="btn span1" value="Add" />
+ 			</span>
+ 			<button class="btn btn-primary " type="button">
+ 				<i class="fa fa-check"></i>
+ 				  Add
+ 			</button>
         </div> 
     </form> 
 
@@ -29,8 +35,8 @@
         <tbody ng-repeat="p in $data">
         <tr id="tr{{p._id}}">
             <td class="rowTd" data-title="'Name'" sortable="'name'">{{p.name}}</td>
-            <td class="rowTd" data-title="'Units'" sortable="'name'">{{p.unit}}</td>
-            <td class="rowTd" data-title="'Days Offset'" sortable="'name'">{{p.delivery_offset}}</td>
+            <td class="rowTd" data-title="'Units'" sortable="'unit'">{{p.unit}}</td>
+            <td class="rowTd" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
             <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
                                       ng-click="setMaterialsEditId(p._id)"></td>
             <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"

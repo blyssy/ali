@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
     _ = require('lodash');
 
 /**
- * Create user
+ * Create material
  */
 exports.create = function(req, res, next) {
     var material = new Material(req.body);
@@ -19,6 +19,7 @@ exports.create = function(req, res, next) {
         return res.status(400).send(errors);
     }
 
+    console.log(material);
     material.save(function(err) {
         if (err) {
             return res.status(500).json({
@@ -57,7 +58,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an material
+ * Delete a material
  */
 exports.destroy = function(req, res) {
     var material = req.material;
