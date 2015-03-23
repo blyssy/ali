@@ -3,7 +3,7 @@
 angular.module('mean.general-tasks').factory('Units', ['$resource',
   function($resource) {
     return $resource('/units/:unitId', {
-      taskId: '@_id'
+      unitId: '@_id'
     }, {
     	update: {
     		method: 'PUT'

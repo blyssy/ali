@@ -16,11 +16,11 @@
         <tr id="tr{{p._id}}">
             <td class="rowTd" data-title="'Unit'" sortable="'units'">{{p.unit}}</td>
             <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
-                                      ng-click="setEditId(p._id)"></td>
+                                      ng-click="setUnitsEditId(p._id)"></td>
             <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"
                                       ng-click="remove(p)"></td>                          
         </tr>
-        <tr ng-show="editId===p._id" ng-if="editId===p._id">
+        <tr ng-show="unitsEditId===p._id" ng-if="unitsEditId===p._id">
             <td colspan="3" ng-include src="'/general-tasks/views/editRow/units.html'"></td>
         </tr>
         </tbody>

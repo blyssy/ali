@@ -1,0 +1,10 @@
+<table class="noborder">
+    <tr>
+        <td rowspan="2"><input type="hidden" name="id" value="{{p._id}}"></td>
+        <td>Unit:</td>
+        <td><input type="text" ng-model="p.unit" class="w100" value="{{p.unit}}"></td>
+    
+        <td><input type="button" value=" cancel" ng-click="setUnitsEditId(-1)"></td>
+        <td><input type="button" value=" save " ng-click="update(p)"></td>
+    </tr>
+</table>

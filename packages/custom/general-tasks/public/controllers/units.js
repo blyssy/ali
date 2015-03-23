@@ -3,9 +3,9 @@
 angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Units', '$filter', 'ngTableParams',
     function($scope, Global, Menus, $rootScope, $http, Units, $filter, ngTableParams) {
         $scope.global = Global;
-    $scope.hasAuthorization = function(task) {
-      if (!task || !task.user) return false;
-      return $scope.global.isAdmin || task.user._id === $scope.global.user._id;
+    $scope.hasAuthorization = function(unit) {
+      if (!unit || !unit.user) return false;
+      return $scope.global.isAdmin || unit.user._id === $scope.global.user._id;
     };
 
         $scope.init = function() {
@@ -26,10 +26,11 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
             });
 
             this.unit = '';
-            doSearch();
+            this.doSearch();
         };
 
         $scope.remove = function(unit) {
+            console.log('In remove unit ' + unit);
             for (var i in $scope.units) {
                 if ($scope.units[i] === unit) {
                     $scope.units.splice(i, 1);
@@ -39,9 +40,9 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
             unit.$remove();
         };
 
-        $scope.update = function(unit, taskField) {
+        $scope.update = function(unit, unitField) {
             unit.$update();
-            $scope.editId = -1;
+            $scope.unitsEditId = -1;
         };
 
         var data = Units.query();
