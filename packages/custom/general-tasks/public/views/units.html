@@ -1,1 +1,30 @@
-<h1>Units</h1>
+
+<section data-ng-controller="UnitsController">
+     <form id="unit-add-form" class="row-fluid form-inline" name="addUnitForm" data-ng-submit="add()">
+        <div class="">
+            <span>
+                <input type="text" class="span2" size="20" data-ng-model="unit" placeholder="Unit Type" id="unit-add-unit" />
+            </span>
+            <input type="submit" class="btn span1" value="Add" />
+        </div> 
+    </form> 
+
+    <h1>Units</h1>
+    
+    <table ng-table="tableUnitsParams" class="table">
+        <tbody ng-repeat="p in $data">
+        <tr id="tr{{p._id}}">
+            <td class="rowTd" data-title="'Unit'" sortable="'units'">{{p.unit}}</td>
+            <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
+                                      ng-click="setEditId(p._id)"></td>
+            <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"
+                                      ng-click="remove(p)"></td>                          
+        </tr>
+        <tr ng-show="editId===p._id" ng-if="editId===p._id">
+            <td colspan="3" ng-include src="'/general-tasks/views/editRow/units.html'"></td>
+        </tr>
+        </tbody>
+    </table>
+    
+
+</section>

@@ -22,29 +22,6 @@ angular.module('mean.general-tasks').config(['$stateProvider',
       return deferred.promise;
     };
 
-   /*$stateProvider.state('goals', {
-      url: '/goals',
-      templateUrl: 'goals/views/index.html',
-      resolve: {
-        loggedin: checkLoggedin
-      }
-    }).state('goals.create',{
-      url: '/create',
-      templateUrl: 'goals/views/goals/create.html',
-      resolve: {
-        loggedin: checkLoggedin
-      }
-    }).state('goals.log', {
-
-<a ui-sref='tasks.units'><img ng-src="inspinia/assets/img/units.jpg" width="200"/></a>
-      <a ui-sref='tasks.equipment'><img ng-src="inspinia/assets/img/equipment.jpg" width="200"/></a>
-    </div>
-    <div class="info col-md-6">
-      <a ui-sref='tasks.materials'><img ng-src="inspinia/assets/img/materials.jpg" width="200"/></a>
-      <a ui-sref='tasks.list'><img ng-src="in
-
-     */
-
     $stateProvider
     	.state('task control', {
       	  url: '/tasks',

@@ -5,10 +5,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var UnitSchema = new Schema({
-    units: [{
+    unit: {
         type: String,
         required: true
-    }]
+    }
 });
 
 mongoose.model('Unit', UnitSchema);
