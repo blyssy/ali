@@ -18,8 +18,8 @@ GeneralTasks.register(function(app, auth, database) {
 
   //We are adding a link to the main menu for all authenticated users
   GeneralTasks.menus.add({
-    title: 'General Tasks',
-    link: 'all tasks',
+    title: 'Task Control Center',
+    link: 'task control',
     roles: ['authenticated'],
     menu: 'main'
   });

@@ -25,6 +25,10 @@ module.exports = function(GeneralTasks, app, auth, database) {
     app.put('/general-tasks/:taskId', auth.requiresAdmin, tasks.update);
     app.delete('/general-tasks/:taskId', auth.requiresAdmin, tasks.destroy);
 
+    //app.route('/tasks/list')
+    //  .get(auth.requiresAdmin, tasks.all)
+    //  .post(auth.requiresAdmin, tasks.create);
+
     app.param('taskId', tasks.task);
 //  app.get('/generalTasks/example/anyone', function(req, res, next) {
 //    res.send('Anyone can access this');
