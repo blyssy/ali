@@ -1,0 +1,45 @@
+<section data-ng-controller="SubTasksController">
+    <ol class="breadcrumb" ng-controller="breadController" data-ng-init="subtaskInit()">
+        <li ng-repeat="item in breadCrumbs">
+          <a ui-sref='{{item.location}}'>{{item.name}}</a>
+        </li>
+    </ol>
+
+    <form id="subtask-add-form" class="row-fluid form-inline" name="addSubtaskForm" data-ng-submit="add()">
+        <div class="">
+            <span>
+                <input type="text" class="span2" size="10" data-ng-model="subtask_code" placeholder="Code" id="subtask-add-code" />
+            </span>
+            <span>
+                <input type="text" class="span2" size="6" data-ng-model="subtask_trade" placeholder="Trade" id="subtask-add-trade" />
+            </span>
+            <span>
+                <input type="text" class="span2" size="6" data-ng-model="subtask" placeholder="Task#" id="subtask-add-task" />
+            </span>
+            <span>
+                <input type="text" class="span2" size="60" data-ng-model="subtask_name" placeholder="Subtask Name" id="subtask-add-name" />
+            </span>
+            <input type="submit" class="btn span1" value="Add" />
+        </div> 
+    </form>
+
+    <h1>Sub Tasks</h1>
+    
+    <table ng-table="subtaskTableParams" class="table">
+        <tbody ng-repeat="p in $data">
+        <tr id="tr{{p._id}}">
+            <td class="rowTd" data-title="'Subtask Code'" sortable="'subtask_code'">{{p.subtask_code}}</td>
+            <td class="rowTd" data-title="'Subtask Name'" sortable="'subtask_name'">{{p.subtask_name}}</td>
+            <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
+                                      ng-click="setEditId(p._id)"></td>
+            <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"
+                                      ng-click="remove(p)"></td>                          
+        </tr>
+        <tr ng-show="editId===p._id" ng-if="editId===p._id">
+            <td colspan="3" ng-include src="'/general-tasks/views/editRow/subtasks.html'"></td>
+        </tr>
+        </tbody>
+    </table>
+    
+
+</section>

@@ -47,6 +47,12 @@ angular.module('mean.general-tasks').config(['$stateProvider',
           resolve: {
           loggedin: checkLoggedin
         }
+    }).state('subtasks list', {
+          url: '/subtasks',
+          templateUrl: 'general-tasks/views/subtasks.html',
+          resolve: {
+          loggedin: checkLoggedin
+        }
     }).state('tasks list', {
           url: '/list',
           templateUrl: 'general-tasks/views/tasks.html',

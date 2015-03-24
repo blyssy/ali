@@ -27,7 +27,7 @@ Profile.register(function(system, app, auth, database) {
   //  menu: 'main'
   //});
   
-  Profile.aggregateAsset('css', 'profile.css');
+  //Profile.aggregateAsset('css', 'profile.css');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

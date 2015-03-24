@@ -1,5 +1,10 @@
 
 <section data-ng-controller="UnitsController">
+    <ol class="breadcrumb" ng-controller="breadController" data-ng-init="unitInit()">
+        <li ng-repeat="item in breadCrumbs">
+          <a ui-sref='{{item.location}}'>{{item.name}}</a>
+        </li>
+    </ol>
      <form id="unit-add-form" class="form-group" name="addUnitForm" data-ng-submit="add()">
         <div class="row">
             <label class="col-sm-4 control-label text-muted">Add New Unit Type</label>

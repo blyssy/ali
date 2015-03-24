@@ -1,1 +1,6 @@
 <h1>Equipment</h1>
+<ol class="breadcrumb" ng-controller="breadController" data-ng-init="equipmentInit()">
+        <li ng-repeat="item in breadCrumbs">
+          <a ui-sref='{{item.location}}'>{{item.name}}</a>
+        </li>
+    </ol>

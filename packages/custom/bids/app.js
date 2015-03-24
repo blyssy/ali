@@ -5,32 +5,41 @@
  */
 var Module = require('meanio').Module;
 
-var Admin = new Module('admin');
+var Bids = new Module('bids');
 
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Admin.register(function(app, auth, database) {
+Bids.register(function(app, auth, database) {
 
   //We enable routing. By default the Package Object is passed to the routes
-  Admin.routes(app, auth, database);
+  Bids.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
-  Admin.menus.add({
-    title: 'Admin Users',
-    link: 'users',
-    roles: ['admin'],
+  Bids.menus.add({
+    title: 'Bid Wizard',
+    link: 'bid wizard',
+    roles: ['authenticated'],
+    menu: 'main'
+  });
+
+  Bids.menus.add({
+    title: 'Bids',
+    link: 'bids',
+    roles: ['authenticated'],
     menu: 'main'
   });
   
-  //Admin.aggregateAsset('css', 'admin.css');
+  //Bids.aggregateAsset('css', 'bids.css');
+  Bids.aggregateAsset('css', 'steps/jquery.steps.css');
+  Bids.aggregateAsset('js', 'steps/jquery.steps.min.js');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
     // Use this for saving data from administration pages
-    Admin.settings({
+    Bids.settings({
         'someSetting': 'some value'
     }, function(err, settings) {
         //you now have the settings object
@@ -38,30 +47,15 @@ Admin.register(function(app, auth, database) {
 
     // Another save settings example this time with no callback
     // This writes over the last settings.
-    Admin.settings({
+    Bids.settings({
         'anotherSettings': 'some value'
     });
 
     // Get settings. Retrieves latest saved settigns
-    Admin.settings(function(err, settings) {
+    Bids.settings(function(err, settings) {
         //you now have the settings object
     });
     */
 
-    Admin.aggregateAsset('js', '../lib/ng-clip/src/ngClip.js', {
-        absolute: false,
-        global: true
-    });
-
-    Admin.aggregateAsset('js', '../lib/zeroclipboard/dist/ZeroClipboard.js', {
-        absolute: false,
-        global: true
-    });
-
-    Admin.angularDependencies(['ngClipboard']);
-
-    // We enable routing. By default the Package Object is passed to the routes
-    Admin.routes(app, auth, database);
-
-  return Admin;
+  return Bids;
 });
