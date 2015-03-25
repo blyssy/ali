@@ -31,6 +31,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
 
         $scope.add = function() {
             if (!$scope.materials) $scope.materials = [];
+            console.log('In add function with ' + $scope.name);
 
             var material = new Materials({
                 name: $scope.name,

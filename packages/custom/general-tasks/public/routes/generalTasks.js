@@ -43,7 +43,7 @@ angular.module('mean.general-tasks').config(['$stateProvider',
         }
     }).state('tasks equipment', {
           url: '/equipment',
-          templateUrl: 'general-tasks/views/equipment.html',
+          templateUrl: 'general-tasks/views/equipments.html',
           resolve: {
           loggedin: checkLoggedin
         }

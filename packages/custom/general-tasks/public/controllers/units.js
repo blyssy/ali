@@ -37,10 +37,13 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
 
             unit.$save(function(response) {
                 $scope.units.push(response);
+
+                var data = $scope.units;
+                $scope.tableUnitsParams.total(data.length);
+                $scope.tableUnitsParams.reload();
             });
 
             this.unit = '';
-            this.doSearch();
         };
 
         $scope.remove = function(unit) {
@@ -52,6 +55,9 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
             }
 
             unit.$remove();
+            var data = $scope.units;
+            $scope.tableUnitsParams.total(data.length);
+            $scope.tableUnitsParams.reload();
         };
 
         $scope.update = function(unit, unitField) {
@@ -63,8 +69,8 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
             $scope.unitsEditId = pid;
         };
 
-        $scope.doSearch = function () {
+        /*$scope.doSearch = function () {
             $scope.tableUnitsParams.reload();
-        };
+        };*/
     }
 ]);
