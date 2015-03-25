@@ -11,6 +11,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
         $scope.init = function() {
             Materials.query({}, function(materials) {
                 $scope.materials = materials;
+                $scope.units = Units.query();
 
                 var data = materials;
             
@@ -39,6 +40,10 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
 
             material.$save(function(response) {
                 $scope.materials.push(response);
+
+                var data = $scope.materials;
+                $scope.tableMaterialsParams.total(data.length);
+                $scope.tableMaterialsParams.reload();
             });
 
             this.name = this.unit = this.delivery_offset = '';
@@ -52,6 +57,9 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
             }
 
             material.$remove();
+            var data = $scope.materials;
+            $scope.tableMaterialsParams.total(data.length);
+            $scope.tableMaterialsParams.reload();
         };
 
         $scope.update = function(material, materialField) {
@@ -63,8 +71,8 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
             $scope.materialsEditId = pid;
         };
 
-        $scope.doSearch = function () {
+        /*$scope.doSearch = function () {
             $scope.tableMaterialsParams.reload();
-        };
+        };*/
     }
 ]);
