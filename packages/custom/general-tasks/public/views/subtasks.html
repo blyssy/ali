@@ -1,45 +1,134 @@
-<section data-ng-controller="SubTasksController">
-    <ol class="breadcrumb" ng-controller="breadController" data-ng-init="subtaskInit()">
-        <li ng-repeat="item in breadCrumbs">
-          <a ui-sref='{{item.location}}'>{{item.name}}</a>
-        </li>
-    </ol>
+<section data-ng-controller="SubTasksController" data-ng-init="init()">
 
-    <form id="subtask-add-form" class="row-fluid form-inline" name="addSubtaskForm" data-ng-submit="add()">
-        <div class="">
-            <span>
-                <input type="text" class="span2" size="10" data-ng-model="subtask_code" placeholder="Code" id="subtask-add-code" />
-            </span>
-            <span>
-                <input type="text" class="span2" size="6" data-ng-model="subtask_trade" placeholder="Trade" id="subtask-add-trade" />
-            </span>
-            <span>
-                <input type="text" class="span2" size="6" data-ng-model="subtask" placeholder="Task#" id="subtask-add-task" />
-            </span>
-            <span>
-                <input type="text" class="span2" size="60" data-ng-model="subtask_name" placeholder="Subtask Name" id="subtask-add-name" />
-            </span>
-            <input type="submit" class="btn span1" value="Add" />
-        </div> 
-    </form>
+  <div class="row wrapper border-bottom white-bg page-heading ng-scope">
+    <div class="col-lg-10"> <!-- data-ng-controller="GeneralTasksController"> -->
+      <h2>Sub Task List</h2>
+        <ol class="breadcrumb" ng-controller="breadController" data-ng-init="subtaskInit()">
+            <li ng-repeat="item in breadCrumbs">
+              <a ui-sref='{{item.location}}'>{{item.name}}</a>
+            </li>
+        </ol>
+    </div>
+  </div>
 
-    <h1>Sub Tasks</h1>
-    
-    <table ng-table="subtaskTableParams" class="table">
-        <tbody ng-repeat="p in $data">
-        <tr id="tr{{p._id}}">
-            <td class="rowTd" data-title="'Subtask Code'" sortable="'subtask_code'">{{p.subtask_code}}</td>
-            <td class="rowTd" data-title="'Subtask Name'" sortable="'subtask_name'">{{p.subtask_name}}</td>
-            <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
-                                      ng-click="setEditId(p._id)"></td>
-            <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"
-                                      ng-click="remove(p)"></td>                          
-        </tr>
-        <tr ng-show="editId===p._id" ng-if="editId===p._id">
-            <td colspan="3" ng-include src="'/general-tasks/views/editRow/subtasks.html'"></td>
-        </tr>
-        </tbody>
-    </table>
-    
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Add A Sub Task</h5>
+            </div>
+            <div class="ibox-content">
+                <form name="addSubtaskForm" data-ng-submit="add()">
+                    <div class="form-group">
+                        <!-- <div class="col-sm-2">
+                            <input type="text" class="form-control m-b" data-ng-model="subtask_code" placeholder="Code" />
+                        </div> -->
+                        <div class="col-sm-2">
+                            <select class="form-control m-b" data-ng-model="subtask_trade">
+                                <option value="" disabled selected>Trade</option>
+                                <option value="01">Concrete</option>
+                                <option value="02">Plumbing</option>
+                                <option value="03">Grader</option>
+                                <option value="04">Framer</option>
+                                <option value="05">Drywall</option>
+                                <option value="06">Roofer</option>
+                                <option value="07">HVAC</option>
+                                <option value="08">Stucco</option>
+                                <option value="09">Electrician</option>
+                                <option value="10">Unused</option>
+                                <option value="11">Fire Sprinkler</option>
+                                <option value="12">Insulation</option>
+                                <option value="13">Painter</option>
+                                <option value="14">Cabinets</option>
+                                <option value="15">Masonry</option>
+                                <option value="16">Finish Trim</option>
+                                <option value="17">Tile</option>
+                                <option value="18">Flooring</option>
+                                <option value="19">Fencing</option>
+                                <option value="20">Landscaping</option>
+                            </select>
+                            <!--<input type="text" data-ng-model="subtask_trade" placeholder="Trade" /> -->
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control m-b" data-ng-model="subtask">
+                                <option value="" disabled selected>Task#</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                            </select>
+                            <!-- <input type="text" data-ng-model="subtask" placeholder="Task#" /> -->
+                        </div>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control m-b" data-ng-model="subtask_name" placeholder="Subtask Name" />
+                        </div>
+                    </div>
+
+                        <button class="btn btn-primary " type="submit">
+                            <i class="fa fa-check"></i>
+                              Add
+                        </button>
+                    
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Sub Tasks </h5>
+            </div>
+            <div class="ibox-content">
+                <table ng-table="subtaskTableParams" class="table">
+                    <tbody ng-repeat="p in $data">
+                    <tr id="tr{{p._id}}">
+                        <td class="rowTd" data-title="'Subtask Code'" sortable="'subtask_code'">{{p.subtask_code}}</td>
+                        <td class="rowTd" data-title="'Subtask Name'" sortable="'subtask_name'">{{p.subtask_name}}</td>
+                        <td class="rowTd" >
+                            <button class="btn btn-primary dim" type="button" ng-click="setEditId(p._id)"><i class="fa fa-edit"></i></button>
+                        </td>
+                        <td class="rowTd" >
+                            <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr ng-show="editId===p._id" ng-if="editId===p._id">
+                        <td coldiv="3" ng-include src="'/general-tasks/views/editRow/subtasks.html'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </section>
+
+
+

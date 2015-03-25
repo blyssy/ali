@@ -11,11 +11,27 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
         $scope.init = function() {
             Subtasks.query({}, function(subtasks) {
                 $scope.subtasks = subtasks;
+
+                var data = subtasks;
+    
+                $scope.subtaskTableParams = new ngTableParams({
+                    page: 1,
+                    count: 10
+                },{
+                    total: data.length,
+                    getData: function($defer, params) {
+                        params.total(data.length);
+                        var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+                        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    }
+                });
             });
         };
 
         $scope.add = function() {
             if (!$scope.subtasks) $scope.subtasks = [];
+
+            $scope.subtask_code = $scope.subtask_trade + $scope.subtask;
 
             var subtask = new Subtasks({
                 subtask_code: $scope.subtask_code,
@@ -26,9 +42,13 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
 
             subtask.$save(function(response) {
                 $scope.subtasks.push(response);
+                
+                var data = $scope.subtasks;
+                $scope.subtaskTableParams.total(data.length);
+                $scope.subtaskTableParams.reload();
             });
 
-            this.subtaskCode = this.subtaskTrade = this.subtask = this.subtaskName = '';
+            this.subtask_code = this.subtask_trade = this.subtask = this.subtask_name = '';
         };
 
         $scope.remove = function(subtask) {
@@ -39,6 +59,9 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
             }
 
             subtask.$remove();
+            var data = $scope.subtasks;
+            $scope.subtaskTableParams.total(data.length);
+            $scope.subtaskTableParams.reload();
         };
 
         $scope.update = function(subtask, subtaskField) {
@@ -46,26 +69,12 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
             $scope.editId = -1;
         };
 
-        var data = Subtasks.query();
-    
-        $scope.subtaskTableParams = new ngTableParams({
-            page: 1,
-            count: 10
-        },{
-            total: data.length,
-            getData: function($defer, params) {
-                params.total(data.length);
-                var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-        });
-
         $scope.setEditId =  function(pid) {
             $scope.editId = pid;
         };
 
-        $scope.doSearch = function () {
+        /*$scope.doSearch = function () {
             $scope.subtaskTableParams.reload();
-        };
+        };*/
     }
 ]);

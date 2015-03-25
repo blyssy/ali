@@ -27,7 +27,7 @@ Inspinia.register(function(system, app, auth, database) {
   //});
   
   //Inspinia.aggregateAsset('css', 'inspinia.css');
-  Inspinia.aggregateAsset('css', 'style.css', {global:true});
+  Inspinia.aggregateAsset('css', 'style.css', {global:true, weight: 5});
   Inspinia.aggregateAsset('css', 'animate.css', {global:true});
   Inspinia.aggregateAsset('css', 'bootstrap.css', {global:true});
   Inspinia.aggregateAsset('css', '../lib/font-awesome/css/font-awesome.css', {global:true});

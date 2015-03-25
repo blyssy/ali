@@ -11,6 +11,20 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         $scope.init = function() {
             GeneralTasks.query({}, function(tasks) {
                 $scope.tasks = tasks;
+
+                var data = tasks;
+
+                $scope.tableParams = new ngTableParams({
+                    page: 1,
+                    count: 10
+                },{
+                    total: data.length,
+                    getData: function($defer, params) {
+                        params.total(data.length);
+                        //var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+                        $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    }
+                });
             });
         };
 
@@ -26,9 +40,13 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
 
             task.$save(function(response) {
                 $scope.tasks.push(response);
+
+                var data = $scope.tasks;
+                $scope.tableParams.total(data.length);
+                $scope.tableParams.reload();
             });
 
-            this.taskCode = this.trade = this.task = this.taskName = '';
+            this.task_code = this.trade = this.task = this.task_name = '';
         };
 
         $scope.remove = function(task) {
@@ -39,6 +57,9 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
             }
 
             task.$remove();
+            var data = $scope.tasks;
+            $scope.tableParams.total(data.length);
+            $scope.tableParams.reload();
         };
 
         $scope.update = function(task, taskField) {
@@ -46,29 +67,12 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
             $scope.editId = -1;
         };
 
-        var data = GeneralTasks.query();
-        $scope.editId = -1;
-    
-        $scope.tableParams = new ngTableParams({
-            page: 1,
-            count: 10
-        },{
-            total: data.length,
-            getData: function($defer, params) {
-                params.total(data.length);
-                //var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-                $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-        });
-
-        $scope.editId = -1;
-
         $scope.setEditId =  function(pid) {
             $scope.editId = pid;
         };
 
-        $scope.doSearch = function () {
+        /*$scope.doSearch = function () {
             $scope.tableParams.reload();
-        };
+        };*/
     }
 ]);

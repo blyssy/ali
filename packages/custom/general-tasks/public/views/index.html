@@ -1,16 +1,36 @@
- <div class=""> <!-- data-ng-controller="GeneralTasksController"> -->
-  <div class="col-md-12 row" align="center">
-    <div class="info col-md-6" align="center">
-      <a ui-sref='tasks units'><h3>Units</h3>
-      <img class="img-thumbnail" ng-src="inspinia/assets/img/units.jpg" width="250"/></a><br><br>
-      <a ui-sref='tasks equipment'><h3>Equipment</h3>
-      <img class="img-thumbnail" ng-src="inspinia/assets/img/equipment.jpg" width="250"/></a>
+<div class="ng-scope">
+  <div class="row wrapper border-bottom white-bg page-heading ng-scope">
+    <div class="col-lg-10"> <!-- data-ng-controller="GeneralTasksController"> -->
+      <h2>Task Control Center</h2>
+      <ol class="breadcrumb" ng-controller="breadController" data-ng-init="mainInit()">
+        <li ng-repeat="item in breadCrumbs">
+          <a ui-sref='{{item.location}}'>{{item.name}}</a>
+        </li>
+      </ol>
     </div>
-    <div class="info col-md-6" align="center">
-      <a ui-sref='tasks materials'><h3>Materials</h3>
-      <img class="img-thumbnail" ng-src="inspinia/assets/img/materials.jpg" width="250"/></a><br><br>
-      <a ui-sref='tasks list'><h3>List</h3>
-      <img class="img-thumbnail" ng-src="inspinia/assets/img/task_list.jpg" width="250"/></a>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-md-6" align="center">
+        <a ui-sref='tasks units'><h3>Units</h3>
+        <img class="img-thumbnail" ng-src="inspinia/assets/img/units.jpg" width="250"/></a>
+      </div>
+      <div class="col-md-6" align="center">
+        <a ui-sref='tasks materials'><h3>Materials</h3>
+        <img class="img-thumbnail" ng-src="inspinia/assets/img/materials.jpg" width="250"/></a>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-md-6" align="center">
+        <a ui-sref='tasks equipment'><h3>Equipment</h3>
+        <img class="img-thumbnail" ng-src="inspinia/assets/img/equipment.jpg" width="250"/></a>
+      </div>
+      <div class="col-md-6" align="center">
+        <a ui-sref='tasks list'><h3>List</h3>
+        <img class="img-thumbnail" ng-src="inspinia/assets/img/task_list.jpg" width="250"/></a>
+      </div>
     </div>
   </div>
 
@@ -36,5 +56,5 @@
   </br>
   <h3><a href="http://www.mean.io/#!/docs">Documentation</a></h3>
   </br> -->
-</div>
 
+</div>

@@ -33,6 +33,9 @@ angular.module('mean.general-tasks').controller('breadController', ['$scope', 'G
       $scope.breadCrumbs = [{
         'location': 'task control',
         'name': 'Task Control'
+      }, {
+        'location': 'tasks materials',
+        'name': 'Materials'
       }];
     };
 
@@ -40,10 +43,23 @@ angular.module('mean.general-tasks').controller('breadController', ['$scope', 'G
       $scope.breadCrumbs = [{
         'location': 'task control',
         'name': 'Task Control'
+      }, {
+        'location': 'tasks units',
+        'name': 'Units'
       }];
     };
 
     $scope.equipmentInit = function () {
+      $scope.breadCrumbs = [{
+        'location': 'task control',
+        'name': 'Task Control'
+      }, {
+        'location': 'tasks equipment',
+        'name': 'Equipment'
+      }];
+    };
+
+    $scope.mainInit = function () {
       $scope.breadCrumbs = [{
         'location': 'task control',
         'name': 'Task Control'

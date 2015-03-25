@@ -11,6 +11,20 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
         $scope.init = function() {
             Units.query({}, function(units) {
                 $scope.units = units;
+
+                var data = units;
+            
+                $scope.tableUnitsParams = new ngTableParams({
+                    page: 1,
+                    count: 10
+                },{
+                    total: data.length,
+                    getData: function($defer, params) {
+                        params.total(data.length);
+                        var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+                        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    }
+                });
             });
         };
 
@@ -44,23 +58,6 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
             unit.$update();
             $scope.unitsEditId = -1;
         };
-
-        var data = Units.query();
-        $scope.unitsEditId = -1;
-    
-        $scope.tableUnitsParams = new ngTableParams({
-            page: 1,
-            count: 10
-        },{
-            total: data.length,
-            getData: function($defer, params) {
-                params.total(data.length);
-                //var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-                $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-        });
-
-        $scope.unitsEditId = -1;
 
         $scope.setUnitsEditId =  function(pid) {
             $scope.unitsEditId = pid;

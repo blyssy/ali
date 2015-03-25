@@ -1,5 +1,5 @@
 
-<section data-ng-controller="UnitsController">
+<section data-ng-controller="UnitsController" data-ng-init="init()">
     <ol class="breadcrumb" ng-controller="breadController" data-ng-init="unitInit()">
         <li ng-repeat="item in breadCrumbs">
           <a ui-sref='{{item.location}}'>{{item.name}}</a>

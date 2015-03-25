@@ -1,4 +1,4 @@
-html {
+/*html {
     height: 100%;
 }
 
@@ -315,8 +315,8 @@ background: url("/theme/assets/img/bg.png");
 
 .login-form__right .bigger .social {
     top: inherit;
-    -ms-transform: none; /* IE 9 */
-    -webkit-transform: none; /* Chrome, Safari, Opera */
+    -ms-transform: none; /* IE 9 
+    -webkit-transform: none; /* Chrome, Safari, Opera 
     transform: none;
 }
 
@@ -329,8 +329,8 @@ background: url("/theme/assets/img/bg.png");
     top:50%;
     left:0;
     right:0;
-    -ms-transform: translate(0, -50%); /* IE 9 */
-    -webkit-transform: translate(0, -50%); /* Chrome, Safari, Opera */
+    -ms-transform: translate(0, -50%); /* IE 9 
+    -webkit-transform: translate(0, -50%); /* Chrome, Safari, Opera 
     transform: translate(0, -50%);
 }
 
@@ -447,3 +447,4 @@ background: url("/theme/assets/img/bg.png");
     width: 465px;
     margin-left: -232px;
 }
+*/

@@ -1,5 +1,7 @@
 {
   "name": "general-tasks",
   "version": "0.0.1",
-  "dependencies": {}
+  "dependencies": {
+    "angular-ui-grid": "~3.0.0-rc.20"
+  }
 }

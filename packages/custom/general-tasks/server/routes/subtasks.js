@@ -21,9 +21,9 @@ module.exports = function(Subtasks, app, auth, database) {
     //var tasks = require('../controllers/general-tasks');
     app.get('/subtasks', auth.requiresAdmin, subtasks.all);
     app.post('/subtasks', auth.requiresAdmin, subtasks.create);
-    app.get('/subtasks/:taskId', auth.requiresAdmin, subtasks.show);
-    app.put('/subtasks/:taskId', auth.requiresAdmin, subtasks.update);
-    app.delete('/subtasks/:taskId', auth.requiresAdmin, subtasks.destroy);
+    app.get('/subtasks/:subtaskId', auth.requiresAdmin, subtasks.show);
+    app.put('/subtasks/:subtaskId', auth.requiresAdmin, subtasks.update);
+    app.delete('/subtasks/:subtaskId', auth.requiresAdmin, subtasks.destroy);
 
     //app.route('/tasks/list')
     //  .get(auth.requiresAdmin, tasks.all)

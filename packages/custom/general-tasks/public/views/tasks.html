@@ -1,9 +1,15 @@
-<section data-ng-controller="GeneralTasksController">
-    <ol class="breadcrumb" ng-controller="breadController" data-ng-init="taskInit()">
-        <li ng-repeat="item in breadCrumbs">
-          <a ui-sref='{{item.location}}'>{{item.name}}</a>
-        </li>
-    </ol>
+<section data-ng-controller="GeneralTasksController" data-ng-init="init()">
+    <div class="row wrapper border-bottom white-bg page-heading ng-scope">
+        <div class="col-lg-10"> <!-- data-ng-controller="GeneralTasksController"> -->
+          <h2>General Task List</h2>
+            <ol class="breadcrumb" ng-controller="breadController" data-ng-init="taskInit()">
+                <li ng-repeat="item in breadCrumbs">
+                  <a ui-sref='{{item.location}}'>{{item.name}}</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+
     <!-- <form id="task-add-form" class="row-fluid form-inline" name="addTaskForm" data-ng-submit="add()">
         <div class="">
             <span>
@@ -21,24 +27,33 @@
             <input type="submit" class="btn span1" value="Add" />
         </div> 
     </form> -->
-
-    <h1>General Tasks</h1>
-    
-    <table ng-table="tableParams" class="table">
-        <tbody ng-repeat="p in $data">
-        <tr id="tr{{p._id}}">
-            <td class="rowTd" data-title="'Task Code'" sortable="'task_code'">{{p.task_code}}</td>
-            <td class="rowTd" data-title="'Task Name'" sortable="'task_name'">{{p.task_name}}</td>
-            <td class="rowTd" ><input type=button id="editRowBtn{{p._id}}" value="edit"
-                                      ng-click="setEditId(p._id)"></td>
-            <td class="rowTd" ><input type=button id="deleteRowBtn{{p._id}}" value="delete"
-                                      ng-click="remove(p)"></td>                          
-        </tr>
-        <tr ng-show="editId===p._id" ng-if="editId===p._id">
-            <td colspan="3" ng-include src="'/general-tasks/views/editRow/tasks.html'"></td>
-        </tr>
-        </tbody>
-    </table>
-    
-
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                  <h5>General Tasks </h5>
+                </div>
+              <div class="ibox-content">   
+                <table ng-table="tableParams" class="table">
+                    <tbody ng-repeat="p in $data">
+                    <tr id="tr{{p._id}}">
+                        <td class="rowTd" data-title="'Task Code'" sortable="'task_code'">{{p.task_code}}</td>
+                        <td class="rowTd" data-title="'Task Name'" sortable="'task_name'">{{p.task_name}}</td>
+                        <td class="rowTd" >
+                            <button class="btn btn-primary dim" type="button" ng-click="setEditId(p._id)"><i class="fa fa-edit"></i></button>
+                        </td>
+                        <td class="rowTd" >
+                            <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr ng-show="editId===p._id" ng-if="editId===p._id">
+                        <td colspan="4" ng-include src="'/general-tasks/views/editRow/tasks.html'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
 </section>

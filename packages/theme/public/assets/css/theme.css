@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
     font-family: 'futura_bkbook';
     src: url("/theme/assets/fonts/ufonts.com_futura-book.eot");
     src: url("/theme/assets/fonts/ufonts.com_futura-book.eot?#iefix") format("embedded-opentype"), url("/theme/assets/fonts/ufonts.com_futura-book.woff") format("woff"), url("/theme/assets/fonts/ufonts.com_futura-book.ttf") format("truetype"), url("/theme/assets/fonts/ufonts.com_futura-book.svg#futura_bkbook") format("svg");
@@ -37,7 +37,7 @@
 
 .welcome {
   padding-bottom: 4px;
-  /*font-family: "futura_bkbook";*/
+  /*font-family: "futura_bkbook";
   font-family:"open_sans_hebrewregular";
   font-size:16px;
   margin: 0;
@@ -68,7 +68,7 @@
 
 .welcome h3 {
   font-size:17px;
-/*  font-weight:300; */
+/*  font-weight:300; 
   text-transform: uppercase;
   color: #0e0e0e;
 }
@@ -89,7 +89,7 @@
   margin:20px 0 20px 0;
 }
 
-/* Docs */
+/* Docs 
 .welcome .info ul {
   padding-left:20px;
   width:220px;
@@ -148,7 +148,7 @@
   margin: 0 0.5em 0 -1em;
 }
 
-/* Packages */
+/* Packages 
 
 .packages .package{
   float:left;
@@ -156,7 +156,7 @@
   margin-right:40px;
 }
 
-/* Packages */
+/* Packages 
 .packages .package h4, .community .package h4{
   text-transform: uppercase;
   margin-left:53px;
@@ -168,7 +168,7 @@
   margin-left:53px;
 }
 
-/* Community */
+/* Community 
 .welcome-sprite{
   float:left;
   width:53px;
@@ -235,7 +235,7 @@
     background-position: -152px -5px;
 }
 
-/* Featured Pic */
+/* Featured Pic 
 .featuredpic img{
   width:510px;
 }
@@ -244,7 +244,7 @@
   margin-bottom:40px;
 }
 
-/* Featured Sites */
+/* Featured Sites 
 
 
 .featured-sites h4{
@@ -259,3 +259,4 @@
   font-size:14px;
   margin-left:0;
 }
+*/
