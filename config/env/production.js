@@ -30,6 +30,9 @@ module.exports = {
   app: {
     name: 'MEAN - A Modern Stack - Production'
   },
+  logging: {
+    format: 'combined'
+  },
   facebook: {
     clientID: 'APP_ID',
     clientSecret: 'APP_SECRET',

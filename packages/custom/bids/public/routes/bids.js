@@ -3,7 +3,8 @@
 angular.module('mean.bids').config(['$stateProvider', 
   function($stateProvider) {
   	// Check if the user is connected
-    var checkLoggedin = function($q, $timeout, $http, $location) {
+    /* jshint ignore:start */
+    /*var checkLoggedin = function($q, $timeout, $http, $location) {
       // Initialize a new promise
       var deferred = $q.defer();
 
@@ -20,7 +21,8 @@ angular.module('mean.bids').config(['$stateProvider',
       });
 
       return deferred.promise;
-    };
+    };*/
+    /* jshint ignore:end */
 
 
     $stateProvider
@@ -30,7 +32,7 @@ angular.module('mean.bids').config(['$stateProvider',
     }).state('bid wizard', {
             url: '/wizard',
             templateUrl: '/bids/views/wizard.html',
-            controller: wizardCtrl,
+            //controller: wizardCtrl,
             data: { pageTitle: 'Wizard form' }/*,
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {

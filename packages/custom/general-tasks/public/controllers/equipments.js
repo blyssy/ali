@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Equipments', '$filter', 'ngTableParams',
-    function($scope, Global, Menus, $rootScope, $http, Equipments, $filter, ngTableParams) {
+    function($scope, Global, Menus, $rootScope, $http, Equipments, $filter, NGTableParams) {
         $scope.global = Global;
     $scope.hasAuthorization = function(equipment) {
       if (!equipment || !equipment.user) return false;
@@ -14,7 +14,8 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
 
                 var data = equipments;
             
-                $scope.tableEquipmentsParams = new ngTableParams({
+                /* jshint ignore:start */
+                $scope.tableEquipmentsParams = new NGTableParams({
                     page: 1,
                     count: 10
                 },{
@@ -25,6 +26,7 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
+                /* jshint ignore:end */
             });
         };
 

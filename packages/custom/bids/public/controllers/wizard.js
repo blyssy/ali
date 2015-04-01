@@ -3,7 +3,8 @@
  * wizardCtrl - Controller for wizard functions
  * used in Wizard view
  */
-function wizardCtrl($scope, $rootScope) {
+ 
+/*function wizardCtrl($scope, $rootScope) {
     // All data will be store in this object
     $scope.formData = {};
 
@@ -12,4 +13,4 @@ function wizardCtrl($scope, $rootScope) {
         alert('Wizard completed');
     };
 
-}
+}*/

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.general-tasks').controller('MaterialsController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Materials', 'Units', '$filter', 'ngTableParams',
-    function($scope, Global, Menus, $rootScope, $http, Materials, Units, $filter, ngTableParams) {
+    function($scope, Global, Menus, $rootScope, $http, Materials, Units, $filter, NGTableParams) {
         $scope.global = Global;
     $scope.hasAuthorization = function(material) {
       if (!material || !material.user) return false;
@@ -15,7 +15,8 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
 
                 var data = materials;
             
-                $scope.tableMaterialsParams = new ngTableParams({
+                /* jshint ignore:start */
+                $scope.tableMaterialsParams = new NGTableParams({
                     page: 1,
                     count: 10
                 },{
@@ -26,6 +27,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
+                /* jshint ignore:end */
             });
         };
 

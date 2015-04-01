@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.general-tasks').controller('SubTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Subtasks', '$filter', 'ngTableParams',
-    function($scope, Global, Menus, $rootScope, $http, Subtasks, $filter, ngTableParams) {
+    function($scope, Global, Menus, $rootScope, $http, Subtasks, $filter, NGTableParams) {
         $scope.global = Global;
     $scope.hasAuthorization = function(subtask) {
       if (!subtask || !subtask.user) return false;
@@ -14,7 +14,8 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
 
                 var data = subtasks;
     
-                $scope.subtaskTableParams = new ngTableParams({
+                /* jshint ignore:start */
+                $scope.subtaskTableParams = new NGTableParams({
                     page: 1,
                     count: 10
                 },{
@@ -25,6 +26,7 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
+                /* jshint ignore:end */
             });
         };
 

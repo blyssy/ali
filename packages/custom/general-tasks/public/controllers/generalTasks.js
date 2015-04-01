@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', '$filter', 'ngTableParams',
-    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, $filter, ngTableParams) {
+    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, $filter, NGTableParams) {
         $scope.global = Global;
     $scope.hasAuthorization = function(task) {
       if (!task || !task.user) return false;
@@ -14,7 +14,8 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
 
                 var data = tasks;
 
-                $scope.tableParams = new ngTableParams({
+                /* jshint ignore:start */
+                $scope.tableParams = new NGTableParams({
                     page: 1,
                     count: 10
                 },{
@@ -25,6 +26,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
                         $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
+                /* jshint ignore:end */
             });
         };
 

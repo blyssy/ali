@@ -3,6 +3,9 @@
 module.exports = {
   db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/meandev',
   debug: true,
+  logging: {
+    format: 'tiny'
+  },
   //  aggregate: 'whatever that is not false, because boolean false value turns aggregation off', //false
   aggregate: false,
   mongoose: {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Units', '$filter', 'ngTableParams',
-    function($scope, Global, Menus, $rootScope, $http, Units, $filter, ngTableParams) {
+    function($scope, Global, Menus, $rootScope, $http, Units, $filter, NGTableParams) {
         $scope.global = Global;
     $scope.hasAuthorization = function(unit) {
       if (!unit || !unit.user) return false;
@@ -14,7 +14,8 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
 
                 var data = units;
             
-                $scope.tableUnitsParams = new ngTableParams({
+                /* jshint ignore:start */
+                $scope.tableUnitsParams = new NGTableParams({
                     page: 1,
                     count: 10
                 },{
@@ -25,6 +26,7 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
+                /* jshint ignore:end */
             });
         };
 
