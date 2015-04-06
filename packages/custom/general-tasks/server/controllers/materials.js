@@ -11,8 +11,9 @@ var mongoose = require('mongoose'),
 /**
  * Create material
  */
-exports.create = function(req, res, next) {
+exports.create = function(req, res, next, id) {
     var material = new Material(req.body);
+    console.log('in the mat create function');
 
     //material = _.extend(material, req.body);
 
@@ -28,6 +29,7 @@ exports.create = function(req, res, next) {
                 error: 'Cannot save the material of measure'
             });
         }
+
         res.json(material);
     });
 };
@@ -44,18 +46,6 @@ exports.material = function(req, res, next, id) {
     req.material = material;
     next();
   });
-
- /*   Material
-        .findOne({
-            _id: id
-        })
-        .exec(function(err, material) {
-            if (err) return next(err);
-            if (!material) return next(new Error('Failed to load Material ' + id));
-            req.material = material;
-            next();
-        });
-*/
 };
 /**
  * Update a material
@@ -64,7 +54,15 @@ exports.update = function(req, res) {
     var material = req.material;
     material = _.extend(material, req.body);
 
+    console.log('in the mat update function');
+
     material.save(function(err) {
+        if (err) {
+            return res.status(500).json({
+                error: 'Cannot save the material of measure'
+            });
+        }
+
         res.json(material);
     });
 };
@@ -90,7 +88,15 @@ exports.destroy = function(req, res) {
  * Show a material
  */
 exports.show = function(req, res) {
-    res.json(req.material);
+    Material.find().populate('unit', 'unit').exec(function(err, materials) {
+        if (err) {
+            return res.status(500).json({
+            error: 'Cannot show the materials'
+            });
+        }
+        res.json(materials);
+    });
+    //res.json(req.material);
 };
 
 /**

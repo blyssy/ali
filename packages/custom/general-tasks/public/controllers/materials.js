@@ -43,6 +43,8 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
             material.$save(function(response) {
                 $scope.materials.push(response);
 
+                console.log('added ' + response);
+
                 var data = $scope.materials;
                 $scope.tableMaterialsParams.total(data.length);
                 $scope.tableMaterialsParams.reload();
@@ -65,6 +67,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
         };
 
         $scope.update = function(material, materialField) {
+            console.log('in the update function');
             material.$update();
             $scope.materialsEditId = -1;
         };

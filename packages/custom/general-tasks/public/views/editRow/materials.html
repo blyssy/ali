@@ -1,12 +1,36 @@
-<table class="noborder">
+<!-- <table class="noborder">
     <tr>
         <td rowspan="2"><input type="hidden" name="id" value="{{p._id}}"></td>
         <td>Material:</td>
         <td><input type="text" ng-model="p.name" class="w100" value="{{p.name}}"></td>
-        <!-- <td><input type="text" ng-model="p.unit" class="w100" value="{{p.unit}}"></td>
-        <td><input type="text" ng-model="p.name" class="w100" value="{{p.name}}"></td> -->
+        <td><input type="text" ng-model="p.unit" class="w100" value="{{p.unit}}"></td>
+        <td><input type="text" ng-model="p.name" class="w100" value="{{p.name}}"></td>
     
         <td><input type="button" value=" cancel" ng-click="setMaterialsEditId(-1)"></td>
         <td><input type="button" value=" save " ng-click="update(p)"></td>
     </tr>
-</table>
+</table> -->
+
+<div class="ibox-content">
+	<div class="well">      
+      <div><label class="control-label">Material:</label>
+      <input type="text" ng-model="p.name" class="form-control m-b" value="{{p.name}}"></div>
+      <div><label class="control-label">Units:</label>
+      	<select data-ng-model="p.unit" class="form-control m-b" 
+                   ng-options="obj as obj.unit for obj in units">
+        </select>
+      </div>
+      <div><label class="control-label">Delivery Offset:</label>
+      	<select data-ng-model="p.delivery_offset" class="form-control m-b">
+      		<option value="Two Days Prior">Two Days Prior</option>
+      		<option value="One Day Prior">One Day Prior</option>
+      		<option value="Same Day">Same Day</option>
+    		</select>
+    	</div>
+  
+      <div class="pull-right">
+      	<button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i></button>
+      	<button class="btn btn-primary dim" type="button" ng-click="setMaterialsEditId(-1)"><i class="fa fa-times"></i></button>
+      </div>
+	</div>
+</div>
