@@ -25,7 +25,7 @@
                             </span>
                             <span class="col-sm-2">
                 				<select data-ng-model="unit" class="form-control m-b" 
-                                	ng-options="obj.unit as obj.unit for obj in units">
+                                	ng-options="obj._id as obj.unit for obj in units">
                                 	<option value="" disabled selected>Unit of Measure</option>
                         		</select>
                             </span>
@@ -59,7 +59,7 @@
                         <tbody ng-repeat="p in $data">
                         <tr id="tr{{p._id}}">
                             <td class="rowTd" data-title="'Name'" sortable="'name'">{{p.name}}</td>
-                            <td class="rowTd" data-title="'Units'" sortable="'unit'">{{p.unit}}</td>
+                            <td class="rowTd" data-title="'Units'" sortable="'unit'">{{p.unit.unit}}</td>
                             <td class="rowTd" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
                             <td class="rowTd" >
                                 <button class="btn btn-primary dim" type="button" ng-click="setMaterialsEditId(p._id)"><i class="fa fa-edit"></i></button>

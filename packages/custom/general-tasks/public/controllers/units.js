@@ -14,7 +14,6 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
 
                 var data = units;
             
-                /* jshint ignore:start */
                 $scope.tableUnitsParams = new NGTableParams({
                     page: 1,
                     count: 10
@@ -26,7 +25,6 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
-                /* jshint ignore:end */
             });
         };
 

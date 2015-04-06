@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Material = mongoose.model('Material'),
+    //Unit = mongoose.model('Unit'),
     _ = require('lodash');
 
 /**
@@ -13,13 +14,14 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res, next) {
     var material = new Material(req.body);
 
+    //material = _.extend(material, req.body);
+
     var errors = req.validationErrors();
     console.log(errors);
     if (errors) {
         return res.status(400).send(errors);
     }
 
-    console.log(material);
     material.save(function(err) {
         if (err) {
             return res.status(500).json({
@@ -34,7 +36,16 @@ exports.create = function(req, res, next) {
  * Find material by id
  */
 exports.material = function(req, res, next, id) {
-    Material
+    Material.load(id, function(err, material) {
+    if (err) return next(err);
+    if (!material) return next(new Error('Failed to load material ' + id));
+
+    console.log('material by id: ' + material);
+    req.material = material;
+    next();
+  });
+
+ /*   Material
         .findOne({
             _id: id
         })
@@ -44,6 +55,7 @@ exports.material = function(req, res, next, id) {
             req.material = material;
             next();
         });
+*/
 };
 /**
  * Update a material
@@ -85,7 +97,7 @@ exports.show = function(req, res) {
  * List of Materials
  */
 exports.all = function(req, res) {
-    Material.find().exec(function(err, materials) {
+    Material.find().populate('unit', 'unit').exec(function(err, materials) {
         if (err) {
             return res.status(500).json({
             error: 'Cannot list the materials'
@@ -94,3 +106,12 @@ exports.all = function(req, res) {
         res.json(materials);
     });
 };
+
+
+
+
+
+
+
+
+

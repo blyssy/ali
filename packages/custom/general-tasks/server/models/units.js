@@ -11,4 +11,13 @@ var UnitSchema = new Schema({
     }
 });
 
+/**
+ * Statics
+ */
+UnitSchema.statics.load = function(id, cb) {
+  this.findOne({
+    _id: id
+  }).exec(cb);
+};
+
 mongoose.model('Unit', UnitSchema);

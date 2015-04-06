@@ -10,12 +10,12 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
 
         $scope.init = function() {
             Materials.query({}, function(materials) {
+
                 $scope.materials = materials;
                 $scope.units = Units.query();
 
                 var data = materials;
             
-                /* jshint ignore:start */
                 $scope.tableMaterialsParams = new NGTableParams({
                     page: 1,
                     count: 10
@@ -27,13 +27,12 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
-                /* jshint ignore:end */
             });
+            
         };
 
         $scope.add = function() {
             if (!$scope.materials) $scope.materials = [];
-            console.log('In add function with ' + $scope.name);
 
             var material = new Materials({
                 name: $scope.name,
@@ -73,9 +72,5 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
         $scope.setMaterialsEditId =  function(pid) {
             $scope.materialsEditId = pid;
         };
-
-        /*$scope.doSearch = function () {
-            $scope.tableMaterialsParams.reload();
-        };*/
     }
 ]);

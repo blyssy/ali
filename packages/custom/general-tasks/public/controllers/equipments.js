@@ -14,7 +14,6 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
 
                 var data = equipments;
             
-                /* jshint ignore:start */
                 $scope.tableEquipmentsParams = new NGTableParams({
                     page: 1,
                     count: 10
@@ -26,7 +25,6 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
                         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
-                /* jshint ignore:end */
             });
         };
 
