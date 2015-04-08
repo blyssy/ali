@@ -34,6 +34,11 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
             });
         };
 
+        $scope.addNewMaterial = function(itemId) {
+            console.log('in addNewMaterial with id ' + itemId);
+            $scope.tasks.materials.push(itemId);
+        };
+
         $scope.add = function() {
             if (!$scope.tasks) $scope.tasks = [];
 
