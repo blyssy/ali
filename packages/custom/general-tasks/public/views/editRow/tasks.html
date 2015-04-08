@@ -1,17 +1,84 @@
-<table class="noborder">
-    <tr>
-        <td rowspan="2"><input type="hidden" name="id" value="{{p._id}}"></td>
-        <td>Task Code:</td>
-        <td><input type="text" ng-model="p.task_code" class="w100" value="{{p.task_code}}"></td>
-        <td>Trade:</td>
-        <td><input type="text" ng-model="p.trade" class="w100" value="{{p.trade}}"></td>
-        <td>Task:</td>
-        <td><input type="text" ng-model="p.task" class="w100" value="{{p.task}}"></td>
-    </tr>
-    <tr>
-        <td>Name:</td>
-        <td><input type="text" ng-model="p.task_name" class="w300" size="60" value="{{p.task_name}}"></td>
-        <td><input type="button" value=" cancel" ng-click="setEditId(-1)"></td>
-        <td><input type="button" value=" save " ng-click="update(p)"></td>
-    </tr>
-</table>
+<div class="ibox-content">
+    <div class="well">      
+      <div><label class="control-label">Unit Name:</label>
+      <input type="text" ng-model="p.task_name" class="form-control m-b" value="{{p.task_name}}"></div>
+      <div><label class="control-label">Trade:</label>
+        <select class="form-control m-b" data-ng-model="p.trade">
+            <!-- <option value="" disabled selected>Trade</option> -->
+            <option value="01">01 - Concrete</option>
+            <option value="02">02 - Plumbing</option>
+            <option value="03">03 - Grader</option>
+            <option value="04">04 - Framer</option>
+            <option value="05">05 - Drywall</option>
+            <option value="06">06 - Roofer</option>
+            <option value="07">07 - HVAC</option>
+            <option value="08">08 - Stucco</option>
+            <option value="09">09 - Electrician</option>
+            <option value="10">10 - Unused</option>
+            <option value="11">11 - Fire Sprinkler</option>
+            <option value="12">12 - Insulation</option>
+            <option value="13">13 - Painter</option>
+            <option value="14">14 - Cabinets</option>
+            <option value="15">15 - Masonry</option>
+            <option value="16">16 - Finish Trim</option>
+            <option value="17">17 - Tile</option>
+            <option value="18">18 - Flooring</option>
+            <option value="19">19 - Fencing</option>
+            <option value="20">20 - Landscaping</option>
+        </select>
+    </div>
+    <div>
+        <label class="control-label">Task Number:</label>
+        <select class="form-control m-b" data-ng-model="p.task">
+            <!-- <option value="" disabled selected>Task#</option> -->
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+        </select>
+    </div>
+    <div>
+        <label class="control-label">Materials:</label>
+        <!-- <div class="col-lg-10 pull-left"> -->
+            <select data-ng-model="p.materials" class="form-control m-b" 
+                       ng-options="obj as obj.name for obj in materials">
+            </select>
+        <!-- </div>
+        <div class="col-lg-2 pull-right"> -->
+            <button class="btn btn-primary" type="submit" ng-click="addMaterial(p)">
+                <i class="fa fa-check"></i>
+                  Add
+            </button>
+        <!-- </div> -->
+    </div>
+    <div>
+        <label class="control-label">Equipment:</label>
+    </div>
+
+      <div class="pull-right">
+        <button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i></button>
+        <button class="btn btn-primary dim" type="button" ng-click="setEditId(-1)"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+</div>

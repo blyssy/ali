@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', '$filter', 'ngTableParams',
-    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, $filter, NGTableParams) {
+angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams',
+    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams) {
         $scope.global = Global;
     $scope.hasAuthorization = function(task) {
       if (!task || !task.user) return false;
@@ -11,6 +11,12 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         $scope.init = function() {
             GeneralTasks.query({}, function(tasks) {
                 $scope.tasks = tasks;
+
+                Materials.query({}, function(materials) {
+                    $scope.materials = materials;
+
+                    //add materials table stuff here?
+                });
 
                 var data = tasks;
 

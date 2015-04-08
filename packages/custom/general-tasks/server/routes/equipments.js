@@ -13,7 +13,7 @@ var hasAuthorization = function(req, res, next) {
 
 /* jshint -W098 */
 // The Package is past automatically as first parameter
-module.exports = function(GeneralTasks, app, auth, database) {
+module.exports = function(Equipments, app, auth, database) {
   var gfs = new Grid(database.connection.connections[0].db, database.connection.mongo);
   var mean = require('meanio');
 

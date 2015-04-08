@@ -36,14 +36,14 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
 
             var material = new Materials({
                 name: $scope.name,
-                unit: $scope.unit,
+                unit: $scope.unit._id,
                 delivery_offset: $scope.delivery_offset
             });
 
+            //console.log('in add funtion with %s %s', material.name, material.unit.unit);
             material.$save(function(response) {
+                //console.log('response is ' + response);
                 $scope.materials.push(response);
-
-                console.log('added ' + response);
 
                 var data = $scope.materials;
                 $scope.tableMaterialsParams.total(data.length);

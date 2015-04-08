@@ -24,10 +24,14 @@
                                 <input type="text" data-ng-model="name" placeholder="Material Name" class="form-control m-b"/>
                             </span>
                             <span class="col-sm-2">
-                				<select data-ng-model="unit" class="form-control m-b" 
+                				<!-- <select ng-model="unit" class="form-control m-b" 
                                 	ng-options="obj._id as obj.unit for obj in units">
                                 	<option value="" disabled selected>Unit of Measure</option>
-                        		</select>
+                        		</select> -->
+                                <select ng-model="unit" class="form-control m-b" 
+                                    ng-options="obj.unit for obj in units track by obj._id">
+                                    <option value="" disabled selected>Unit of Measure</option>
+                                </select>
                             </span>
                             <span class="col-sm-2">
                             	<select data-ng-model="delivery_offset" class="form-control m-b">

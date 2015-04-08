@@ -34,7 +34,6 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
 
             var equipment = new Equipments({
                 name: $scope.name,
-                unit: $scope.unit,
                 delivery_offset: $scope.delivery_offset
             });
 

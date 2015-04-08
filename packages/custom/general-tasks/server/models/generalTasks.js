@@ -30,6 +30,10 @@ var GeneralTaskSchema = new Schema({
     materials: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Material'
+    }],
+    equipment: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Equipment'
     }]
 });
 

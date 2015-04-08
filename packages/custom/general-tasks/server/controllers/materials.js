@@ -13,25 +13,39 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res, next, id) {
     var material = new Material(req.body);
-    console.log('in the mat create function');
-
     //material = _.extend(material, req.body);
 
-    var errors = req.validationErrors();
-    console.log(errors);
-    if (errors) {
-        return res.status(400).send(errors);
-    }
-
+    console.log('in the create funtion %s %s', material.name, material.delivery_offset);
     material.save(function(err) {
+        if (err) {
+          return res.json(500, {
+            error: 'Cannot save the material'
+          });
+        } else {
+          material.populate({
+            path: 'unit',
+            select: 'unit'
+          }, function(err, doc) {
+            res.json(doc);
+          });
+        }
+      });
+    //var errors = req.validationErrors();
+    //console.log(errors);
+    //if (errors) {
+    //    return res.status(400).send(errors);
+    //}
+
+    //material.unit = req.unit;
+
+    /*material.save(function(err) {
         if (err) {
             return res.status(500).json({
                 error: 'Cannot save the material of measure'
             });
         }
-
         res.json(material);
-    });
+    });*/
 };
 
 /**
