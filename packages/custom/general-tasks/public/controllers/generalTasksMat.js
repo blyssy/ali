@@ -6,18 +6,18 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
         $scope.global = Global;
         $scope.tasks = [];
         $scope.tasks.materials = [];
-        var socket = MeanSocket;
+        //var socket = MeanSocket;
 
         $scope.hasAuthorization = function(task) {
           if (!task || !task.user) return false;
           return $scope.global.isAdmin || task.user._id === $scope.global.user._id;
         };
 
-        socket.$on('ListMatRefresh', function(response) {
-            console.log('listmat needs to be refreshed here');
+        $scope.$on('ListMatRefresh', function(event, item) {
+            console.log('listmat needs to be refreshed here' + item.name);
 
-            $scope.current_materials.push(response.material.data);
-            
+            $scope.current_materials.push(item);
+
             var data = $scope.current_materials;
             $scope.tableListMatParams.total(data.length);
             $scope.tableListMatParams.reload();

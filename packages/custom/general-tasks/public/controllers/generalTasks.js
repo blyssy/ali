@@ -6,7 +6,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         $scope.global = Global;
         $scope.tasks = [];
         $scope.tasks.materials = [];
-        var socket = MeanSocket;
+        //var socket = MeanSocket;
 
         $scope.hasAuthorization = function(task) {
           if (!task || !task.user) return false;
@@ -43,12 +43,13 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         };
 
         $scope.addNewMaterial = function(task, material) {
-            console.log('in addNewMaterial with task id %s and material id %s', task._id, material._id);
+            //console.log('in addNewMaterial with task id %s and material id %s', task._id, material._id);
             
             var idsArray = [];
 
-            for (var i = 0; i < task.materials.length; i+=1) {
-              idsArray.push(task.materials[i]._id);
+            for (var i = 0; i < task.materials.length; i=i+1) {
+                //console.log('pushing mat id ' + task.materials[i]);
+                idsArray.push(task.materials[i]);
             }
             idsArray.push(material._id);
 
@@ -56,10 +57,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
 
             task.$update(function(response){
                 if (response._id !== undefined) {
-                  socket.emit('ListMatRefresh', {
-                    data: material,
-                    parent: $scope.parent
-                  });
+                  $scope.$broadcast('ListMatRefresh', material);
                 }
             });
         };
