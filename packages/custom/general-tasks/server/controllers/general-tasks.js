@@ -59,6 +59,7 @@ exports.task = function(req, res, next, id) {
  * Update a task
  */
 exports.update = function(req, res) {
+    console.log('In the server side update() function');
     var task = req.task;
     task = _.extend(task, req.body);
 

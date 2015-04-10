@@ -55,7 +55,7 @@ GeneralTaskSchema.path('task_name').validate(function(task_name) {
 GeneralTaskSchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
-  });
+  }).populate('materials', 'name unit delivery_offset').exec(cb);
 };
 
 mongoose.model('GeneralTask', GeneralTaskSchema);

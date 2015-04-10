@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res, next) {
     var unit = new Unit(req.body);
+    var success = true;
 
     var errors = req.validationErrors();
     console.log(errors);
@@ -24,11 +25,13 @@ exports.create = function(req, res, next) {
     //user.roles = req.body.roles;
     unit.save(function(err) {
         if (err) {
+            success = false;
             return res.status(500).json({
                 error: 'Cannot save the unit of measure'
             });
         }
         res.json(unit);
+        next(err, success);
     });
 };
 

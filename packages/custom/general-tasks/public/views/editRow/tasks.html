@@ -59,18 +59,34 @@
         </select>
     </div>
     <div>
-        <label class="control-label">Materials:</label>
-        <!-- <div class="col-lg-10 pull-left"> -->
-            <select data-ng-model="p.materials" class="form-control m-b" 
-                       ng-options="obj as obj.name for obj in materials">
-            </select>
-        <!-- </div>
-        <div class="col-lg-2 pull-right"> -->
-            <button class="btn btn-primary" type="submit" ng-click="addNewMaterial(p._id)">
-                <i class="fa fa-check"></i>
-                  Add
-            </button>
-        <!-- </div> -->
+        <section data-ng-controller="GeneralTasksMatController" data-ng-init="initListMat(p)">
+            <label class="control-label">Materials:</label>
+            <!-- <ul data-ng-model="p.materials">
+                <li ng-repeat="mat in p.materials">{{mat}}
+                </li>
+            </ul> -->
+            <table ng-table="tableListMatParams" class="table">
+                <tbody ng-repeat="q in $data track by $index">
+                <tr id="tr{{q._id}}">
+                    <td class="rowTd" data-title="'Material Name'" sortable="'name'">{{q.name}}</td>
+                    <td class="rowTd" data-title="'Units'" sortable="'unit.unit'">{{q.unit.unit}}</td>
+                    <td class="rowTd" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
+                    <td class="rowTd" >
+                        <button class="btn btn-danger dim" type="button" ng-click="removeListMat(q)"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        
+        <select data-ng-model="p.materials_list" class="form-control m-b" 
+                   ng-options="obj as obj.name for obj in materials_list">
+        </select>
+        <button class="btn btn-primary" type="submit" ng-click="addNewMaterial(p, p.materials_list)">
+            <i class="fa fa-check"></i>
+              Add
+        </button>
     </div>
     <div>
         <label class="control-label">Equipment:</label>

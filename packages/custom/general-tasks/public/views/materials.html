@@ -18,16 +18,12 @@
                     <h5>Add A New Material</h5>
                 </div>
                 <div class="ibox-content">
-                    <form id="material-add-form" class="form-group" name="addMaterialForm" data-ng-submit="add()">
+                    <form id="material-add-form" class="form-group" name="addMaterialForm" data-ng-submit="addMaterial()">
                         <div class="row">
                             <span class="col-sm-5">
                                 <input type="text" data-ng-model="name" placeholder="Material Name" class="form-control m-b"/>
                             </span>
                             <span class="col-sm-2">
-                				<!-- <select ng-model="unit" class="form-control m-b" 
-                                	ng-options="obj._id as obj.unit for obj in units">
-                                	<option value="" disabled selected>Unit of Measure</option>
-                        		</select> -->
                                 <select ng-model="unit" class="form-control m-b" 
                                     ng-options="obj.unit for obj in units track by obj._id">
                                     <option value="" disabled selected>Unit of Measure</option>

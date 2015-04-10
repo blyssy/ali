@@ -13,8 +13,6 @@ var hasAuthorization = function(req, res, next) {
 /* jshint -W098 */
 // The Package is past automatically as first parameter
 module.exports = function(Materials, app, auth, database) {
-
-    console.log('SETTING UP MATERIAL ROUTES');
     //Setting up the materials api
     app.get('/materials', auth.requiresAdmin, materials.all);
     app.post('/materials', auth.requiresAdmin, materials.create);

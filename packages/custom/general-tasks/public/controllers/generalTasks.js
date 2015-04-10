@@ -1,42 +1,67 @@
 'use strict';
 
-angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams',
-    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams) {
+angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams', 'MeanSocket',
+    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams, MeanSocket) {
+    
         $scope.global = Global;
-    $scope.hasAuthorization = function(task) {
-      if (!task || !task.user) return false;
-      return $scope.global.isAdmin || task.user._id === $scope.global.user._id;
-    };
+        $scope.tasks = [];
+        $scope.tasks.materials = [];
+        var socket = MeanSocket;
+
+        $scope.hasAuthorization = function(task) {
+          if (!task || !task.user) return false;
+          return $scope.global.isAdmin || task.user._id === $scope.global.user._id;
+        };
 
         $scope.init = function() {
             GeneralTasks.query({}, function(tasks) {
                 $scope.tasks = tasks;
 
                 Materials.query({}, function(materials) {
-                    $scope.materials = materials;
-
-                    //add materials table stuff here?
+                    //get the materials list
+                    $scope.materials_list = materials;
                 });
 
                 var data = tasks;
 
                 $scope.tableParams = new NGTableParams({
                     page: 1,
-                    count: 10
+                    count: 10,
+                    sorting: {
+                        order: 'asc'     // initial sorting
+                    }
                 },{
                     total: data.length,
                     getData: function($defer, params) {
                         params.total(data.length);
-                        //var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-                        $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                        var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+                        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     }
                 });
+
             });
         };
 
-        $scope.addNewMaterial = function(itemId) {
-            console.log('in addNewMaterial with id ' + itemId);
-            $scope.tasks.materials.push(itemId);
+        $scope.addNewMaterial = function(task, material) {
+            console.log('in addNewMaterial with task id %s and material id %s', task._id, material._id);
+            
+            var idsArray = [];
+
+            for (var i = 0; i < task.materials.length; i+=1) {
+              idsArray.push(task.materials[i]._id);
+            }
+            idsArray.push(material._id);
+
+            task.materials = idsArray;
+
+            task.$update(function(response){
+                if (response._id !== undefined) {
+                  socket.emit('ListMatRefresh', {
+                    data: material,
+                    parent: $scope.parent
+                  });
+                }
+            });
         };
 
         $scope.add = function() {
@@ -81,9 +106,5 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         $scope.setEditId =  function(pid) {
             $scope.editId = pid;
         };
-
-        /*$scope.doSearch = function () {
-            $scope.tableParams.reload();
-        };*/
     }
 ]);

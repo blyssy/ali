@@ -8,15 +8,14 @@ var mongoose = require('mongoose'),
     //Unit = mongoose.model('Unit'),
     _ = require('lodash');
 
+//material = _.extend(material, req.body);
 /**
  * Create material
  */
 exports.create = function(req, res, next, id) {
     var material = new Material(req.body);
-    //material = _.extend(material, req.body);
 
-    console.log('in the create funtion %s %s', material.name, material.delivery_offset);
-    material.save(function(err) {
+    /*material.save(function(err) {
         if (err) {
           return res.json(500, {
             error: 'Cannot save the material'
@@ -30,6 +29,7 @@ exports.create = function(req, res, next, id) {
           });
         }
       });
+*/
     //var errors = req.validationErrors();
     //console.log(errors);
     //if (errors) {
@@ -38,14 +38,14 @@ exports.create = function(req, res, next, id) {
 
     //material.unit = req.unit;
 
-    /*material.save(function(err) {
+    material.save(function(err) {
         if (err) {
             return res.status(500).json({
                 error: 'Cannot save the material of measure'
             });
         }
         res.json(material);
-    });*/
+    });
 };
 
 /**

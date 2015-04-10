@@ -31,7 +31,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
             
         };
 
-        $scope.add = function() {
+        $scope.addMaterial = function() {
             if (!$scope.materials) $scope.materials = [];
 
             var material = new Materials({
@@ -40,9 +40,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
                 delivery_offset: $scope.delivery_offset
             });
 
-            //console.log('in add funtion with %s %s', material.name, material.unit.unit);
             material.$save(function(response) {
-                //console.log('response is ' + response);
                 $scope.materials.push(response);
 
                 var data = $scope.materials;
