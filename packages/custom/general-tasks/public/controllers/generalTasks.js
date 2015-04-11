@@ -105,6 +105,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         };
 
         $scope.update = function(task, taskField) {
+            console.log('in the public/controller update function');
             task.$update();
             $scope.editId = -1;
         };
