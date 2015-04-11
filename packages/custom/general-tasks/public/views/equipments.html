@@ -55,10 +55,10 @@
                             <td class="col-lg-6" data-title="'Name'" sortable="'name'">{{p.name}}</td>
                             <td class="col-lg-3" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
                             <td class="rowTd" >
-                                <button class="btn btn-primary dim" type="button" ng-click="setEquipmentsEditId(p._id)"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-primary dim" type="button" ng-click="setEquipmentsEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
                             </td>
                             <td class="rowTd" >
-                                <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i> Delete</button>
                             </td>                         
                         </tr>
                         <tr ng-show="equipmentsEditId===p._id" ng-if="equipmentsEditId===p._id">

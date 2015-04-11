@@ -111,10 +111,10 @@
                         <td class="rowTd" data-title="'Subtask Code'" sortable="'subtask_code'">{{p.subtask_code}}</td>
                         <td class="rowTd" data-title="'Subtask Name'" sortable="'subtask_name'">{{p.subtask_name}}</td>
                         <td class="rowTd" >
-                            <button class="btn btn-primary dim" type="button" ng-click="setEditId(p._id)"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-primary dim" type="button" ng-click="setEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
                         </td>
                         <td class="rowTd" >
-                            <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                     </tr>
                     <tr ng-show="editId===p._id" ng-if="editId===p._id">

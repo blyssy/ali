@@ -68,9 +68,5 @@ angular.module('mean.general-tasks').controller('UnitsController', ['$scope', 'G
         $scope.setUnitsEditId =  function(pid) {
             $scope.unitsEditId = pid;
         };
-
-        /*$scope.doSearch = function () {
-            $scope.tableUnitsParams.reload();
-        };*/
     }
 ]);

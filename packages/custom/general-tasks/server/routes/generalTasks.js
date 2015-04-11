@@ -25,7 +25,7 @@ module.exports = function(GeneralTasks, app, auth, database) {
     app.get('/general-tasks/:taskId', auth.requiresAdmin, tasks.show);
     app.put('/general-tasks/:taskId', auth.requiresAdmin, tasks.update);
     app.delete('/general-tasks/:taskId', auth.requiresAdmin, tasks.destroy);
-    app.delete('/general-tasks/:taskId/:index', auth.requiresAdmin, tasks.destroyMatItem);
+    //app.delete('/general-tasks/:taskId/:index', auth.requiresAdmin, tasks.destroyMatItem);
 
     //app.route('/tasks/list')
     //  .get(auth.requiresAdmin, tasks.all)

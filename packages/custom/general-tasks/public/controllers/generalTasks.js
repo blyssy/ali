@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams', 'MeanSocket',
-    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams, MeanSocket) {
+angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams', 
+    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams) {
     
         $scope.global = Global;
         $scope.tasks = [];
         $scope.tasks.materials = [];
-        //var socket = MeanSocket;
 
         $scope.hasAuthorization = function(task) {
           if (!task || !task.user) return false;
@@ -52,15 +51,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
                 task_name: task.task_name,
                 materials: task.materials
             });
-            //var idsArray = [];
-
-            //for (var i = 0; i < task.materials.length; i=i+1) {
-                //console.log('pushing mat id ' + task.materials[i]);
-            //    idsArray.push(task.materials[i]);
-            //}
-            //idsArray.push(material._id);
-
-            //task.materials = idsArray;
+            
             local_task.materials.push(material._id);
 
             local_task.$update(function(response){

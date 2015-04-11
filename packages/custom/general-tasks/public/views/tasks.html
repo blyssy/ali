@@ -38,15 +38,14 @@
                 <table ng-table="tableParams" class="table">
                     <tbody ng-repeat="p in $data">
                     <tr id="tr{{p._id}}">
-                        <!-- <td class="rowTd" data-title="'Task Code'" sortable="'task_code'">{{p.task_code}}</td> -->
                         <td class="rowTd" data-title="'Task Order'" sortable="'order'">{{p.order}}</td>
                         <td class="rowTd" data-title="'Task Code'" sortable="'task_code'">{{p.trade}}{{p.task}}</td>
                         <td class="rowTd" data-title="'Task Name'" sortable="'task_name'">{{p.task_name}}</td>
                         <td class="rowTd" >
-                            <button class="btn btn-primary dim" type="button" ng-click="setEditId(p._id)"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-primary dim" type="button" ng-click="setEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
                         </td>
                         <td class="rowTd" >
-                            <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                     </tr>
                     <tr ng-show="editId===p._id" ng-if="editId===p._id">

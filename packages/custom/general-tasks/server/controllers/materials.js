@@ -12,16 +12,13 @@ var mongoose = require('mongoose'),
 /**
  * Create material
  */
-exports.create = function(req, res, next, id) {
+exports.create = function(req, res, next) {
     var material = new Material(req.body);
     //var errors = req.validationErrors();
     //console.log(errors);
     //if (errors) {
     //    return res.status(400).send(errors);
     //}
-
-    if(id)
-        console.log('the id value is: ' + id);
 
     material.save(function(err) {
         if (err) {

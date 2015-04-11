@@ -69,9 +69,5 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
         $scope.setEquipmentsEditId =  function(pid) {
             $scope.equipmentsEditId = pid;
         };
-
-        /*$scope.doSearch = function () {
-            $scope.tableEquipmentsParams.reload();
-        };*/
     }
 ]);
