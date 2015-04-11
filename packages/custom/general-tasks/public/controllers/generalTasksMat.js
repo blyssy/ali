@@ -56,13 +56,14 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
             });
         };
 
-        $scope.removeListMat = function(material) {
-            for (var i in $scope.current_materials) {
-                if ($scope.current_materials[i] === material) {
-                    $scope.current_materials.splice(i, 1);
-                }
-            }
-
+        $scope.removeListMat = function(item, material, index) {
+            
+        //$scope.current_materials.splice(index, 1);
+            
+            console.log('spliced at index ' + index);
+            //item.$deleteMaterial({'index': index});
+            item.material_delete({'index': index});
+            //GeneralTasks.deleteMaterial({'id':item._id, 'index': index});
             //this needs work.  probably setup a route and
             //a service to handle removing a material from
             //a list item.

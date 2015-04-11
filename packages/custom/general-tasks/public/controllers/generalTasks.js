@@ -43,19 +43,27 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         };
 
         $scope.addNewMaterial = function(task, material) {
-            //console.log('in addNewMaterial with task id %s and material id %s', task._id, material._id);
-            
-            var idsArray = [];
+            console.log('in addNewMaterial with task id %s and material id %s', task._id, material._id);
+            var local_task = new GeneralTasks({
+                _id: task._id,
+                task_code: task.task_code,
+                trade: task.trade,
+                task: task.task,
+                task_name: task.task_name,
+                materials: task.materials
+            });
+            //var idsArray = [];
 
-            for (var i = 0; i < task.materials.length; i=i+1) {
+            //for (var i = 0; i < task.materials.length; i=i+1) {
                 //console.log('pushing mat id ' + task.materials[i]);
-                idsArray.push(task.materials[i]);
-            }
-            idsArray.push(material._id);
+            //    idsArray.push(task.materials[i]);
+            //}
+            //idsArray.push(material._id);
 
-            task.materials = idsArray;
+            //task.materials = idsArray;
+            local_task.materials.push(material._id);
 
-            task.$update(function(response){
+            local_task.$update(function(response){
                 if (response._id !== undefined) {
                   $scope.$broadcast('ListMatRefresh', material);
                 }

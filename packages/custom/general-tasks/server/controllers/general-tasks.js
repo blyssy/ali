@@ -71,13 +71,38 @@ exports.update = function(req, res) {
     });
 };
 
+exports.updateMaterial = function(req, res) {
+    //console.log('In the server side updateMaterial() function');
+    
+    var task = req.body;
+    task = _.extend(task, req.body);
+
+    //console.log(task);
+    
+    task.save(function(err) {
+        if (err) {
+          return res.status(500).json({
+            error: 'Cannot save the material'
+          });
+        } else {
+          task.populate({
+            path: 'materials',
+            select: '_id'
+          }, function(err, doc) {
+            res.json(doc);
+          });
+        }
+    });
+};
+
 /**
  * Delete an task
  */
 exports.destroy = function(req, res) {
-    var task = req.task;
+    console.log('in the regular delete function...commented out the remove function for now.');
+    //var task = req.task;
 
-    task.remove(function(err) {
+    /*task.remove(function(err) {
         if (err) {
             res.render('error', {
                 status: 500
@@ -85,7 +110,14 @@ exports.destroy = function(req, res) {
         } else {
             res.json(task);
         }
-    });
+    });*/
+};
+
+exports.destroyMatItem = function(req, res){
+    console.log(req);
+    console.log('item value is: ' + req.params.taskId);
+    console.log('index value is: ' + req.params.index);
+    res.send('testing destroyMatItem');
 };
 
 /**

@@ -10,7 +10,48 @@ angular.module('mean.general-tasks').factory('GeneralTasks', ['$resource',
     	}
     });
   }
-]);/*.factory('utils', function() {
+]);
+
+/*angular.module('mean.general-tasks').factory('DeleteMaterial', ['$resource',
+  function($resource) {
+    return $resource('/general-tasks/:taskId/:index', {
+      taskId: '@_id',
+      index: '@index'
+      }, {
+      deleteMaterial: {
+        method: 'DELETE'
+      }
+    });
+  }
+]);*/
+
+/*angular.module('mean.general-tasks').factory('GeneralTasks', ['$resource',
+  function($resource) {
+    return {
+      query: $resource('/general-tasks/', {}, {
+        query: {
+          method: 'GET',
+          isArray: true
+        }
+      }),
+      update: $resource('/general-tasks/:taskId', {
+        taskId: '@_id'
+      }, {
+        update: {
+          method: 'PUT'
+        } 
+      }),
+      material_delete: $resource('/general-tasks/:taskId/:index', {
+        taskId: '@_id',
+        index: '@index'
+      }, {
+        deleteMaterial: {
+          method: 'DELETE'
+        }
+      })
+    };
+  }]);*/
+/*.factory('utils', function() {
   var utils = {
     indexOf: function(arr, obj) {
       var index = -1; // not found initially
