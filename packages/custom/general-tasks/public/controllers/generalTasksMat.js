@@ -43,7 +43,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
 
                 $scope.tableListMatParams = new NGTableParams({
                     page: 1,
-                    count: 10
+                    count: 5
                 },{
                     total: data.length,
                     getData: function($defer, params) {
@@ -62,7 +62,8 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
                 trade: item.trade,
                 task: item.task,
                 task_name: item.task_name,
-                materials: item.materials
+                materials: item.materials,
+                equipments: item.equipments
             });
             
             //delete a material from the current task item
@@ -71,7 +72,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
                 $scope.current_task.materials = item.materials;
                 $scope.current_materials.splice(index, 1);
 
-                $scope.$emit('ListMatRefresh', material);
+                $scope.$emit('ListMatRefresh', item.materials);
             });
         };
     }

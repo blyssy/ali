@@ -63,8 +63,8 @@ exports.update = function(req, res) {
     var task = req.task;
     task = _.extend(task, req.body);
 
-    console.log(task);
-    console.log(req.body);
+    //console.log(task);
+    //console.log(req.body);
 
     task.save(function(err) {
         res.json(task);
@@ -72,14 +72,14 @@ exports.update = function(req, res) {
 };
 
 exports.updateMaterial = function(req, res) {
-    //console.log('In the server side updateMaterial() function');
+    console.log('In the server side updateMaterial() function');
     
     var task = req.body;
     task = _.extend(task, req.body);
 
-    //console.log(task);
-    
-    task.save(function(err) {
+    console.log(task);
+    res.json('no updating of database from updateMaterial yet');
+    /*task.save(function(err) {
         if (err) {
           return res.status(500).json({
             error: 'Cannot save the material'
@@ -92,24 +92,21 @@ exports.updateMaterial = function(req, res) {
             res.json(doc);
           });
         }
-    });
+    });*/
 };
 
 /**
  * Delete an task
  */
 exports.destroy = function(req, res) {
-    console.log('in the regular delete function...commented out the remove function for now.');
+    //console.log('in the regular delete function...commented out the remove function for now.');
     var task = req.task;
-
-    //console.log(res);
-    console.log(task);
 
     if(req.query.type === 'material'){
         if(req.query.index){
-            console.log('index does exits for the material type');
+            //console.log('index does exits for the material type');
             task.materials.splice(req.query.index, 1);
-            console.log(task);
+            //console.log(task);
             task.save(function(err) {
                 if (err) {
                     res.render('could not remove material item from list', {
@@ -122,10 +119,20 @@ exports.destroy = function(req, res) {
         }
     } else if(req.query.type === 'equipment'){
         if(req.query.index){
-            console.log('index does exits for the equipment type');
+            //console.log('index does exits for the equipment type');
+            task.equipment.splice(req.query.index, 1);
+            task.save(function(err) {
+                if (err) {
+                    res.render('could not remove equipment item from list', {
+                        status: 500
+                    });
+                } else {
+                    res.json(task);
+                }
+            });
         }
     } else {
-        console.log('this is a delete on the task itself.');
+        //console.log('this is a delete on the task itself.');
         task.remove(function(err) {
             if (err) {
                 res.render('error', {
@@ -136,13 +143,6 @@ exports.destroy = function(req, res) {
             }
         });
     }
-};
-
-exports.destroyMatItem = function(req, res){
-    console.log(req);
-    console.log('item value is: ' + req.params.taskId);
-    console.log('index value is: ' + req.params.index);
-    res.send('testing destroyMatItem');
 };
 
 /**

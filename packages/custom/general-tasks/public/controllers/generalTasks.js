@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams', 
-    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams) {
+angular.module('mean.general-tasks').controller('GeneralTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', 'Equipments', '$filter', 'ngTableParams', 
+    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, Equipments, $filter, NGTableParams) {
     
         $scope.global = Global;
         $scope.tasks = [];
         $scope.tasks.materials = [];
+        $scope.tasks.equipments = [];
 
         $scope.hasAuthorization = function(task) {
           if (!task || !task.user) return false;
@@ -19,6 +20,11 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
                 Materials.query({}, function(materials) {
                     //get the materials list
                     $scope.materials_list = materials;
+                });
+
+                Equipments.query({}, function(equipments) {
+                    //get the equipments list
+                    $scope.equipments_list = equipments;
                 });
 
                 var data = tasks;
@@ -49,7 +55,8 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
                 trade: task.trade,
                 task: task.task,
                 task_name: task.task_name,
-                materials: task.materials
+                materials: task.materials,
+                equipment: task.equipment
             });
             
             local_task.materials.push(material._id);
@@ -57,6 +64,27 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
             local_task.$update(function(response){
                 if (response._id !== undefined) {
                   $scope.$broadcast('ListMatAddRefresh', material);
+                }
+            });
+        };
+
+        $scope.addNewEquipment = function(task, equipment) {
+            //console.log('in addNewMaterial with task id %s and material id %s', task._id, material._id);
+            var local_task = new GeneralTasks({
+                _id: task._id,
+                task_code: task.task_code,
+                trade: task.trade,
+                task: task.task,
+                task_name: task.task_name,
+                materials: task.materials,
+                equipment: task.equipment
+            });
+            
+            local_task.equipment.push(equipment._id);
+
+            local_task.$update(function(response){
+                if (response._id !== undefined) {
+                  $scope.$broadcast('ListEquipAddRefresh', equipment);
                 }
             });
         };
@@ -96,7 +124,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
         };
 
         $scope.update = function(task, taskField) {
-            console.log('in the public/controller update function');
+            //console.log('in the public/controller update function');
             task.$update();
             $scope.editId = -1;
         };

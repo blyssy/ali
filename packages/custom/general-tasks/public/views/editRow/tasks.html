@@ -88,7 +88,32 @@
         </section>
     </div>
     <div>
-        <label class="control-label">Equipment:</label>
+        <section data-ng-controller="GeneralTasksEquipController" data-ng-init="initListEquip(p)">
+            <label class="control-label">Equipment:</label>
+            <!-- <ul data-ng-model="p.materials">
+                <li ng-repeat="mat in p.materials">{{mat}}
+                </li>
+            </ul> -->
+            <table ng-table="tableListEquipParams" class="table">
+                <tbody ng-repeat="q in $data track by $index">
+                <tr id="tr{{q._id}}">
+                    <td class="rowTd" data-title="'Equipment Name'" sortable="'name'">{{q.name}}</td>
+                    <td class="rowTd" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
+                    <td class="rowTd" >
+                        <button class="btn btn-danger dim" type="button" ng-click="removeListEquip(p, q, $index)"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <select data-ng-model="p.equipments_list" class="form-control m-b" 
+                       ng-options="obj as obj.name for obj in equipments_list">
+                       <option value="" disabled selected>Select Equipment Type</option>
+            </select>
+            <button class="btn btn-primary" type="submit" ng-click="addNewEquipment(p, p.equipments_list)">
+                <i class="fa fa-check"></i>
+                  Add Equipment
+            </button>
+        </section>
     </div>
 
       <div class="pull-right">

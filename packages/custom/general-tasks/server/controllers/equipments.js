@@ -53,6 +53,11 @@ exports.update = function(req, res) {
     equipment = _.extend(equipment, req.body);
 
     equipment.save(function(err) {
+        if (err) {
+            return res.status(500).json({
+                error: 'Cannot save the equipment in server update'
+            });
+        }
         res.json(equipment);
     });
 };
