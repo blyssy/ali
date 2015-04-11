@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams', 'MeanSocket',
-    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams, MeanSocket) {
+angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'GeneralTasks', 'Materials', '$filter', 'ngTableParams', 'DeleteMaterial',
+    function($scope, Global, Menus, $rootScope, $http, GeneralTasks, Materials, $filter, NGTableParams, DeleteMaterial) {
     
         $scope.global = Global;
         $scope.tasks = [];
@@ -13,10 +13,18 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
           return $scope.global.isAdmin || task.user._id === $scope.global.user._id;
         };
 
-        $scope.$on('ListMatRefresh', function(event, item) {
-            console.log('listmat needs to be refreshed here' + item.name);
+        $scope.$on('ListMatAddRefresh', function(event, item) {
+            //console.log('listmat needs to be refreshed here' + item.name);
 
             $scope.current_materials.push(item);
+
+            var data = $scope.current_materials;
+            $scope.tableListMatParams.total(data.length);
+            $scope.tableListMatParams.reload();
+        });
+
+        $scope.$on('ListMatRefresh', function(event, item) {
+            //console.log('listmat needs to be refreshed here' + item.name);
 
             var data = $scope.current_materials;
             $scope.tableListMatParams.total(data.length);
@@ -57,12 +65,29 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
         };
 
         $scope.removeListMat = function(item, material, index) {
-            
+            var task = new GeneralTasks({
+                _id: item._id,
+                task_code: item.task_code,
+                trade: item.trade,
+                task: item.task,
+                task_name: item.task_name,
+                materials: item.materials
+            });
         //$scope.current_materials.splice(index, 1);
             
             console.log('spliced at index ' + index);
+            console.log(task);
             //item.$deleteMaterial({'index': index});
-            item.material_delete({'index': index});
+            task.$delete({'type': 'material', 'index': index}, function(item){
+                console.log('back from delete function with item ' + item.materials);
+
+                $scope.current_materials = item.materials;
+                //$scope.$emit('ListMatRefresh', material);
+
+                //var data = $scope.current_materials;
+                //$scope.tableListMatParams.total(data.length);
+                //$scope.tableListMatParams.reload();
+            });
             //GeneralTasks.deleteMaterial({'id':item._id, 'index': index});
             //this needs work.  probably setup a route and
             //a service to handle removing a material from
@@ -72,6 +97,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksMatController', ['$
             var data = $scope.current_materials;
             $scope.tableListMatParams.total(data.length);
             $scope.tableListMatParams.reload();
+            //$scope.$emit('ListMatRefresh', material);
         };
 
         //$scope.setEditListMatId =  function(pid) {

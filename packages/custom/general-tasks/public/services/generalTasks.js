@@ -12,7 +12,7 @@ angular.module('mean.general-tasks').factory('GeneralTasks', ['$resource',
   }
 ]);
 
-/*angular.module('mean.general-tasks').factory('DeleteMaterial', ['$resource',
+angular.module('mean.general-tasks').factory('DeleteMaterial', ['$resource',
   function($resource) {
     return $resource('/general-tasks/:taskId/:index', {
       taskId: '@_id',
@@ -23,7 +23,7 @@ angular.module('mean.general-tasks').factory('GeneralTasks', ['$resource',
       }
     });
   }
-]);*/
+]);
 
 /*angular.module('mean.general-tasks').factory('GeneralTasks', ['$resource',
   function($resource) {

@@ -100,17 +100,42 @@ exports.updateMaterial = function(req, res) {
  */
 exports.destroy = function(req, res) {
     console.log('in the regular delete function...commented out the remove function for now.');
-    //var task = req.task;
+    var task = req.task;
 
-    /*task.remove(function(err) {
-        if (err) {
-            res.render('error', {
-                status: 500
+    //console.log(res);
+    console.log(task);
+
+    if(req.query.type === 'material'){
+        if(req.query.index){
+            console.log('index does exits for the material type');
+            task.materials.splice(req.query.index, 1);
+            console.log(task);
+            task.save(function(err) {
+                if (err) {
+                    res.render('could not remove material item from list', {
+                        status: 500
+                    });
+                } else {
+                    res.json(task);
+                }
             });
-        } else {
-            res.json(task);
         }
-    });*/
+    } else if(req.query.type === 'equipment'){
+        if(req.query.index){
+            console.log('index does exits for the equipment type');
+        }
+    } else {
+        console.log('this is a delete on the task itself.');
+        task.remove(function(err) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                res.json(task);
+            }
+        });
+    }
 };
 
 exports.destroyMatItem = function(req, res){

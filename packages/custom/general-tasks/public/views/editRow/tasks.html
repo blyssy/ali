@@ -79,10 +79,11 @@
             </table>
             <select data-ng-model="p.materials_list" class="form-control m-b" 
                        ng-options="obj as obj.name for obj in materials_list">
+                       <option value="" disabled selected>Select Material Type</option>
             </select>
             <button class="btn btn-primary" type="submit" ng-click="addNewMaterial(p, p.materials_list)">
                 <i class="fa fa-check"></i>
-                  Add
+                  Add Material
             </button>
         </section>
     </div>
@@ -91,8 +92,8 @@
     </div>
 
       <div class="pull-right">
-        <button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i></button>
-        <button class="btn btn-primary dim" type="button" ng-click="setEditId(-1)"><i class="fa fa-times"></i></button>
+        <button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i> Save</button>
+        <button class="btn btn-primary dim" type="button" ng-click="setEditId(-1)"><i class="fa fa-times"></i> Cancel</button>
       </div>
     </div>
 </div>

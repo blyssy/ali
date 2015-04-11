@@ -65,7 +65,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
 
             local_task.$update(function(response){
                 if (response._id !== undefined) {
-                  $scope.$broadcast('ListMatRefresh', material);
+                  $scope.$broadcast('ListMatAddRefresh', material);
                 }
             });
         };
