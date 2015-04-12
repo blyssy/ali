@@ -22,7 +22,15 @@ var SubtaskSchema = new Schema({
     subtask_name: {
         type: String,
         required: true
-    }
+    },
+    materials: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Material'
+    }],
+    equipment: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Equipment'
+    }]
 });
 
 /**

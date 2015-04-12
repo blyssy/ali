@@ -62,15 +62,49 @@ exports.update = function(req, res) {
 exports.destroy = function(req, res) {
     var subtask = req.subtask;
 
-    subtask.remove(function(err) {
-        if (err) {
-            res.render('error', {
-                status: 500
+    //console.log('in the subtask destroy method...nothing removed.' + subtask);
+
+    if(req.query.type === 'material'){
+        if(req.query.index){
+            //console.log('index does exits for the material type');
+            subtask.materials.splice(req.query.index, 1);
+            //console.log(task);
+            subtask.save(function(err) {
+                if (err) {
+                    res.render('could not remove material item from subtask list', {
+                        status: 500
+                    });
+                } else {
+                    res.json(subtask);
+                }
             });
-        } else {
-            res.json(subtask);
         }
-    });
+    } else if(req.query.type === 'equipment'){
+        if(req.query.index){
+            //console.log('index does exits for the equipment type');
+            subtask.equipment.splice(req.query.index, 1);
+            subtask.save(function(err) {
+                if (err) {
+                    res.render('could not remove equipment item from subtask list', {
+                        status: 500
+                    });
+                } else {
+                    res.json(subtask);
+                }
+            });
+        }
+    } else {
+        //console.log('this is a delete on the task itself.');
+        subtask.remove(function(err) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                res.json(subtask);
+            }
+        });
+    }
 };
 
 /**

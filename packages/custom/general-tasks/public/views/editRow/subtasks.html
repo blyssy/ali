@@ -1,0 +1,120 @@
+<div class="ibox-content">
+    <div class="well">      
+        <div><label class="control-label">Subtask Name:</label>
+            <input type="text" ng-model="p.subtask_name" class="form-control m-b" value="{{p.subtask_name}}">
+        </div>
+        <div><label class="control-label">Subtask Trade:</label>
+            <select class="form-control m-b" data-ng-model="p.subtask_trade">
+                <!-- <option value="" disabled selected>Trade</option> -->
+                <option value="01">01 - Concrete</option>
+                <option value="02">02 - Plumbing</option>
+                <option value="03">03 - Grader</option>
+                <option value="04">04 - Framer</option>
+                <option value="05">05 - Drywall</option>
+                <option value="06">06 - Roofer</option>
+                <option value="07">07 - HVAC</option>
+                <option value="08">08 - Stucco</option>
+                <option value="09">09 - Electrician</option>
+                <option value="10">10 - Unused</option>
+                <option value="11">11 - Fire Sprinkler</option>
+                <option value="12">12 - Insulation</option>
+                <option value="13">13 - Painter</option>
+                <option value="14">14 - Cabinets</option>
+                <option value="15">15 - Masonry</option>
+                <option value="16">16 - Finish Trim</option>
+                <option value="17">17 - Tile</option>
+                <option value="18">18 - Flooring</option>
+                <option value="19">19 - Fencing</option>
+                <option value="20">20 - Landscaping</option>
+            </select>
+        </div>
+        <div>
+            <label class="control-label">Subtask Number:</label>
+            <select class="form-control m-b" data-ng-model="p.subtask">
+                <!-- <option value="" disabled selected>Task#</option> -->
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+            </select>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i> Save</button>
+            <button class="btn btn-primary dim" type="button" ng-click="setEditSubId(-1)"><i class="fa fa-times"></i> Cancel</button>
+        </div>
+        <br><br><br>
+        <div>
+            <section data-ng-controller="SubTasksMatController" data-ng-init="initSubListMat(p)">
+                <label class="control-label">Materials:</label>
+                <table ng-table="tableSubListMatParams" class="table">
+                    <tbody ng-repeat="q in $data track by $index">
+                    <tr id="tr{{q._id}}">
+                        <td class="rowTd" data-title="'Material Name'" sortable="'name'">{{q.name}}</td>
+                        <td class="rowTd" data-title="'Units'" sortable="'unit.unit'">{{q.unit.unit}}</td>
+                        <td class="rowTd" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
+                        <td class="rowTd" >
+                            <button class="btn btn-danger dim" type="button" ng-click="removeSubListMat(p, q, $index)"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <select data-ng-model="p.materials_list" class="form-control m-b" 
+                           ng-options="obj as obj.name for obj in materials_list">
+                           <option value="" disabled selected>Select Material Type</option>
+                </select>
+                <button class="btn btn-primary" type="submit" ng-click="addNewMaterial(p, p.materials_list)">
+                    <i class="fa fa-check"></i>
+                      Add Material
+                </button>
+            </section>
+        </div>
+        <div>
+            <section data-ng-controller="SubTasksEquipController" data-ng-init="initSubListEquip(p)">
+                <label class="control-label">Equipment:</label>
+                <table ng-table="tableSubListEquipParams" class="table">
+                    <tbody ng-repeat="q in $data track by $index">
+                    <tr id="tr{{q._id}}">
+                        <td class="rowTd" data-title="'Equipment Name'" sortable="'name'">{{q.name}}</td>
+                        <td class="rowTd" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
+                        <td class="rowTd" >
+                            <button class="btn btn-danger dim" type="button" ng-click="removeSubListEquip(p, q, $index)"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <select data-ng-model="p.equipments_list" class="form-control m-b" 
+                           ng-options="obj as obj.name for obj in equipments_list">
+                           <option value="" disabled selected>Select Equipment Type</option>
+                </select>
+                <button class="btn btn-primary" type="submit" ng-click="addNewEquipment(p, p.equipments_list)">
+                    <i class="fa fa-check"></i>
+                      Add Equipment
+                </button>
+            </section>
+        </div>
+      <div class="pull-right">
+        <button class="btn btn-primary dim" type="button" ng-click="setEditSubId(-1)"><i class="fa fa-times"></i> Close</button>
+      </div> 
+    </div>
+</div>

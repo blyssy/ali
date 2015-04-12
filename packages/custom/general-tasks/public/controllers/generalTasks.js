@@ -66,6 +66,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
                   $scope.$broadcast('ListMatAddRefresh', material);
                 }
             });
+            //$scope.materials_list = '';
         };
 
         $scope.addNewEquipment = function(task, equipment) {
@@ -125,6 +126,7 @@ angular.module('mean.general-tasks').controller('GeneralTasksController', ['$sco
 
         $scope.update = function(task, taskField) {
             //console.log('in the public/controller update function');
+            task.task_code = task.trade + task.task;
             task.$update();
             $scope.editId = -1;
         };
