@@ -54,6 +54,7 @@ Inspinia.register(function(system, app, auth, database) {
   Inspinia.aggregateAsset('js', 'demo/sparkline-demo.js', {global:true, weight: 13, group: 'footer'});
   Inspinia.aggregateAsset('js', 'plugins/chartJs/Chart.min.js', {global:true, weight: 14, group: 'footer'});
   Inspinia.aggregateAsset('js', 'plugins/toastr/toastr.min.js', {global:true, weight: 15, group: 'footer'});
+  Inspinia.aggregateAsset('js', 'plugins/jasny/jasny-bootstrap.min.js', {global:true, weight: 16, group: 'footer'});
   
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

@@ -3,8 +3,7 @@
 angular.module('mean.bids').config(['$stateProvider',  
   function($stateProvider) {
   	// Check if the user is connected
-    /* jshint ignore:start */
-    /*var checkLoggedin = function($q, $timeout, $http, $location) {
+    var checkLoggedin = function($q, $timeout, $http, $location) {
       // Initialize a new promise
       var deferred = $q.defer();
 
@@ -21,19 +20,24 @@ angular.module('mean.bids').config(['$stateProvider',
       });
 
       return deferred.promise;
-    };*/
-    /* jshint ignore:end */
-
+    };
 
     $stateProvider
       .state('bids', {
         url: '/bids',
-        templateUrl: 'bids/views/bids.html'
-    }).state('bid wizard', {
-            url: '/wizard',
-            templateUrl: '/bids/views/wizard.html'
-        })
-        .state('bid wizard step one', {
+        templateUrl: 'bids/views/bids.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
+      .state('bid wizard', {
+        url: '/wizard',
+        templateUrl: '/bids/views/wizard.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      });
+        /*.state('bid wizard step one', {
             url: '/step_one',
             templateUrl: '/bids/views/wizard/step_one.html'
         })
@@ -44,7 +48,7 @@ angular.module('mean.bids').config(['$stateProvider',
         .state('bid wizard step three', {
             url: '/step_three',
             templateUrl: '/bids/views/wizard/step_three.html'
-        });
+        });*/
 
         //$urlRouteProvider.otherwise('/wizard/step_one');
   }

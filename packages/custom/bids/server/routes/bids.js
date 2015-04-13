@@ -1,27 +1,25 @@
 'use strict';
 
+var bids = require('../controllers/bids');
+
+// Task authorization helpers
+var hasAuthorization = function(req, res, next) {
+  if (!req.user.isAdmin && req.bid.user.id !== req.user.id) {
+    return res.status(401).send('User is not authorized');
+  }
+  next();
+};
+
 /* jshint -W098 */
 // The Package is past automatically as first parameter
 module.exports = function(Bids, app, auth, database) {
+    //Setting up the gtasks api
+    app.get('/bids', auth.requiresAdmin, bids.all);
+    app.post('/bids', auth.requiresAdmin, bids.create);
+    //app.put('/bids', auth.requiresAdmin, bids.updateMaterial);
+    app.get('bids/:bidId', auth.requiresAdmin, bids.show);
+    app.put('/bids/:bidId', auth.requiresAdmin, bids.update);
+    app.delete('/bids/:bidId', auth.requiresAdmin, bids.destroy);
 
-  app.get('/bids/example/anyone', function(req, res, next) {
-    res.send('Anyone can access this');
-  });
-
-  app.get('/bids/example/auth', auth.requiresLogin, function(req, res, next) {
-    res.send('Only authenticated users can access this');
-  });
-
-  app.get('/bids/example/admin', auth.requiresAdmin, function(req, res, next) {
-    res.send('Only users with Admin role can access this');
-  });
-
-  app.get('/bids/example/render', function(req, res, next) {
-    Bids.render('index', {
-      package: 'bids'
-    }, function(err, html) {
-      //Rendering a view from the Package server/views
-      res.send(html);
-    });
-  });
+    app.param('bidId', bids.bid);
 };
