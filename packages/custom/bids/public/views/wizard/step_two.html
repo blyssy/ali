@@ -1,28 +1,129 @@
 <fieldset>
-    <h2>Profile Information</h2>
+    <h2>Project Information</h2>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="form-group">
-                <label>First name *</label>
-                <input id="name" name="name" ng-model="formData.name" type="text" class="form-control required">
+                <label>Project Name</label>
+                <input id="projectName" name="projectName" ng-model="formData.projectName" type="text" class="form-control required">
             </div>
             <div class="form-group">
-                <label>Last name *</label>
-                <input id="surname" name="surname" ng-model="formData.lastName" type="text" class="form-control required">
+                <label>Project Address</label>
+                <input id="address" ng-model="formData.projectAddress" name="projectAddress" type="text" class="form-control">
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <label>City</label>
+                    <input id="projectCity" ng-model="formData.projectCity" name="ProjectCity" type="text" class="form-control">
+                </div>
+                <div class="col-lg-4">
+                    <label>State</label><br>
+                    <select chosen id="states" ng-model="formData.projectState" class="chosen-select" style="width:200px;" tabindex="4" ng-model="state" ng-options="s for s in main.states">
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <label>Zip</label>
+                    <input id="projectZip" ng-model="formData.projectZip" name="projectZip" type="text" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="form-group">
+                    <label>Purchasing Agent</label>
+                    <input id="purchasingAgent" name="purchasingAgent" type="text" ng-model="formData.purchasingAgent" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <label>Phone Number</label>
+                    <input id="purchasingAgentPhone" data-mask="(999) 999-9999" placeholder="" ng-model="formData.purchasingAgentPhone" name="purchasingAgentPhoneNumber" type="text" class="form-control">
+                    <span class="help-block">(999) 999-9999</span>
+                </div>
+                <div class="col-lg-8">
+                    <label>Email Address</label>
+                    <input id="purchasingAgentEmail" ng-model="formData.purchasingAgentEmail" name="purchasingAgentEmail" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <label># of Lots</label>
+                    <input id="numberOfLots" ng-model="formData.numberOfLots" name="numberOfLots" type="text" class="form-control">
+                </div>
+                <div class="col-lg-10">
+                    <label>Lot Numbers</label>
+                    <input id="lotNumbers" ng-model="formData.lotNumbers" name="lotNumbers" type="text" class="form-control">
+                    <span class="help-block">Comma Seperated (123, 456, 789)</span>
+                </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label>Email *</label>
-                <input id="email" name="email" type="text" ng-model="formData.email" class="form-control required email">
+        <br> 
+        <!-- <div class="col-md-4">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Google Reference Map</h5>
+                </div>
+                <div class="ibox-content">
+                    <p>
+                        Use this map to review lot/land locations.
+                    </p>
+                    <section id="map" ng-controller="GoogleMaps">
+                        <div ui-map="myMap" ui-options="mapOptions" class="google-map"></div>
+                    </section>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Address *</label>
-                <input id="address" name="address" type="text" ng-model="formData.address" class="form-control">
-            </div>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-lg-2" align="center">
+            <label>Phase One</label><br>
+            <input type="checkbox" class="js-switch" ui-switch="{color:'#1AB394'}" ng-model="main.checkOne"/>
+        </div>
+        <div class="col-lg-10">
+            <label>Phase One Lot Numbers</label>
+            <input id="lotNumbersPhaseOne" ng-model="formData.lotNumbersPhaseOne" name="lotNumbersPhaseOne" type="text" class="form-control">
+            <span class="help-block">Comma Seperated (123, 456, 789)</span>
         </div>
     </div>
-    <a ui-sref="wizard step one" class="btn btn-default">Previous</a>
-    <a ui-sref="wizard step three" class="btn btn-primary">Next</a>
+    <div class="row">
+        <div class="col-lg-2" align="center">
+            <label>Phase Two</label><br>
+            <input type="checkbox" class="js-switch" ui-switch="{color:'#1AB394'}" ng-model="main.checkTwo"/>
+        </div>
+        <div class="col-lg-10">
+            <label>Phase Two Lot Numbers</label>
+            <input id="lotNumbersPhaseTwo" ng-model="formData.lotNumbersPhaseTwo" name="lotNumbersPhaseTwo" type="text" class="form-control">
+            <span class="help-block">Comma Seperated (123, 456, 789)</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2" align="center">
+            <label>Phase Three</label><br>
+            <input type="checkbox" class="js-switch" ui-switch="{color:'#1AB394'}" ng-model="main.checkThree"/>
+        </div>
+        <div class="col-lg-10">
+            <label>Phase Three Lot Numbers</label>
+            <input id="lotNumbersPhaseThree" ng-model="formData.lotNumbersPhaseThree" name="lotNumbersPhaseThree" type="text" class="form-control">
+            <span class="help-block">Comma Seperated (123, 456, 789)</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2" align="center">
+            <label>Phase Four</label><br>
+            <input type="checkbox" class="js-switch" ui-switch="{color:'#1AB394'}" ng-model="main.checkFour"/>
+        </div>
+        <div class="col-lg-10">
+            <label>Phase Four Lot Numbers</label>
+            <input id="lotNumbersPhaseFour" ng-model="formData.lotNumbersPhaseFour" name="lotNumbersPhaseFour" type="text" class="form-control">
+            <span class="help-block">Comma Seperated (123, 456, 789)</span>
+        </div>
+    
+
+
+     </div>
+    <div class="row">
+        <div class="col-lg-12" align="center">
+    <a ng-click="setEditId(1)" class="btn btn-default">Previous</a>
+    <a ng-click="setEditId(3)" class="btn btn-primary">Next</a>
+        </div>
+    </div> 
 </fieldset>

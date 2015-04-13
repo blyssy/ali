@@ -34,6 +34,8 @@ Bids.register(function(app, auth, database) {
   //Bids.aggregateAsset('css', 'bids.css');
   Bids.aggregateAsset('css', 'steps/jquery.steps.css');
   Bids.aggregateAsset('js', 'steps/jquery.steps.min.js');
+  //Bids.aggregateAsset('js', '../lib/angular/angular.min.js');
+  //Bids.aggregateAsset('js', '../lib/angular-ui-router/release/angular-ui-router.js', {global:true, weight: -20, group: 'header'});
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
@@ -56,6 +58,8 @@ Bids.register(function(app, auth, database) {
         //you now have the settings object
     });
     */
+  //Bids.angularDependencies(['ngAnimate']);
+  //Bids.angularDependencies(['ui-router']);
 
   return Bids;
 });

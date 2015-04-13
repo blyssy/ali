@@ -77,5 +77,7 @@ Inspinia.register(function(system, app, auth, database) {
     });
     */
 
+  
+
   return Inspinia;
 });

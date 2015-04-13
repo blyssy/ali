@@ -1,69 +1,60 @@
-<div class="wrapper wrapper-content animated fadeInRight">
-
-    <div class="row">
+<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="WizardController" data-ng-init="init()">
+    <!-- <div class="row">
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h3>Angular Wizard</h3>
+                <h3>Bid Wizard</h3>
 
-                <p>It is example of simple wizard build with Angular plugin - ui-router based on diferent state view. You can use standard angular validation also with this form.</p>
+                <p>Start here to build out your next bid</p>
 
                 </p>
             </div>
         </div>
 
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Angular wizard</h5>
+                    <h5>Bid Wizard</h5>
 
                     <div ibox-tools></div>
                 </div>
                 <div class="ibox-content wizard">
                     <h2>
-                        Wizard
+                        Bid Wizard
                     </h2>
 
                     <p>
                         This example show how to use ui-router to create wizard like form.
                         <br/>
                         <strong>Data from ng-model.</strong><br/>
-                        <code>{{ formData}}</code>
+                        <code>{{formData}}</code>
                     </p>
 
                     <div class="steps clearfix">
-                        <ul>
-                        	<li ui-sref-active="current">
-                                <a href="bids/views/wizard/step_one.html" class="btn-default"><span>1</span> Account information</a>
+                        <ul>   <!-- ng-include src="'/bids/views/wizard/step_one.html'" -->
+                        	<li>
+                                <a ng-click="setEditId(1)" class="{{editId === 1 ? 'btn-primary' : 'btn-default'}}"><span>1. </span> Builder information</a>
                             </li>
-                            <li ui-sref-active="current">
-                                <a href="bids/views/wizard/step_two.html" class="btn-default"><span>2</span> Profile Information</a>
+                            <li>
+                                <a ng-click="setEditId(2)" class="{{editId === 2 ? 'btn-primary' : 'btn-default'}}"><span>2. </span> Project information</a>
                             </li>
-                            <li ui-sref-active="current">
-                                <a href="bids/views/wizard/step_three.html" class="btn-default"><span>3</span> Terms and Conditions</a>
+                            <li>
+                                <a ng-click="setEditId(3)" class="{{editId === 3 ? 'btn-primary' : 'btn-default'}}"><span>3. </span> MTC Information</a>
                             </li>
-
-                            <!-- <li ui-sref-active="current">
-                                <a ui-sref="wizard step one" class="btn-default"><span>1</span> Account information</a>
+                            <li>
+                                <a ng-click="setEditId(4)" class="{{editId === 4 ? 'btn-primary' : 'btn-default'}}"><span>4. </span> Terms and Conditions</a>
                             </li>
-                            <li ui-sref-active="current">
-                                <a ui-sref="wizard step two" class="btn-default"><span>2</span> Profile Information</a>
-                            </li>
-                            <li ui-sref-active="current">
-                                <a ui-sref="wizard step three" class="btn-default"><span>3</span> Terms and Conditions</a>
-                            </li> -->
                         </ul>
                     </div>
                     <div class="wizard">
                         <div class="content">
-
-                        <form name="signupForm" ng-submit="processForm()" class="p-lg">
-
-                            <!-- our nested state views will be injected here -->
-                            <div id="form-views" ui-view></div>
-                        </form>
-
+    <form name="signupForm" ng-submit="processForm()" class="p-lg">
+        <div ng-show="editId===1" ng-if="editId===1" ng-include src="'/bids/views/wizard/step_one.html'"></div>
+        <div ng-show="editId===2" ng-if="editId===2" ng-include src="'/bids/views/wizard/step_two.html'"></div>
+        <div ng-show="editId===3" ng-if="editId===3" ng-include src="'/bids/views/wizard/step_three.html'"></div>
+        <div ng-show="editId===4" ng-if="editId===4" ng-include src="'/bids/views/wizard/step_four.html'"></div>
+    </form>
                         </div>
                         </div>
                 </div>

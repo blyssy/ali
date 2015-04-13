@@ -7,7 +7,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   plugins = gulpLoadPlugins(),
   paths = {
-    js: ['*.js', 'test/**/*.js', '!test/coverage/**', '!bower_components/**', 'packages/**/*.js', '!packages/**/node_modules/**', '!packages/contrib/**/*.js', '!packages/contrib/**/node_modules/**', '!packages/custom/**/public/assets/js/*.js', '!packages/custom/**/public/assets/js/plugins/**/js/*.js', '!packages/custom/**/public/assets/lib/**/**/js/*.js', '!packages/custom/**/public/assets/lib/**/*.js', '!packages/custom/**/public/assets/js/plugins/**/*.js', '!packages/custom/**/public/assets/js/**/*.js'],
+    js: ['*.js', 'test/**/*.js', '!test/coverage/**', '!bower_components/**', 'packages/**/*.js', '!packages/**/node_modules/**', '!packages/contrib/**/*.js', '!packages/contrib/**/node_modules/**', '!packages/custom/**/public/assets/js/*.js', '!packages/custom/**/public/assets/js/plugins/**/js/*.js', '!packages/custom/**/public/assets/lib/**/**/js/*.js', '!packages/custom/**/public/assets/lib/**/*.js', '!packages/custom/**/public/assets/js/plugins/**/*.js', '!packages/custom/**/public/assets/js/**/*.js', '!/packages/custom/inspinia/public/directives/inspinia.js'],
     html: ['packages/**/public/**/views/**', 'packages/**/server/views/**'],
     css: ['!bower_components/**', 'packages/**/public/**/css/*.css', '!packages/contrib/**/public/**/css/*.css', '!packages/custom/**/public/assets/css/*.css', '!packages/custom/**/public/assets/css/plugins/**/css/*.css', '!packages/custom/**/public/assets/lib/**/**/css/*.css'],
     less: ['**/public/**/css/*.less'],
