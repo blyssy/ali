@@ -1,7 +1,7 @@
 /**
  * icheck - Directive for custom checkbox icheck
  */
- angular.module('mean.bids').directive('icheck', function ($timeout) {
+ /*angular.module('mean.bids').directive('icheck', function ($timeout) {
     return {
         restrict: 'A',
         require: 'ngModel',
@@ -33,4 +33,4 @@
             });
         }
     };
-});
+});*/
