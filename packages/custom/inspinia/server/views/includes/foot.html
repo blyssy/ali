@@ -17,7 +17,6 @@ $(document).ready(function () {
         }
     })
     fix_height();
-
 });
 
 // Minimalize menu when screen is less than 768px
@@ -30,6 +29,15 @@ $(function() {
         }
     })
 })
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+    });
+  });
 </script>
 
 {% if (process.env.NODE_ENV == 'development') %}
