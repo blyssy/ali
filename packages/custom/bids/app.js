@@ -35,10 +35,12 @@ Bids.register(function(app, auth, database) {
   
   //Bids.aggregateAsset('css', 'bids.css');
   Bids.aggregateAsset('css', 'steps/jquery.steps.css');
+  //Bids.aggregateAsset('css', '../lib/switchery/dist/switchery.css');
+
+
   Bids.aggregateAsset('js', 'steps/jquery.steps.min.js');
   Bids.aggregateAsset('js', '../lib/angular-ui-utils/ui-utils.js');
-  //Bids.aggregateAsset('js', 'switchery.js');
-  //Bids.aggregateAsset('css', 'switchery.css');
+  //Bids.aggregateAsset('js', '../lib/switchery/dist/switchery.js');
   //Bids.aggregateAsset('js', '../lib/angular/angular.min.js');
   //Bids.aggregateAsset('js', '../lib/angular-ui-router/release/angular-ui-router.js', {global:true, weight: -20, group: 'header'});
 

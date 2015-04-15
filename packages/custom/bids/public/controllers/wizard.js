@@ -15,7 +15,7 @@
 
 }*/
 
-angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users',
+angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users', 
   function($scope, Global, Bids, Users) {
     $scope.global = Global;
 

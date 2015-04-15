@@ -59,6 +59,15 @@ function sideNavigation($timeout) {
     };
 }
 
+function jsSwitch(){
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            //var switchery = new Switchery(element, { color: '#1AB394'});
+            $(element).Switchery({ color: '#1AB394'});
+        }
+    }
+}
 /**
  * responsibleVideo - Directive for responsive video
  */
@@ -374,6 +383,7 @@ angular
     .module('mean')
     .directive('pageTitle', pageTitle)
     .directive('sideNavigation', sideNavigation)
+    .directive('jsSwitch', jsSwitch)
     //.directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
     .directive('vectorMap', vectorMap)
