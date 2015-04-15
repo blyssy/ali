@@ -21,7 +21,8 @@ Admin.register(function(app, auth, database) {
     title: 'Admin Users',
     link: 'users',
     roles: ['admin'],
-    menu: 'main'
+    menu: 'main',
+    icon: 'fa fa-user'
   });
   
   //Admin.aggregateAsset('css', 'admin.css');

@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-                <a ui-sref='{{item.link}}'><span class="nav-label">{{item.title}}</span> </a>
+                <a ui-sref='{{item.link}}'><i class="{{item.icon}}"></i> <span class="nav-label">{{item.title}}</span> </a>
             </li>
         </ul>
     </div>

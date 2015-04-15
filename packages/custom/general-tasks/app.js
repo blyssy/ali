@@ -21,7 +21,8 @@ GeneralTasks.register(function(app, auth, database) {
     title: 'Task Control Center',
     link: 'task control',
     roles: ['authenticated'],
-    menu: 'main'
+    menu: 'main',
+    icon: 'fa fa-tasks'
   });
 
   //GeneralTasks.angularDependencies(['ngTable']);

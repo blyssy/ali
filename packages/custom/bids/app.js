@@ -21,14 +21,16 @@ Bids.register(function(app, auth, database) {
     title: 'Bid Wizard',
     link: 'bid wizard',
     roles: ['authenticated'],
-    menu: 'main'
+    menu: 'main',
+    icon: 'fa fa-magic'
   });
 
   Bids.menus.add({
     title: 'Bid Control Center',
     link: 'bids',
     roles: ['authenticated'],
-    menu: 'main'
+    menu: 'main',
+    icon: 'glyphicon glyphicon-leaf'
   });
   
   //Bids.aggregateAsset('css', 'bids.css');

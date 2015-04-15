@@ -19,12 +19,13 @@ Inspinia.register(function(system, app, auth, database) {
   Inspinia.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
-  //Inspinia.menus.add({
-  //  title: 'inspinia example page',
-  //  link: 'inspinia example page',
-  //  roles: ['authenticated'],
-  //  menu: 'main'
-  //});
+  /*Inspinia.menus.add({
+    title: 'inspinia example page',
+    link: 'inspinia example page',
+    roles: ['authenticated'],
+    menu: 'main',
+    icon: 'glyphicon glyphicon-asterisk'
+  });*/
   
   //Inspinia.aggregateAsset('css', 'inspinia.css');
   Inspinia.aggregateAsset('css', 'style.css', {global:true, weight: 5});
