@@ -22,7 +22,7 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
             title: 'Roles',
             schemaKey: 'roles',
             type: 'select',
-            options: ['authenticated', 'foreman', 'manager', 'contractor', 'admin'],
+            options: ['authenticated', 'foreman', 'tm', 'mtc', 'admin'],
             inTable: true
         }, {
             title: 'Password',
@@ -30,11 +30,15 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
             type: 'password',
             inTable: false
         }, {
-            title: 'Repeat password',
-            schemaKey: 'confirmPassword',
-            type: 'password',
-            inTable: false
+            title: 'Trade',
+            schemaKey: 'trade',
+            type: 'select',
+            options: ['Concrete', 'Plumbing', 'Grader', 'Framer', 'Drywall', 'Roofer', 'HVAC', 'Stucco', 
+              'Electrician', 'Unused', 'Fire Sprinkler', 'Insulation', 'Painter', 'Cabinets', 'Masonry',
+              'Finish Trim', 'Tile', 'Flooring', 'Fencing', 'Landscaping'],
+            inTable: true
         }];
+
         $scope.user = {};
 
         $scope.init = function() {
@@ -46,13 +50,16 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
         $scope.add = function() {
             if (!$scope.users) $scope.users = [];
 
+            console.log('adding user %s with role %s and trade %s', $scope.user.name, $scope.user.roles, $scope.user.trade);
+
             var user = new Users({
                 email: $scope.user.email,
                 name: $scope.user.name,
                 username: $scope.user.username,
                 password: $scope.user.password,
-                confirmPassword: $scope.user.confirmPassword,
-                roles: $scope.user.roles
+                confirmPassword: $scope.user.password,
+                roles: $scope.user.roles,
+                trade: $scope.user.trade
             });
 
             user.$save(function(response) {
@@ -61,7 +68,7 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
 
             //user.firstName = user.lastName = user.email = user.password = user.role = '';
 
-            this.firstName = this.lastName = this.email = this.password = this.role = '';
+            this.firstName = this.lastName = this.email = this.password = this.role = this.trade = '';
         };
 
         $scope.remove = function(user) {
@@ -75,6 +82,7 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
         };
 
         $scope.update = function(user, userField) {
+            console.log('we are now in the update function!!!!!!!!!!!!');
             if (userField && userField === 'roles' && user.roles.indexOf('admin') === -1) {
                 if (confirm('Are you sure you want to remove "admin" role?')) {
                     user.$update();

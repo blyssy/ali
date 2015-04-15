@@ -33,6 +33,8 @@ Inspinia.register(function(system, app, auth, database) {
   Inspinia.aggregateAsset('css', '../lib/font-awesome/css/font-awesome.css', {global:true});
   Inspinia.aggregateAsset('css', 'plugins/toastr/toastr.min.css', {global:true});
   Inspinia.aggregateAsset('css', '../js/plugins/gritter/jquery.gritter.css', {global:true});
+  Inspinia.aggregateAsset('css', 'plugins/switchery/switchery.css', {global:true});
+  Inspinia.aggregateAsset('css', 'plugins/iCheck/custom.css', {global:true});
 
   Inspinia.aggregateAsset('js', 'bootstrap.js', {global:true, weight: -4, group: 'footer'});
   Inspinia.aggregateAsset('js', 'jquery-2.1.1.js', {global:true, weight: -5, group: 'footer'});
@@ -55,7 +57,8 @@ Inspinia.register(function(system, app, auth, database) {
   Inspinia.aggregateAsset('js', 'plugins/chartJs/Chart.min.js', {global:true, weight: 14, group: 'footer'});
   Inspinia.aggregateAsset('js', 'plugins/toastr/toastr.min.js', {global:true, weight: 15, group: 'footer'});
   Inspinia.aggregateAsset('js', 'plugins/jasny/jasny-bootstrap.min.js', {global:true, weight: 16, group: 'footer'});
-  
+  Inspinia.aggregateAsset('js', 'plugins/switchery/switchery.js', {global:true, weight: 17, group: 'footer'});
+  Inspinia.aggregateAsset('js', 'plugins/iCheck/icheck.min.js', {global:true, weight: 18, group: 'footer'});
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
@@ -78,7 +81,7 @@ Inspinia.register(function(system, app, auth, database) {
     });
     */
 
-  
+    //Inspinia.angularDependencies(['ui-switchery']);
 
   return Inspinia;
 });

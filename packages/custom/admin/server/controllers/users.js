@@ -13,6 +13,8 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res, next) {
     var user = new User(req.body);
 
+    //console.log(req.body);
+
     user.provider = 'local';
 
     // because we set our user.provider to local our models/user.js validation will always be true
@@ -32,6 +34,7 @@ exports.create = function(req, res, next) {
     user.roles = req.body.roles;
     user.save(function(err) {
         if (err) {
+            console.log(err);
             switch (err.code) {
                 case 11000:
                 case 11001:
@@ -68,6 +71,8 @@ exports.user = function(req, res, next, id) {
 exports.update = function(req, res) {
     var user = req.profile;
     user = _.extend(user, req.body);
+
+    console.log(user);
 
     user.save(function(err) {
         res.jsonp(user);

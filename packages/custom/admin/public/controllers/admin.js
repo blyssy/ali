@@ -1,18 +1,5 @@
 'use strict';
 
-/* jshint -W098 */
-/*angular.module('mean.admin').controller('AdminController', ['$scope', 'Global', 'Admin',
-  function($scope, Global, Admin) {
-    $scope.global = Global;
-    $scope.package = {
-      name: 'admin'
-    };
-  }
-]);
-*/
-
-//'use strict';
-
 angular.module('mean.admin').controller('AdminController', ['$scope', 'Global', 'Menus', '$rootScope',
     function($scope, Global, Menus, $rootScope) {
         $scope.global = Global;

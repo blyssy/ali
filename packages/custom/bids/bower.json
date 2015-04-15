@@ -1,5 +1,7 @@
 {
   "name": "bids",
   "version": "0.0.1",
-  "dependencies": {}
+  "dependencies": {
+    "angular-ui-utils": "~0.2.3"
+  }
 }

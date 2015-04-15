@@ -20,7 +20,7 @@
                     <label>City</label>
                     <input id="city" ng-model="formData.city" name="city" type="text" class="form-control">
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <label>State</label><br>
                     <select chosen id="states" ng-model="formData.state" class="chosen-select" style="width:200px;" tabindex="4" ng-model="state" ng-options="s for s in states">
                     </select>
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label>Phone Number</label>
-                    <input id="phone" ng-model="formData.phone" data-mask="(999) 999-9999" name="phoneNumber" type="text" class="form-control">
+                    <input id="phone" ui-mask="(999) 999-9999" ng-model="formData.phone" name="phone" type="text" class="form-control">
                     <span class="help-block">(999) 999-9999</span>
                 </div>
                 <div class="col-md-8">

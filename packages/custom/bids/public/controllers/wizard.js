@@ -15,20 +15,26 @@
 
 }*/
 
-angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids',
-  function($scope, Global, Bids) {
+angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users',
+  function($scope, Global, Bids, Users) {
     $scope.global = Global;
 
     // All data will be store in this object
     $scope.formData = {};
 
     $scope.init = function() {
+        console.log('In the bids init function');
     	$scope.editId = 1;
+
+        Users.query({}, function(users) {
+            $scope.users = users;
+        });
     };
 
     // After process wizard
     $scope.processForm = function() {
-        alert('Wizard completed');
+        var formD = $scope.formData;
+        alert('Wizard completed' + formD);
     };
 
     $scope.setEditId =  function(pid) {
@@ -87,5 +93,85 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
         'Wisconsin',
         'Wyoming'
     ];
+
+    $scope.setConcrete = function(obj) {
+        $scope.formData.concrete = obj;
+    };
+
+    $scope.setPlumbing = function(obj) {
+        $scope.formData.plumbing = obj;
+    };
+
+    $scope.setGrader = function(obj) {
+        $scope.formData.grader = obj;
+    };
+    
+    $scope.setFramer = function(obj) {
+        $scope.formData.framer = obj;
+    };
+
+    $scope.setDrywall = function(obj) {
+        $scope.formData.drywall = obj;
+    };
+
+    $scope.setRoofer = function(obj) {
+        $scope.formData.roofer = obj;
+    };
+
+    $scope.setHVAC = function(obj) {
+        $scope.formData.havc = obj;
+    };
+
+    $scope.setStucco = function(obj) {
+        $scope.formData.stucco = obj;
+    };
+    
+    $scope.setElectrician = function(obj) {
+        $scope.formData.electrician = obj;
+    };
+
+    $scope.setUnused = function(obj) {
+        $scope.formData.unused = obj;
+    };
+
+    $scope.setFireSprinkler = function(obj) {
+        $scope.formData.fireSprinkler = obj;
+    };
+
+    $scope.setInsulation = function(obj) {
+        $scope.formData.insulation = obj;
+    };
+
+    $scope.setPainter = function(obj) {
+        $scope.formData.painter = obj;
+    };
+
+    $scope.setCabinets = function(obj) {
+        $scope.formData.cabinets = obj;
+    };
+    
+    $scope.setMasonry = function(obj) {
+        $scope.formData.masonry = obj;
+    };
+
+    $scope.setFinishTrim = function(obj) {
+        $scope.formData.finishTrim = obj;
+    };
+
+    $scope.setTile = function(obj) {
+        $scope.formData.tile = obj;
+    };
+
+    $scope.setFlooring = function(obj) {
+        $scope.formData.flooring = obj;
+    };
+
+    $scope.setFencing = function(obj) {
+        $scope.formData.fencing = obj;
+    };
+
+    $scope.setLandScaping = function(obj) {
+        $scope.formData.landScaping = obj;
+    };
   }
 ]);

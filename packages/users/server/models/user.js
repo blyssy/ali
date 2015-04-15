@@ -66,6 +66,10 @@ var UserSchema = new Schema({
     type: Array,
     default: ['authenticated']
   },
+  trade: {
+    type: Array,
+    default: ['Unused']
+  },
   hashed_password: {
     type: String,
     validate: [validatePresenceOf, 'Password cannot be blank']
