@@ -40,6 +40,8 @@
                     <tr id="tr{{p._id}}">
                         <td class="rowTd" data-title="'Task Order'" sortable="'order'">{{p.order}}</td>
                         <td class="rowTd" data-title="'Task Code'" sortable="'task_code'">{{p.task_code}}</td>
+                        <td class="rowTd" data-title="'Trade'" sortable="'trade'">{{p.trade}} - {{getTradeName(p.trade)}}</td>
+                        <td class="rowTd" data-title="'Task'" sortable="'task'">{{p.task}}</td>
                         <td class="rowTd" data-title="'Task Name'" sortable="'task_name'">{{p.task_name}}</td>
                         <td class="rowTd" >
                             <button class="btn btn-primary dim" type="button" ng-click="setEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
@@ -49,7 +51,7 @@
                         </td>
                     </tr>
                     <tr ng-show="editId===p._id" ng-if="editId===p._id">
-                        <td colspan="4" ng-include src="'/general-tasks/views/editRow/tasks.html'"></td>
+                        <td colspan="10" ng-include src="'/general-tasks/views/editRow/tasks.html'"></td>
                     </tr>
                     </tbody>
                 </table>

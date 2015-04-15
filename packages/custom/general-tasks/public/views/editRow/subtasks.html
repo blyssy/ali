@@ -63,10 +63,12 @@
             <button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i> Save</button>
             <button class="btn btn-primary dim" type="button" ng-click="setEditSubId(-1)"><i class="fa fa-times"></i> Cancel</button>
         </div>
-        <br><br><br>
+        <br><br><br><br>
         <div>
             <section data-ng-controller="SubTasksMatController" data-ng-init="initSubListMat(p)">
-                <label class="control-label">Materials:</label>
+                <h3 class="control-label">
+                    Material List For This Task:
+                </h3><br>
                 <table ng-table="tableSubListMatParams" class="table">
                     <tbody ng-repeat="q in $data track by $index">
                     <tr id="tr{{q._id}}">
@@ -89,9 +91,12 @@
                 </button>
             </section>
         </div>
+        <br><br>
         <div>
             <section data-ng-controller="SubTasksEquipController" data-ng-init="initSubListEquip(p)">
-                <label class="control-label">Equipment:</label>
+                <h3 class="control-label">
+                    Equipment List For This Task:
+                </h3><br>
                 <table ng-table="tableSubListEquipParams" class="table">
                     <tbody ng-repeat="q in $data track by $index">
                     <tr id="tr{{q._id}}">

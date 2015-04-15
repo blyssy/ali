@@ -1,5 +1,7 @@
 {
   "name": "inspinia",
   "version": "0.0.1",
-  "dependencies": {}
+  "dependencies": {
+    "metisMenu": "~2.0.0"
+  }
 }

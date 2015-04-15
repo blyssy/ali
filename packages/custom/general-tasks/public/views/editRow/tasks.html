@@ -66,11 +66,9 @@
         <br><br><br>
         <div>
             <section data-ng-controller="GeneralTasksMatController" data-ng-init="initListMat(p)">
-                <label class="control-label">Materials:</label>
-                <!-- <ul data-ng-model="p.materials">
-                    <li ng-repeat="mat in p.materials">{{mat}}
-                    </li>
-                </ul> -->
+                <h3 class="control-label">
+                    Material List For This Task:
+                </h3><br>
                 <table ng-table="tableListMatParams" class="table">
                     <tbody ng-repeat="q in $data track by $index">
                     <tr id="tr{{q._id}}">
@@ -93,13 +91,12 @@
                 </button>
             </section>
         </div>
+        <br><br>
         <div>
             <section data-ng-controller="GeneralTasksEquipController" data-ng-init="initListEquip(p)">
-                <label class="control-label">Equipment:</label>
-                <!-- <ul data-ng-model="p.materials">
-                    <li ng-repeat="mat in p.materials">{{mat}}
-                    </li>
-                </ul> -->
+                <h3 class="control-label">
+                    Equipment List For This Task:
+                </h3><br>
                 <table ng-table="tableListEquipParams" class="table">
                     <tbody ng-repeat="q in $data track by $index">
                     <tr id="tr{{q._id}}">

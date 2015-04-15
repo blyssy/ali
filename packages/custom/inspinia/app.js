@@ -36,10 +36,12 @@ Inspinia.register(function(system, app, auth, database) {
   Inspinia.aggregateAsset('css', '../js/plugins/gritter/jquery.gritter.css', {global:true});
   Inspinia.aggregateAsset('css', 'plugins/switchery/switchery.css', {global:true});
   Inspinia.aggregateAsset('css', 'plugins/iCheck/custom.css', {global:true});
+  Inspinia.aggregateAsset('css', '../lib/metisMenu/dist/metisMenu.css', {global:true});
 
   Inspinia.aggregateAsset('js', 'bootstrap.js', {global:true, weight: -4, group: 'footer'});
   Inspinia.aggregateAsset('js', 'jquery-2.1.1.js', {global:true, weight: -5, group: 'footer'});
-  Inspinia.aggregateAsset('js', 'plugins/metisMenu/jquery.metisMenu.js', {global:true, weight: -1, group: 'footer'});
+  //Inspinia.aggregateAsset('js', 'plugins/metisMenu/jquery.metisMenu.js', {global:true, weight: -1, group: 'footer'});
+  Inspinia.aggregateAsset('js', '../lib/metisMenu/dist/metisMenu.js', {global:true, weight: -1, group: 'footer'});
   Inspinia.aggregateAsset('js', 'plugins/slimscroll/jquery.slimscroll.min.js', {global:true, weight: 0, group: 'footer'});
   Inspinia.aggregateAsset('js', 'plugins/flot/jquery.flot.js', {global:true, weight: 1, group: 'footer'});
   Inspinia.aggregateAsset('js', 'plugins/flot/jquery.flot.tooltip.min.js', {global:true, weight: 2, group: 'footer'});
@@ -82,7 +84,7 @@ Inspinia.register(function(system, app, auth, database) {
     });
     */
 
-    //Inspinia.angularDependencies(['ui-switchery']);
+    Inspinia.angularDependencies(['metisMenu']);
 
   return Inspinia;
 });
