@@ -14,17 +14,18 @@ var BidSchema = new Schema({
     bid_status: {
         type: String,
         required: true
-    }, 
+    },
+    bid_request_progress: {
+        type: String
+    },
     builder_name: {
-        type: String,
-        required: true
+        type: String
     }, 
     builder_division: {
         type: String
     }, 
     builder_address: {
-        type: String,
-        required: true
+        type: String
     },
     builder_city: {
         type: String
@@ -42,8 +43,7 @@ var BidSchema = new Schema({
         type: String
     },
     project_name: {
-        type: String,
-        required: true
+        type: String
     },
     project_address: {
         type: String
@@ -53,7 +53,68 @@ var BidSchema = new Schema({
     },
     project_zip: {
         type: String
-    }
+    },
+    purchasing_agent_name: {
+        type: String
+    },
+    purchasing_agent_phone_number: {
+        type: String
+    },
+    purchasing_agent_email: {
+        type: String
+    },
+    project_type: {  //not in the html at this point but should track multi-home, single family, etc...
+        type: String
+    },
+    project_number_of_lots: {
+        type: Number
+    },
+    project_lot_numbers: {
+        type: String
+    },
+    project_phases: [{
+        lots: {
+            type: String
+        }
+    }],
+    mtc_name: {
+        type: String
+    },
+    mtc_division: {
+        type: String
+    },
+    mtc_president_name: {
+        type: String
+    },
+    mtc_president_phone_number: {
+        type: String
+    },
+    mtc_president_email: {
+        type: String
+    },
+    mtc_division_manager_name: {
+        type: String
+    },
+    mtc_division_manager_phone_number: {
+        type: String
+    },
+    mtc_division_manager_email: {
+        type: String
+    },
+    bidding_trades: [{
+        trade: {
+            type: String
+        },
+        name: {
+            type: String
+        },
+        email: {
+            type: String
+        },
+        phone: {
+            type: String
+        }
+    }]
 });
 
 /**

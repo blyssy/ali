@@ -1,11 +1,34 @@
-<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="WizardController" data-ng-init="init()">
-    <div class="row">
+<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="BidsController" data-ng-init="init()">
+   <!--  <div class="row">
         <div class="col-lg-12">
             <div class="jumbotron">
                 <h2>Bid Control Center</h2>
             </div>
         </div>
 
+    </div> -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Add A New Bid</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="addBidForm" data-ng-submit="addBid()">
+                        <div class="form-group">
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control m-b" data-ng-model="bid_name" placeholder="New Bid Name" />
+                            </div>
+                        </div>
+                            <button class="btn btn-primary " type="submit">
+                                <i class="fa fa-check"></i>
+                                  Add
+                            </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -16,9 +39,19 @@
                     <div ibox-tools></div>
                 </div>
                 <div class="ibox-content wizard">
-                    <p>
-                        Saved Bids List Goes Here
-                    </p>
+                    <table ng-table="newBidTableParams" class="table">
+                        <tbody ng-repeat="p in $data">
+                            <tr id="tr{{p._id}}">
+                                <td class="col-sm-10" data-title="'Bid Name'" sortable="'bid_name'">{{p.bid_name}}</td>
+                                <td class="col-sm-1" >
+                                    <button class="btn btn-primary dim" type="button" ng-click="submitBid(p)"><i class="fa fa-edit"></i> Submit</button>
+                                </td>
+                                <td class="col-sm-1" >
+                                    <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -28,13 +61,20 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>Bid Requests</h5>
-
-                    <div ibox-tools></div>
                 </div>
                 <div class="ibox-content wizard">
-                    <p>
-                        These are bids that have been sent to trade partners for bid requests
-                    </p>
+                    <div class="dd" id="nestable">
+                        <ol class="dd-list">
+                            <li class="dd-item" ng-repeat="bid in submitted_bids track by $index" data-id='{{$index}}'>
+                                <div>
+                                    <p class="dd-handle">{{$index}} - {{bid.bid_name}} {{bid.bid_request_progress}}</p>
+                                    <!-- <div ng-bind-html="renderProgressBar(bid)"></div> -->
+                                    <progressbar class="progress-striped active" value="getProgress(bid)" type="{{bid.progress_type}}"><b>{{bid.progress_type}}%</progressbar> 
+                                </div>
+                                <!-- <progressbar ng-bind-html="renderProgressBar(bid)"></progressbar> -->
+                            </li> 
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>

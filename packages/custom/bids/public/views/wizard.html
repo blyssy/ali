@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <label>Select Bid </label>
                         <div class="input-group">
-                            <select chosen class="form-control m-b" ng-model="selectedItem" ng-change='onSelect()' class="chosen-select" style="width:200px;" tabindex="4" ng-options="s.name for s in bids | filter: { status: 'new'}">
+                            <select chosen class="form-control m-b" ng-model="selectedItem" ng-change='onSelect()' class="chosen-select" style="width:200px;" tabindex="4" ng-options="s.bid_name for s in bids | filter: { bid_status: 'new'}">
                             </select>
                         </div>
                     </div>

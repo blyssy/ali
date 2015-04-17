@@ -25,25 +25,9 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
     $scope.init = function() {
     	$scope.editId = 1;
 
-        $scope.bids = [{
-                name: 'test one',
-                status: 'new',
-                builderName: 'Test Builder Name',
-                builderAddress: '123 Liberty Way'
-            },
-            {
-                name: 'test two',
-                status: 'new',
-                builderName: 'Test Builder Two\'s Name',
-                builderAddress: '456 Road St'
-            },
-            {
-                name: 'test three',
-                status: 'submitted',
-                builderName: 'Test Builder Three\'s Name',
-                builderAddress: '789 Road St'
-            }
-        ];
+        Bids.query({}, function(bids) {
+            $scope.bids = bids;
+        });
 
         $scope.formData.builderName = 'test name';
         Users.query({}, function(users) {
