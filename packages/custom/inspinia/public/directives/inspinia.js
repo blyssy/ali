@@ -43,6 +43,18 @@ function pageTitle($rootScope, $timeout) {
     };
 }
 
+function chosenSelect($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            //$(".chosen-select").chosen();
+            $timeout(function() {
+                $(element).chosen();
+            });
+        }
+    };
+}
+
 /**
  * sideNavigation - Directive for run metsiMenu on sidebar navigation
  */
@@ -384,6 +396,7 @@ angular
     .directive('pageTitle', pageTitle)
     .directive('sideNavigation', sideNavigation)
     .directive('jsSwitch', jsSwitch)
+    .directive('chosenSelect', chosenSelect)
     //.directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
     .directive('vectorMap', vectorMap)

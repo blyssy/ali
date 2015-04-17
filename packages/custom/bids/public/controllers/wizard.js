@@ -23,18 +23,54 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
     $scope.formData = {};
 
     $scope.init = function() {
-        console.log('In the bids init function');
     	$scope.editId = 1;
 
+        $scope.bids = [{
+                name: 'test one',
+                status: 'new',
+                builderName: 'Test Builder Name',
+                builderAddress: '123 Liberty Way'
+            },
+            {
+                name: 'test two',
+                status: 'new',
+                builderName: 'Test Builder Two\'s Name',
+                builderAddress: '456 Road St'
+            },
+            {
+                name: 'test three',
+                status: 'submitted',
+                builderName: 'Test Builder Three\'s Name',
+                builderAddress: '789 Road St'
+            }
+        ];
+
+        $scope.formData.builderName = 'test name';
         Users.query({}, function(users) {
             $scope.users = users;
         });
     };
 
+    $scope.onSelect = function(){
+        console.log('in onSelect with item ' + $scope.selectedItem);
+        $scope.current_bid_name = $scope.selectedItem.name;
+        $scope.current_bid_status = $scope.selectedItem.status;
+        $scope.formData.builderName = $scope.selectedItem.builderName;
+        $scope.formData.builderAddress = $scope.selectedItem.builderAddress;
+    };
+
     // After process wizard
     $scope.processForm = function() {
         var formD = $scope.formData;
-        alert('Wizard completed' + formD);
+        var result = (formD.phaseOneCheckbox)?'true':'false';
+
+        if(formD.phaseOneCheckbox) {
+            console.log('formD.phaseOneCheckbox is set to true');
+        } else {
+            console.log('formD.phaseOneCheckbox is set to false');
+        }
+
+        alert('Wizard completed ' + formD.builderName + ' result is ' + result);
     };
 
     $scope.setEditId =  function(pid) {
@@ -96,82 +132,102 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
     $scope.setConcrete = function(obj) {
         $scope.formData.concrete = obj;
+        this.concrete = '';
     };
 
     $scope.setPlumbing = function(obj) {
         $scope.formData.plumbing = obj;
+        this.plumbing = '';
     };
 
     $scope.setGrader = function(obj) {
         $scope.formData.grader = obj;
+        this.grader = '';
     };
     
     $scope.setFramer = function(obj) {
         $scope.formData.framer = obj;
+        this.framer = '';
     };
 
     $scope.setDrywall = function(obj) {
         $scope.formData.drywall = obj;
+        this.drywall = '';
     };
 
     $scope.setRoofer = function(obj) {
         $scope.formData.roofer = obj;
+        this.roofer = '';
     };
 
     $scope.setHVAC = function(obj) {
         $scope.formData.havc = obj;
+        this.havc = '';
     };
 
     $scope.setStucco = function(obj) {
         $scope.formData.stucco = obj;
+        this.stucco = '';
     };
     
     $scope.setElectrician = function(obj) {
         $scope.formData.electrician = obj;
+        this.electrician = '';
     };
 
     $scope.setUnused = function(obj) {
         $scope.formData.unused = obj;
+        this.unused = '';
     };
 
     $scope.setFireSprinkler = function(obj) {
         $scope.formData.fireSprinkler = obj;
+        this.fireSprinkler = '';
     };
 
     $scope.setInsulation = function(obj) {
         $scope.formData.insulation = obj;
+        this.insulation = '';
     };
 
     $scope.setPainter = function(obj) {
         $scope.formData.painter = obj;
+        this.painter = '';
     };
 
     $scope.setCabinets = function(obj) {
         $scope.formData.cabinets = obj;
+        this.cabinets = '';
     };
     
     $scope.setMasonry = function(obj) {
         $scope.formData.masonry = obj;
+        this.masonry = '';
     };
 
     $scope.setFinishTrim = function(obj) {
         $scope.formData.finishTrim = obj;
+        this.finishTrim = '';
     };
 
     $scope.setTile = function(obj) {
         $scope.formData.tile = obj;
+        this.tile = '';
     };
 
     $scope.setFlooring = function(obj) {
         $scope.formData.flooring = obj;
+        this.flooring = '';
     };
 
     $scope.setFencing = function(obj) {
         $scope.formData.fencing = obj;
+        this.fencing = '';
     };
 
     $scope.setLandScaping = function(obj) {
         $scope.formData.landScaping = obj;
+        this.landScaping = '';
     };
   }
 ]);

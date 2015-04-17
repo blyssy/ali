@@ -1,16 +1,23 @@
 <div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="WizardController" data-ng-init="init()">
-    <!-- <div class="row">
+    <div class="row">
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h3>Bid Wizard</h3>
-
-                <p>Start here to build out your next bid</p>
-
+                <h3>Bid Wizard - {{selectedItem.name}}</h3>
+                <div class="col-lg-3 pull-right">
+                    <div class="form-group">
+                        <label>Select Bid </label>
+                        <div class="input-group">
+                            <select chosen class="form-control m-b" ng-model="selectedItem" ng-change='onSelect()' class="chosen-select" style="width:200px;" tabindex="4" ng-options="s.name for s in bids | filter: { status: 'new'}">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- <button ng-click="newBid()" class="btn btn-primary"> Add New</button> -->
                 </p>
             </div>
         </div>
 
-    </div> -->
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">

@@ -1,46 +1,45 @@
 <fieldset>
     <h2>Multi-Trade Contractor Information</h2>
-  
     <div class="row">
         <div class="col-lg-8">
             <div class="form-group">
                 <label>Name</label>
-                <input id="mtcName" ng-model="formData.mtcName" name="mtcName" type="text" class="form-control">
+                <input ng-model="formData.mtcName" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label>Division</label>
-                <input id="mtcDivision" ng-model="formData.mtcDivision" name="mtcDivision" type="text" class="form-control">
+                <input ng-model="formData.mtcDivision" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label>President's Name</label>
-                <input id="mtcPresidentName" ng-model="formData.mtcPresidentName" name="mtcPresidentName" type="text" class="form-control">
+                <input ng-model="formData.mtcPresidentName" type="text" class="form-control">
             </div>            
             
             <div class="row">
             	<div class="col-md-4">
             		<label>Phone Number</label>
-            		<input id="mtcPresidentPhone" data-mask="(999) 999-9999" ng-model="formData.mtcPresidentPhone" name="mtcPresidentPhone" type="text" class="form-control">
+            		<input ui-mask="(999) 999-9999" ng-model="formData.mtcPresidentPhone" type="text" class="form-control">
             		<span class="help-block">(999) 999-9999</span>
             	</div>
             	<div class="col-md-8">
             		<label>Email Address</label>
-            		<input id="mtcPresidentEmail" ng-model="formData.mtcPresidentEmail" name="mtcPresidentEmail" type="text" class="form-control">
+            		<input ng-model="formData.mtcPresidentEmail" type="text" class="form-control">
             	</div>
             </div>
             <div class="form-group">
                 <label>Division Manager's Name</label>
-                <input id="mtcDivisionManagerName" ng-model="formData.mtcDivisionManagerName" name="mtcDivisionManagerName" type="text" class="form-control">
+                <input ng-model="formData.mtcDivisionManagerName" type="text" class="form-control">
             </div>            
             
             <div class="row">
             	<div class="col-md-4">
             		<label>Phone Number</label>
-            		<input id="mtcDivisionManagerPhone" data-mask="(999) 999-9999" ng-model="formData.mtcDivisionManagerPhone" name="mtcDivisionManagerPhone" type="text" class="form-control">
+            		<input ui-mask="(999) 999-9999" ng-model="formData.mtcDivisionManagerPhone" type="text" class="form-control">
             		<span class="help-block">(999) 999-9999</span>
             	</div>
             	<div class="col-md-8">
             		<label>Email Address</label>
-            		<input id="mtcDivisionManagerEmail" ng-model="formData.mtcDivisionManagerEmail" name="mtcDivisionManagerEmail" type="text" class="form-control">
+            		<input ng-model="formData.mtcDivisionManagerEmail" type="text" class="form-control">
             	</div>
             </div>
 
@@ -53,15 +52,12 @@
             </div>
         </div>
     </div>
-
-            
-            
-</fieldset>
-<fieldset class="m-t-md">
-	<div class="row">
-		<div class="col-lg-12" align="center">
-    <a ng-click="setEditId(2)" class="btn btn-default">Previous</a>
-    <a ng-click="setEditId(4)" class="btn btn-primary">Next</a>
-    	</div>
+    <div class="row">
+        <div class="col-lg-9"></div>
+        <div class="col-lg-3 pull-right">
+            <button ng-click="setEditId(2)" class="btn btn-default"><i class="fa fa-chevron-left"></i> Previous</button>
+            <button ng-click="setEditId(4)" class="btn btn-primary"><i class="fa fa-chevron-right"></i> Next</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        </div>
     </div>
 </fieldset>

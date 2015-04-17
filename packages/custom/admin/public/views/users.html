@@ -1,19 +1,29 @@
 <section data-ng-controller="UsersController">
     <form id="user-add-form" class="row-fluid form-inline" name="addUserForm" data-ng-submit="add()">
         <div class="form-group">
-            <span data-ng-repeat="field in userSchema">
-                <input data-ng-if="(field['type'] == 'text' || field['type'] == 'password')" type="{{field['type']}}" class="form-control" data-ng-model="user[field['schemaKey']]" placeholder="{{field['title']}}" id="user-add-title" />
-                <select class="form-control m-l-n" data-ng-if="field['title'] == 'Roles'" data-ng-model="user[field['schemaKey']]" ng-multiple="true" multiple ng-options="option for option in field['options']">
-                    <option value="">-- Choose Role --</option>
-                </select>
-                <select class="form-control m-l-n" data-ng-if="field['title'] == 'Trade'" data-ng-model="user[field['schemaKey']]" ng-options="option for option in field['options']">
-                    <option value="">-- Choose Trade --</option>
-                </select>
-
-            </span>
-            <input type="submit" class="btn btn-primary" value="Add" />
+            <div class="row">
+                <span data-ng-repeat="field in userSchema">
+                    <input data-ng-if="(field['type'] == 'text' || field['type'] == 'password')" type="{{field['type']}}" class="form-control" data-ng-model="user[field['schemaKey']]" placeholder="{{field['title']}}" id="user-add-title" />
+                    <select class="form-control" data-ng-if="field['title'] == 'Roles'" data-ng-model="user[field['schemaKey']]" ng-multiple="true" multiple ng-options="option for option in field['options']">
+                        <option value="">-- Choose Role --</option>
+                    </select>
+                    <select class="form-control" data-ng-if="field['title'] == 'Trade'" data-ng-model="user[field['schemaKey']]" ng-options="option for option in field['options']">
+                        <option value="">-- Choose Trade --</option>
+                    </select>
+                </span>
+            </div>
+            <div class="row">
+                <span>
+                    <button class="btn btn-primary pull-right" type="submit">
+                        <i class="fa fa-check"></i>
+                          Add
+                    </button>
+                </span>
+            </div>
         </div>
     </form>
+
+    <div class="row">
     <div class="loader" data-ng-init="init()" data-ng-hide="users.length"></div>
     <div class="actions-bar" data-ng-show="users.length">
         <input type="button" class="btn btn-danger" data-ng-hide="edit" data-ng-click="edit=!edit" value="Edit">
@@ -39,4 +49,5 @@
             </td>
         </tr>
     </table>
+    </div>
 </section>

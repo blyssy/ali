@@ -70,6 +70,9 @@ var UserSchema = new Schema({
     type: Array,
     default: ['Unused']
   },
+  phone: {
+    type: String
+  },
   hashed_password: {
     type: String,
     validate: [validatePresenceOf, 'Password cannot be blank']

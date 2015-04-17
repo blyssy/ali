@@ -73,128 +73,177 @@
 		</div>
 	</div>
 	</br>
-	<h3>Contact Info</h3>
-	<div class="row" data-ng-if="formData.bidTradeConcrete">
+	<h2>Contact Info</h2>
+	<div class="col-md-4" data-ng-if="formData.bidTradeConcrete">
 		<label class="control-label">Concrete</label>
 		<select class="form-control m-b" data-ng-model="concrete" ng-click="setConcrete(concrete)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Concrete'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.concrete.email"></span>    Phone: <span ng-bind="formData.concrete.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.concrete.name"></span>
+Email: <span ng-bind="formData.concrete.email"></span>    
+Phone: <span ng-bind="formData.concrete.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradePlumbing">
+	<div class="col-md-4" data-ng-if="formData.bidTradePlumbing">
 		<label class="control-label">Plumbing</label>
 		<select class="form-control m-b" data-ng-model="plumbing" ng-click="setPlumbing(plumbing)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Plumbing'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.plumbing.email"></span>    Phone: <span ng-bind="formData.plumbing.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.plumbing.name"></span>
+Email: <span ng-bind="formData.plumbing.email"></span>    
+Phone: <span ng-bind="formData.plumbing.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeGrader">
+	<div class="col-md-4" data-ng-if="formData.bidTradeGrader">
 		<label class="control-label">Grader</label>
 		<select class="form-control m-b" data-ng-model="grader" ng-click="setGrader(grader)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Grader'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.grader.email"></span>    Phone: <span ng-bind="formData.grader.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.grader.name"></span>
+Email: <span ng-bind="formData.grader.email"></span>    
+Phone: <span ng-bind="formData.grader.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeFramer">
+	<div class="col-md-4" data-ng-if="formData.bidTradeFramer">
 		<label class="control-label">Framer</label>
 		<select class="form-control m-b" data-ng-model="framer" ng-click="setFramer(framer)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Framer'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.framer.email"></span>    Phone: <span ng-bind="formData.framer.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.framer.name"></span>
+Email: <span ng-bind="formData.framer.email"></span>    
+Phone: <span ng-bind="formData.framer.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeDrywall">
+	<div class="col-md-4" data-ng-if="formData.bidTradeDrywall">
 		<label class="control-label">Drywall</label>
 		<select class="form-control m-b" data-ng-model="drywall" ng-click="setDrywall(drywall)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Drywall'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.drywall.email"></span>    Phone: <span ng-bind="formData.drywall.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.drywall.name"></span>
+Email: <span ng-bind="formData.drywall.email"></span>    
+Phone: <span ng-bind="formData.drywall.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeRoofer">
+	<div class="col-md-4" data-ng-if="formData.bidTradeRoofer">
 		<label class="control-label">Roofer</label>
 		<select class="form-control m-b" data-ng-model="roofer" ng-click="setRoofer(roofer)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Roofer'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.roofer.email"></span>    Phone: <span ng-bind="formData.roofer.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.roofer.name"></span>
+Email: <span ng-bind="formData.roofer.email"></span>    
+Phone: <span ng-bind="formData.roofer.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeHVAC">
+	<div class="col-md-4" data-ng-if="formData.bidTradeHVAC">
 		<label class="control-label">HVAC</label>
 		<select class="form-control m-b" data-ng-model="hvac" ng-click="setHVAC(hvac)" ng-options="obj as obj.name for obj in users | filter: { trade: 'HVAC'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.hvac.email"></span>    Phone: <span ng-bind="formData.hvac.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.hvac.name"></span>
+Email: <span ng-bind="formData.hvac.email"></span>    
+Phone: <span ng-bind="formData.hvac.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeStucco">
+	<div class="col-md-4" data-ng-if="formData.bidTradeStucco">
 		<label class="control-label">Stucco</label>
 		<select class="form-control m-b" data-ng-model="stucco" ng-click="setStucco(stucco)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Stucco'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.stucco.email"></span>    Phone: <span ng-bind="formData.stucco.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.stucco.name"></span>
+Email: <span ng-bind="formData.stucco.email"></span>    
+Phone: <span ng-bind="formData.stucco.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeElectrician">
+	<div class="col-md-4" data-ng-if="formData.bidTradeElectrician">
 		<label class="control-label">Electrician</label>
 		<select class="form-control m-b" data-ng-model="electrician" ng-click="setElectrician(electrician)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Electrician'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.electrician.email"></span>    Phone: <span ng-bind="formData.electrician.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.electrician.name"></span>
+Email: <span ng-bind="formData.electrician.email"></span>    
+Phone: <span ng-bind="formData.electrician.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeUnused">
+	<div class="col-md-4" data-ng-if="formData.bidTradeUnused">
 		<label class="control-label">Unused</label>
 		<select class="form-control m-b" data-ng-model="unused" ng-click="setUnused(unused)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Unused'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.unused.email"></span>    Phone: <span ng-bind="formData.unused.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.unused.name"></span>
+Email: <span ng-bind="formData.unused.email"></span>    
+Phone: <span ng-bind="formData.unused.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeFireSprinkler">
+	<div class="col-md-4" data-ng-if="formData.bidTradeFireSprinkler">
 		<label class="control-label">Fire Sprinkler</label>
 		<select class="form-control m-b" data-ng-model="fireSprinkler" ng-click="setFireSprinkler(fireSprinkler)" ng-options="obj as obj.name for obj in users | filter: { trade: 'FireSprinkler'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.fireSprinkler.email"></span>    Phone: <span ng-bind="formData.fireSprinkler.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.fireSprinkler.name"></span>
+Email: <span ng-bind="formData.fireSprinkler.email"></span>    
+Phone: <span ng-bind="formData.fireSprinkler.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeInsulation">
+	<div class="col-md-4" data-ng-if="formData.bidTradeInsulation">
 		<label class="control-label">Insulation</label>
 		<select class="form-control m-b" data-ng-model="insulation" ng-click="setInsulation(insulation)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Insulation'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.insulation.email"></span>    Phone: <span ng-bind="formData.insulation.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.insulation.name"></span>
+Email: <span ng-bind="formData.insulation.email"></span>    
+Phone: <span ng-bind="formData.insulation.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradePainter">
+	<div class="col-md-4" data-ng-if="formData.bidTradePainter">
 		<label class="control-label">Painter</label>
 		<select class="form-control m-b" data-ng-model="painter" ng-click="setPainter(painter)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Painter'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.painter.email"></span>    Phone: <span ng-bind="formData.painter.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.painter.name"></span>
+Email: <span ng-bind="formData.painter.email"></span>    
+Phone: <span ng-bind="formData.painter.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeCabinets">
+	<div class="col-md-4" data-ng-if="formData.bidTradeCabinets">
 		<label class="control-label">Cabinets</label>
 		<select class="form-control m-b" data-ng-model="cabinets" ng-click="setCabinets(cabinets)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Cabinets'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.cabinets.email"></span>    Phone: <span ng-bind="formData.cabinets.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.cabinets.name"></span>
+Email: <span ng-bind="formData.cabinets.email"></span>    
+Phone: <span ng-bind="formData.cabinets.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeMasonry">
+	<div class="col-md-4" data-ng-if="formData.bidTradeMasonry">
 		<label class="control-label">Masonry</label>
 		<select class="form-control m-b" data-ng-model="masonry" ng-click="setMasonry(masonry)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Masonry'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.masonry.email"></span>    Phone: <span ng-bind="formData.masonry.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.masonry.name"></span>
+Email: <span ng-bind="formData.masonry.email"></span>    
+Phone: <span ng-bind="formData.masonry.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeFinishTrim">
+	<div class="col-md-4" data-ng-if="formData.bidTradeFinishTrim">
 		<label class="control-label">Finish Trim</label>
 		<select class="form-control m-b" data-ng-model="finishTrim" ng-click="setFinishTrim(finishTrim)" ng-options="obj as obj.name for obj in users | filter: { trade: 'FinishTrim'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.finishTrim.email"></span>    Phone: <span ng-bind="formData.finishTrim.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.finishTrim.name"></span>
+Email: <span ng-bind="formData.finishTrim.email"></span>    
+Phone: <span ng-bind="formData.finishTrim.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeTile">
+	<div class="col-md-4" data-ng-if="formData.bidTradeTile">
 		<label class="control-label">Tile</label>
 		<select class="form-control m-b" data-ng-model="tile" ng-click="setTile(tile)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Tile'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.tile.email"></span>    Phone: <span ng-bind="formData.tile.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.tile.name"></span>
+Email: <span ng-bind="formData.tile.email"></span>    
+Phone: <span ng-bind="formData.tile.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeFlooring">
+	<div class="col-md-4" data-ng-if="formData.bidTradeFlooring">
 		<label class="control-label">Flooring</label>
 		<select class="form-control m-b" data-ng-model="flooring" ng-click="setFlooring(flooring)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Flooring'}">
 		</select>
-		<pre>Email: <span ng-bind="formData.flooring.email"></span>    Phone: <span ng-bind="formData.flooring.phone"></span></pre>
+		<pre>Name: <span ng-bind="formData.flooring.name"></span>
+Email: <span ng-bind="formData.flooring.email"></span>    
+Phone: <span ng-bind="formData.flooring.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeFencing">
+	<div class="col-md-4" data-ng-if="formData.bidTradeFencing">
 		<label class="control-label">Fencing</label>
 		<select class="form-control m-b" data-ng-model="fencing" ng-click="setFencing(fencing)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Fencing'}">
-		</select><pre>Email: <span ng-bind="formData.fencing.email"></span>    Phone: <span ng-bind="formData.fencing.phone"></span></pre>
+		</select>
+		<pre>Name: <span ng-bind="formData.fencing.name"></span>
+Email: <span ng-bind="formData.fencing.email"></span>    
+Phone: <span ng-bind="formData.fencing.phone"></span></pre>
 	</div>
-	<div class="row" data-ng-if="formData.bidTradeLandscaping">
+	<div class="col-md-4" data-ng-if="formData.bidTradeLandscaping">
 		<label class="control-label">Landscaping</label>
 		<select class="form-control m-b" data-ng-model="landScaping" ng-click="setLandScaping(landScaping)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Landscaping'}">
-		</select><pre>Email: <span ng-bind="formData.landScaping.email"></span>    Phone: <span ng-bind="formData.landScaping.phone"></span></pre>
+		</select>
+		<pre>Name: <span ng-bind="formData.landScaping.name"></span>
+Email: <span ng-bind="formData.landScaping.email"></span>    
+Phone: <span ng-bind="formData.landScaping.phone"></span></pre>
 	</div>
+	<div class="row">
+        <div class="col-lg-9"></div>
+        <div class="col-lg-2 pull-right">
+            <button ng-click="setEditId(3)" class="btn btn-default"><i class="fa fa-chevron-left"></i> Previous</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        </div>
+    </div>
     <!-- <input id="acceptTerms" name="acceptTerms" type="checkbox" ng-model="formData.terms" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label> -->
 </fieldset>
-<fieldset class="m-t-md">
+<!-- <fieldset class="m-t-md">
     <a ui-sref="wizard.step_four" class="btn btn-default">Previous</a>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</fieldset>
+    <button type="submit" class="btn btn-primary">Save</button>
+</fieldset> -->

@@ -37,6 +37,11 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
               'Electrician', 'Unused', 'Fire Sprinkler', 'Insulation', 'Painter', 'Cabinets', 'Masonry',
               'Finish Trim', 'Tile', 'Flooring', 'Fencing', 'Landscaping'],
             inTable: true
+        }, {
+            title: 'Phone',
+            schemaKey: 'phone',
+            type: 'text',
+            inTable: true
         }];
 
         $scope.user = {};
@@ -59,7 +64,8 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
                 password: $scope.user.password,
                 confirmPassword: $scope.user.password,
                 roles: $scope.user.roles,
-                trade: $scope.user.trade
+                trade: $scope.user.trade,
+                phone: $scope.user.phone
             });
 
             user.$save(function(response) {
