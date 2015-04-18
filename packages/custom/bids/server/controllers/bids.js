@@ -82,6 +82,7 @@ exports.destroy = function(req, res) {
  * Show a bid
  */
 exports.show = function(req, res) {
+    console.log('in show with req ' + req.body);
     res.json(req.bid);
 };
 

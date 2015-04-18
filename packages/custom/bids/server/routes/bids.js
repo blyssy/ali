@@ -17,7 +17,7 @@ module.exports = function(Bids, app, auth, database) {
     app.get('/bids', auth.requiresAdmin, bids.all);
     app.post('/bids', auth.requiresAdmin, bids.create);
     //app.put('/bids', auth.requiresAdmin, bids.updateMaterial);
-    app.get('bids/:bidId', auth.requiresAdmin, bids.show);
+    app.get('/bids/:bidId', auth.requiresAdmin, bids.show);
     app.put('/bids/:bidId', auth.requiresAdmin, bids.update);
     app.delete('/bids/:bidId', auth.requiresAdmin, bids.destroy);
 

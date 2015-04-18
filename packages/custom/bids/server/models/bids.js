@@ -51,6 +51,9 @@ var BidSchema = new Schema({
     project_city: {
         type: String
     },
+    project_state: {
+        type: String
+    },
     project_zip: {
         type: String
     },
@@ -106,6 +109,9 @@ var BidSchema = new Schema({
             type: String
         },
         name: {
+            type: String
+        },
+        username: {
             type: String
         },
         email: {

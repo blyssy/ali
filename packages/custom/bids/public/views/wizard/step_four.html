@@ -79,6 +79,7 @@
 		<select class="form-control m-b" data-ng-model="concrete" ng-click="setConcrete(concrete)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Concrete'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.concrete.name"></span>
+EmployeeId: <span ng-bind="formData.concrete.username"></span> 
 Email: <span ng-bind="formData.concrete.email"></span>    
 Phone: <span ng-bind="formData.concrete.phone"></span></pre>
 	</div>
@@ -87,6 +88,7 @@ Phone: <span ng-bind="formData.concrete.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="plumbing" ng-click="setPlumbing(plumbing)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Plumbing'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.plumbing.name"></span>
+EmployeeId: <span ng-bind="formData.plumbing.username"></span>
 Email: <span ng-bind="formData.plumbing.email"></span>    
 Phone: <span ng-bind="formData.plumbing.phone"></span></pre>
 	</div>
@@ -95,6 +97,7 @@ Phone: <span ng-bind="formData.plumbing.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="grader" ng-click="setGrader(grader)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Grader'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.grader.name"></span>
+EmployeeId: <span ng-bind="formData.grader.username"></span>
 Email: <span ng-bind="formData.grader.email"></span>    
 Phone: <span ng-bind="formData.grader.phone"></span></pre>
 	</div>
@@ -103,6 +106,7 @@ Phone: <span ng-bind="formData.grader.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="framer" ng-click="setFramer(framer)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Framer'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.framer.name"></span>
+EmployeeId: <span ng-bind="formData.framer.username"></span>
 Email: <span ng-bind="formData.framer.email"></span>    
 Phone: <span ng-bind="formData.framer.phone"></span></pre>
 	</div>
@@ -111,6 +115,7 @@ Phone: <span ng-bind="formData.framer.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="drywall" ng-click="setDrywall(drywall)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Drywall'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.drywall.name"></span>
+EmployeeId: <span ng-bind="formData.drywall.username"></span>
 Email: <span ng-bind="formData.drywall.email"></span>    
 Phone: <span ng-bind="formData.drywall.phone"></span></pre>
 	</div>
@@ -119,6 +124,7 @@ Phone: <span ng-bind="formData.drywall.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="roofer" ng-click="setRoofer(roofer)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Roofer'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.roofer.name"></span>
+EmployeeId: <span ng-bind="formData.roofer.username"></span>
 Email: <span ng-bind="formData.roofer.email"></span>    
 Phone: <span ng-bind="formData.roofer.phone"></span></pre>
 	</div>
@@ -127,6 +133,7 @@ Phone: <span ng-bind="formData.roofer.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="hvac" ng-click="setHVAC(hvac)" ng-options="obj as obj.name for obj in users | filter: { trade: 'HVAC'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.hvac.name"></span>
+EmployeeId: <span ng-bind="formData.hvac.username"></span>
 Email: <span ng-bind="formData.hvac.email"></span>    
 Phone: <span ng-bind="formData.hvac.phone"></span></pre>
 	</div>
@@ -135,6 +142,7 @@ Phone: <span ng-bind="formData.hvac.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="stucco" ng-click="setStucco(stucco)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Stucco'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.stucco.name"></span>
+EmployeeId: <span ng-bind="formData.stucco.username"></span>
 Email: <span ng-bind="formData.stucco.email"></span>    
 Phone: <span ng-bind="formData.stucco.phone"></span></pre>
 	</div>
@@ -143,6 +151,7 @@ Phone: <span ng-bind="formData.stucco.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="electrician" ng-click="setElectrician(electrician)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Electrician'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.electrician.name"></span>
+EmployeeId: <span ng-bind="formData.electrician.username"></span>
 Email: <span ng-bind="formData.electrician.email"></span>    
 Phone: <span ng-bind="formData.electrician.phone"></span></pre>
 	</div>
@@ -151,6 +160,7 @@ Phone: <span ng-bind="formData.electrician.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="unused" ng-click="setUnused(unused)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Unused'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.unused.name"></span>
+EmployeeId: <span ng-bind="formData.unused.username"></span>
 Email: <span ng-bind="formData.unused.email"></span>    
 Phone: <span ng-bind="formData.unused.phone"></span></pre>
 	</div>
@@ -159,6 +169,7 @@ Phone: <span ng-bind="formData.unused.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="fireSprinkler" ng-click="setFireSprinkler(fireSprinkler)" ng-options="obj as obj.name for obj in users | filter: { trade: 'FireSprinkler'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.fireSprinkler.name"></span>
+EmployeeId: <span ng-bind="formData.fireSprinkler.username"></span>
 Email: <span ng-bind="formData.fireSprinkler.email"></span>    
 Phone: <span ng-bind="formData.fireSprinkler.phone"></span></pre>
 	</div>
@@ -167,6 +178,7 @@ Phone: <span ng-bind="formData.fireSprinkler.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="insulation" ng-click="setInsulation(insulation)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Insulation'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.insulation.name"></span>
+EmployeeId: <span ng-bind="formData.insulation.username"></span>
 Email: <span ng-bind="formData.insulation.email"></span>    
 Phone: <span ng-bind="formData.insulation.phone"></span></pre>
 	</div>
@@ -175,6 +187,7 @@ Phone: <span ng-bind="formData.insulation.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="painter" ng-click="setPainter(painter)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Painter'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.painter.name"></span>
+EmployeeId: <span ng-bind="formData.painter.username"></span>
 Email: <span ng-bind="formData.painter.email"></span>    
 Phone: <span ng-bind="formData.painter.phone"></span></pre>
 	</div>
@@ -183,6 +196,7 @@ Phone: <span ng-bind="formData.painter.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="cabinets" ng-click="setCabinets(cabinets)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Cabinets'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.cabinets.name"></span>
+EmployeeId: <span ng-bind="formData.cabinets.username"></span>
 Email: <span ng-bind="formData.cabinets.email"></span>    
 Phone: <span ng-bind="formData.cabinets.phone"></span></pre>
 	</div>
@@ -191,6 +205,7 @@ Phone: <span ng-bind="formData.cabinets.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="masonry" ng-click="setMasonry(masonry)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Masonry'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.masonry.name"></span>
+EmployeeId: <span ng-bind="formData.masonry.username"></span>
 Email: <span ng-bind="formData.masonry.email"></span>    
 Phone: <span ng-bind="formData.masonry.phone"></span></pre>
 	</div>
@@ -199,6 +214,7 @@ Phone: <span ng-bind="formData.masonry.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="finishTrim" ng-click="setFinishTrim(finishTrim)" ng-options="obj as obj.name for obj in users | filter: { trade: 'FinishTrim'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.finishTrim.name"></span>
+EmployeeId: <span ng-bind="formData.finishTrim.username"></span>
 Email: <span ng-bind="formData.finishTrim.email"></span>    
 Phone: <span ng-bind="formData.finishTrim.phone"></span></pre>
 	</div>
@@ -207,6 +223,7 @@ Phone: <span ng-bind="formData.finishTrim.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="tile" ng-click="setTile(tile)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Tile'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.tile.name"></span>
+EmployeeId: <span ng-bind="formData.tile.username"></span>
 Email: <span ng-bind="formData.tile.email"></span>    
 Phone: <span ng-bind="formData.tile.phone"></span></pre>
 	</div>
@@ -215,6 +232,7 @@ Phone: <span ng-bind="formData.tile.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="flooring" ng-click="setFlooring(flooring)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Flooring'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.flooring.name"></span>
+EmployeeId: <span ng-bind="formData.flooring.username"></span>
 Email: <span ng-bind="formData.flooring.email"></span>    
 Phone: <span ng-bind="formData.flooring.phone"></span></pre>
 	</div>
@@ -223,6 +241,7 @@ Phone: <span ng-bind="formData.flooring.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="fencing" ng-click="setFencing(fencing)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Fencing'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.fencing.name"></span>
+EmployeeId: <span ng-bind="formData.fencing.username"></span>
 Email: <span ng-bind="formData.fencing.email"></span>    
 Phone: <span ng-bind="formData.fencing.phone"></span></pre>
 	</div>
@@ -231,6 +250,7 @@ Phone: <span ng-bind="formData.fencing.phone"></span></pre>
 		<select class="form-control m-b" data-ng-model="landScaping" ng-click="setLandScaping(landScaping)" ng-options="obj as obj.name for obj in users | filter: { trade: 'Landscaping'}">
 		</select>
 		<pre>Name: <span ng-bind="formData.landScaping.name"></span>
+EmployeeId: <span ng-bind="formData.landScaping.username"></span>
 Email: <span ng-bind="formData.landScaping.email"></span>    
 Phone: <span ng-bind="formData.landScaping.phone"></span></pre>
 	</div>
