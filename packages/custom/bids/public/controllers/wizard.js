@@ -1,19 +1,4 @@
 'use strict';
-/**
- * wizardCtrl - Controller for wizard functions
- * used in Wizard view
- */
- 
-/*function wizardCtrl($scope, $rootScope) {
-    // All data will be store in this object
-    $scope.formData = {};
-
-    // After process wizard
-    $scope.processForm = function() {
-        alert('Wizard completed');
-    };
-
-}*/
 
 angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users', 
   function($scope, Global, Bids, Users) {
@@ -36,19 +21,12 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
     };
 
     $scope.onSelect = function(){
-        //I want to get the currently selected bid by id from the database
-        //$scope.selectedItem._id and fill in the formData based on what
-        //is in the database.
-
-        //if the user has a currently selected bid and did not save the
-        //changes, those changes will be wiped out.  Might want to send
-        //a warning of that case in the future.
-        console.log('onSelect has a bid id of ' + $scope.selectedItem._id);
-
         //get the current bid from the database
         Bids.get({
             bidId: $scope.selectedItem._id
           }, function(bid) {
+            $scope.formData = {};
+
             $scope.current_bid_name = bid.bid_name;
             $scope.current_bid_status = bid.bid_status;
             $scope.formData.builderName = bid.builder_name;
@@ -79,6 +57,229 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
             $scope.formData.mtcDivisionManagerName = bid.mtc_division_manager_name;
             $scope.formData.mtcDivisionManagerPhone = bid.mtc_division_manager_phone_number;
             $scope.formData.mtcDivisionManagerEmail = bid.mtc_division_manager_email;
+
+            for(var i=0; i<bid.bidding_trades.length; i=i+1){
+                if(bid.bidding_trades[i].trade === 'Concrete'){
+                    $scope.formData.bidTradeConcrete = true;
+
+                    $scope.formData.concrete = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Concrete',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Plumbing'){
+                    $scope.formData.bidTradePlumbing = true;
+
+                    $scope.formData.plumbing = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Plumbing',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Grader'){
+                    $scope.formData.bidTradeGrader = true;
+
+                    $scope.formData.grader = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Grader',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Framer'){
+                    $scope.formData.bidTradeFramer = true;
+
+                    $scope.formData.framer = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Framer',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Drywall'){
+                    $scope.formData.bidTradeDrywall = true;
+
+                    $scope.formData.drywall = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Drywall',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Roofer'){
+                    $scope.formData.bidTradeRoofer = true;
+
+                    $scope.formData.roofer = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Roofer',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'HVAC'){
+                    $scope.formData.bidTradeHVAC = true;
+
+                    $scope.formData.hvac = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'HVAC',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Stucco'){
+                    $scope.formData.bidTradeStucco = true;
+
+                    $scope.formData.stucco = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Stucco',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Electrician'){
+                    $scope.formData.bidTradeElectrician = true;
+
+                    $scope.formData.electrician = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Electrician',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Unused'){
+                    $scope.formData.bidTradeUnused = true;
+
+                    $scope.formData.unused = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Unused',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'FireSprinkler'){
+                    $scope.formData.bidTradeFireSprinkler = true;
+
+                    $scope.formData.fireSprinkler = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'FireSprinkler',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Insulation'){
+                    $scope.formData.bidTradeInsulation = true;
+
+                    $scope.formData.insulation = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Insulation',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Painter'){
+                    $scope.formData.bidTradePainter = true;
+
+                    $scope.formData.painter = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Painter',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Cabinets'){
+                    $scope.formData.bidTradeCabinets = true;
+
+                    $scope.formData.cabinets = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Cabinets',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Masonry'){
+                    $scope.formData.bidTradeMasonry = true;
+
+                    $scope.formData.masonry = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Masonry',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'FinishTrim'){
+                    $scope.formData.bidTradeFinishTrim = true;
+
+                    $scope.formData.finishTrim = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'FinishTrim',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Tile'){
+                    $scope.formData.bidTradeTile = true;
+
+                    $scope.formData.tile = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Tile',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Flooring'){
+                    $scope.formData.bidTradeFlooring = true;
+
+                    $scope.formData.flooring = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Flooring',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'Fencing'){
+                    $scope.formData.bidTradeFencing = true;
+
+                    $scope.formData.fencing = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'Fencing',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+                if(bid.bidding_trades[i].trade === 'LandScaping'){
+                    $scope.formData.bidTradeLandScaping = true;
+
+                    $scope.formData.landScaping = {
+                        name: bid.bidding_trades[i].name,
+                        username: bid.bidding_trades[i].username,
+                        trade: 'LandScaping',
+                        email: bid.bidding_trades[i].email,
+                        phone: bid.bidding_trades[i].phone
+                    };
+                }
+            }
             /*$scope.formData. = $scope.selectedItem.bidding_trades;  //need to figure this one out
             $scope.formData. = $scope.selectedItem.;
             $scope.formData. = $scope.selectedItem.;
@@ -90,6 +291,13 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
             $scope.formData. = $scope.selectedItem.;
             */
         });
+    };
+
+    $scope.removeIfTradeFound = function(trade) {
+        for(var i=0; i<$scope.selectedItem.bidding_trades.length; i=i+1) {
+            if($scope.selectedItem.bidding_trades[i].trade === trade)
+                $scope.selectedItem.bidding_trades.splice(i, 1);
+        }
     };
 
     // After process wizard
@@ -142,6 +350,8 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
         $scope.selectedItem.mtc_division_manager_email = $scope.formData.mtcDivisionManagerEmail;
         //$scope.formData. = $scope.selectedItem.bidding_trades;  //need to figure this one out
         if($scope.formData.bidTradeConcrete) {
+            $scope.removeIfTradeFound('Concrete');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Concrete',
                 name: $scope.formData.concrete.name,
@@ -149,181 +359,283 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
                 email: $scope.formData.concrete.email,
                 phone: $scope.formData.concrete.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Concrete');
         }
+
         if($scope.formData.bidTradePlumbing) {
+            $scope.removeIfTradeFound('Plumbing');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Plumbing',
                 name: $scope.formData.plumbing.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.plumbing.username,
                 email: $scope.formData.plumbing.email,
                 phone: $scope.formData.plumbing.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Plumbing');
         }
+        
         if($scope.formData.bidTradeGrader) {
+            $scope.removeIfTradeFound('Grader');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Grader',
                 name: $scope.formData.grader.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.grader.username,
                 email: $scope.formData.grader.email,
                 phone: $scope.formData.grader.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Grader');
         }
+        
         if($scope.formData.bidTradeFramer) {
+            $scope.removeIfTradeFound('Framer');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Framer',
                 name: $scope.formData.framer.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.framer.username,
                 email: $scope.formData.framer.email,
                 phone: $scope.formData.framer.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Framer');
         }
+        
         if($scope.formData.bidTradeDrywall) {
+            $scope.removeIfTradeFound('Drywall');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Drywall',
                 name: $scope.formData.drywall.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.drywall.username,
                 email: $scope.formData.drywall.email,
                 phone: $scope.formData.drywall.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Drywall');
         }
+        
         if($scope.formData.bidTradeRoofer) {
+            $scope.removeIfTradeFound('Roofer');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Roofer',
                 name: $scope.formData.roofer.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.roofer.username,
                 email: $scope.formData.roofer.email,
                 phone: $scope.formData.roofer.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Roofer');
         }
+        
         if($scope.formData.bidTradeHVAC) {
+            $scope.removeIfTradeFound('HVAC');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'HVAC',
                 name: $scope.formData.hvac.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.hvac.username,
                 email: $scope.formData.hvac.email,
                 phone: $scope.formData.hvac.phone
             });
+        } else {
+            $scope.removeIfTradeFound('HVAC');
         }
+        
         if($scope.formData.bidTradeStucco) {
+            $scope.removeIfTradeFound('Stucco');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Stucco',
                 name: $scope.formData.stucco.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.stucco.username,
                 email: $scope.formData.stucco.email,
                 phone: $scope.formData.stucco.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Stucco');
         }
+        
         if($scope.formData.bidTradeElectrician) {
+            $scope.removeIfTradeFound('Electrician');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Electrician',
                 name: $scope.formData.electrician.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.electrician.username,
                 email: $scope.formData.electrician.email,
                 phone: $scope.formData.electrician.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Electrician');
         }
+        
         if($scope.formData.bidTradeUnused) {
+            $scope.removeIfTradeFound('Unused');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Unused',
                 name: $scope.formData.unused.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.unused.username,
                 email: $scope.formData.unused.email,
                 phone: $scope.formData.unused.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Unused');
         }
+        
         if($scope.formData.bidTradeFireSprinkler) {
+            $scope.removeIfTradeFound('FireSprinkler');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'FireSprinkler',
                 name: $scope.formData.fireSprinkler.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.fireSprinkler.username,
                 email: $scope.formData.fireSprinkler.email,
                 phone: $scope.formData.fireSprinkler.phone
             });
+        } else {
+            $scope.removeIfTradeFound('FireSprinkler');
         }
+        
         if($scope.formData.bidTradeInsulation) {
+            $scope.removeIfTradeFound('Insulation');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Insulation',
                 name: $scope.formData.insulation.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.insulation.username,
                 email: $scope.formData.insulation.email,
                 phone: $scope.formData.insulation.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Insulation');
         }
+        
         if($scope.formData.bidTradePainter) {
+            $scope.removeIfTradeFound('Painter');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Painter',
                 name: $scope.formData.painter.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.painter.username,
                 email: $scope.formData.painter.email,
                 phone: $scope.formData.painter.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Painter');
         }
+        
         if($scope.formData.bidTradeCabinets) {
+            $scope.removeIfTradeFound('Cabinets');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Cabinets',
                 name: $scope.formData.cabinets.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.cabinets.username,
                 email: $scope.formData.cabinets.email,
                 phone: $scope.formData.cabinets.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Cabinets');
         }
+        
         if($scope.formData.bidTradeMasonry) {
+            $scope.removeIfTradeFound('Masonry');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Masonry',
                 name: $scope.formData.masonry.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.masonry.username,
                 email: $scope.formData.masonry.email,
                 phone: $scope.formData.masonry.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Masonry');
         }
+        
         if($scope.formData.bidTradeFinishTrim) {
+            $scope.removeIfTradeFound('FinishTrim');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'FinishTrim',
                 name: $scope.formData.finishTrim.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.finishTrim.username,
                 email: $scope.formData.finishTrim.email,
                 phone: $scope.formData.finishTrim.phone
             });
+        } else {
+            $scope.removeIfTradeFound('FinishTrim');
         }
+        
         if($scope.formData.bidTradeTile) {
+            $scope.removeIfTradeFound('Tile');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Tile',
                 name: $scope.formData.tile.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.tile.username,
                 email: $scope.formData.tile.email,
                 phone: $scope.formData.tile.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Tile');
         }
+        
         if($scope.formData.bidTradeFlooring) {
+            $scope.removeIfTradeFound('Flooring');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Flooring',
                 name: $scope.formData.flooring.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.flooring.username,
                 email: $scope.formData.flooring.email,
                 phone: $scope.formData.flooring.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Flooring');
         }
+        
         if($scope.formData.bidTradeFencing) {
+            $scope.removeIfTradeFound('Fencing');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'Fencing',
                 name: $scope.formData.fencing.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.fencing.username,
                 email: $scope.formData.fencing.email,
                 phone: $scope.formData.fencing.phone
             });
+        } else {
+            $scope.removeIfTradeFound('Fencing');
         }
+        
         if($scope.formData.bidTradeLandScaping) {
+            $scope.removeIfTradeFound('LandScaping');
+
             $scope.selectedItem.bidding_trades.push({
                 trade: 'LandScaping',
                 name: $scope.formData.landScaping.name,
-                username: $scope.formData.concrete.username,
+                username: $scope.formData.landScaping.username,
                 email: $scope.formData.landScaping.email,
                 phone: $scope.formData.landScaping.phone
             });
+        } else {
+            $scope.removeIfTradeFound('LandScaping');
         }
+        
+        //I am thinking here is where we want to pull the task list and subtask
+        //list and fill it in and attach to the bid.  Do it one time for now since
+        //there is only one task list.  May want to add a check down the road to
+        //see if we need to wipe it out and repopulate.
 
         $scope.selectedItem.$update();
-        //alert('Wizard completed ' + $scope.current_bid_name + ' status is ' + $scope.current_bid_status);
+        alert('Bid Updated');
     };
 
     $scope.setEditId =  function(pid) {
