@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users', 
-  function($scope, Global, Bids, Users) {
+angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users', 'toaster', 
+  function($scope, Global, Bids, Users, toaster) {
     $scope.global = Global;
 
     // All data will be store in this object
@@ -303,7 +303,16 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
     // After process wizard
     $scope.processForm = function() {
         if(!$scope.selectedItem || !$scope.selectedItem._id) {
-            alert('No Bid Selected');
+            toaster.pop({
+                type: 'error',
+                title: 'Bid Selection',
+                body: 'Please Select a Bid!',
+                timeout: 0,
+                fadein: 0,
+                position: 'toast-top-full-width',
+                showCloseButton: true
+            });
+            //alert('No Bid Selected');
             return;
         }
 
@@ -635,7 +644,15 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
         //see if we need to wipe it out and repopulate.
 
         $scope.selectedItem.$update();
-        alert('Bid Updated');
+        toaster.pop({
+                type: 'success',
+                title: 'Bid Update',
+                body: 'Current bid ' + $scope.current_bid_name + ' saved.',
+                timeout: 5000,
+                showDuration: 30,
+                position: 'toast-top-full-width',
+                showCloseButton: true
+            });
     };
 
     $scope.setEditId =  function(pid) {

@@ -1,7 +1,9 @@
 {
   "core": {
     "css": {
-      "bower_components/build/css/dist.min.css": []
+      "bower_components/build/css/dist.min.css": [
+        "bower_components/angularjs-toaster/toaster.min.css"
+      ]
     },
     "js": {
       "bower_components/build/js/dist.min.js": [
@@ -13,7 +15,9 @@
         "bower_components/angular-ui-router/release/angular-ui-router.min.js",
         "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
         "bower_components/web-bootstrap/index.js",
-	"bower_components/angular-jwt/dist/angular-jwt.min.js"
+	"bower_components/angular-jwt/dist/angular-jwt.min.js",
+        "bower_components/angular-animate/angular-animate.js",
+        "bower_components/angularjs-toaster/toaster.min.js"
       ]
     }
   }

@@ -35,11 +35,16 @@ Bids.register(function(app, auth, database) {
   
   //Bids.aggregateAsset('css', 'bids.css');
   Bids.aggregateAsset('css', 'steps/jquery.steps.css');
+  //Bids.aggregateAsset('css', '../lib/angular-animate/');
+  Bids.aggregateAsset('css', 'steps/jquery.steps.css');
+  //Bids.aggregateAsset('css', '../../../../../../bower_components/angularjs-toaster/toaster.css');
   //Bids.aggregateAsset('css', '../lib/switchery/dist/switchery.css');
 
 
   Bids.aggregateAsset('js', 'steps/jquery.steps.min.js');
   Bids.aggregateAsset('js', '../lib/angular-ui-utils/ui-utils.js');
+  //Bids.aggregateAsset('js', '../../../../../../bower_components/angular-animate/angular-animate.js');
+  //Bids.aggregateAsset('js', '../../../../../../bower_components/angularjs-toaster/toaster.js');
   //Bids.aggregateAsset('js', '../lib/switchery/dist/switchery.js');
   //Bids.aggregateAsset('js', '../lib/angular/angular.min.js');
   //Bids.aggregateAsset('js', '../lib/angular-ui-router/release/angular-ui-router.js', {global:true, weight: -20, group: 'header'});
@@ -66,7 +71,7 @@ Bids.register(function(app, auth, database) {
     });
     */
   //Bids.angularDependencies(['ngAnimate']);
-  Bids.angularDependencies(['ui.mask']);
+  Bids.angularDependencies(['ui.mask', 'toaster']);
   //Bids.angularDependencies(['ui-switchery']);
 
   return Bids;

@@ -1,11 +1,15 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.bids').controller('BidsController', ['$scope', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce',
-  function($scope, Global, Bids, $filter, NGTableParams, $sce) {
+angular.module('mean.bids').controller('BidsController', ['$scope', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster',
+  function($scope, Global, Bids, $filter, NGTableParams, $sce, toaster) {
     $scope.global = Global;
     $scope.package = {
       name: 'bids'
+    };
+
+    $scope.pop = function() {
+    	toaster.pop('success', 'title', 'text');
     };
 
     $scope.init = function() {
