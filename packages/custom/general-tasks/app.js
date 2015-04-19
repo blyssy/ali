@@ -20,7 +20,7 @@ GeneralTasks.register(function(app, auth, database) {
   GeneralTasks.menus.add({
     title: 'Task Control Center',
     link: 'task control',
-    roles: ['authenticated'],
+    roles: ['admin'],
     menu: 'main',
     icon: 'fa fa-tasks'
   });

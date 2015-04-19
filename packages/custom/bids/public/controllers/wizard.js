@@ -301,6 +301,8 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
     };
 
     // After process wizard
+    //need to come up with something better than toaster 
+    //for system type messages.
     $scope.processForm = function() {
         if(!$scope.selectedItem || !$scope.selectedItem._id) {
             toaster.pop({

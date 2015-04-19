@@ -20,7 +20,7 @@ Bids.register(function(app, auth, database) {
   Bids.menus.add({
     title: 'Bid Wizard',
     link: 'bid wizard',
-    roles: ['authenticated'],
+    roles: ['admin'],
     menu: 'main',
     icon: 'fa fa-magic'
   });
@@ -28,7 +28,7 @@ Bids.register(function(app, auth, database) {
   Bids.menus.add({
     title: 'Bid Control Center',
     link: 'bids',
-    roles: ['authenticated'],
+    roles: ['admin'],
     menu: 'main',
     icon: 'glyphicon glyphicon-leaf'
   });
