@@ -51,9 +51,11 @@ angular.module('mean.users')
                 window.location.reload();
               } else {
                 window.location = response.redirect;
+                window.location.reload();
               }
             } else {
               $location.url('/');
+              window.location.reload();
             }
           })
           .error(function() {

@@ -1,8 +1,8 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.bids').controller('BidsController', ['$scope', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster',
-  function($scope, Global, Bids, $filter, NGTableParams, $sce, toaster) {
+angular.module('mean.bids').controller('BidsController', ['$scope', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService',
+  function($scope, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService) {
     $scope.global = Global;
     $scope.package = {
       name: 'bids'
@@ -92,20 +92,28 @@ angular.module('mean.bids').controller('BidsController', ['$scope', 'Global', 'B
     };
 
     $scope.submitBid = function(bid) {
-    	for (var i in $scope.new_bids) {
-            if ($scope.new_bids[i] === bid) {
-                $scope.new_bids.splice(i, 1);
-            }
+    	//for (var i in $scope.new_bids) {
+        //    if ($scope.new_bids[i] === bid) {
+        //        $scope.new_bids.splice(i, 1);
+        //    }
+        //}
+
+        //bid.bid_status = 'submitted';
+        //bid.$update();
+
+        for(var j=0; j<bid.bidding_trades.length; j=j+1) {
+            NotifyService.addNotification(bid.bidding_trades[j].username, 'toast-info', 'New Bid', 'There is a new bid request for you to fill out and return', 'No');
+            $scope.$broadcast('notificationAdded');
         }
+        //$scope.submitted_bids.push(bid);
 
-        bid.bid_status = 'submitted';
-        bid.$update();
+        //for(var j=0; bid.bidding_trades.length; j=j+1) {
+        //    Notifys.addNotification(bid.bidding_trades[j].username, 'toast-info', 'New Bid', 'There is a new bid request for you to fill out and return', 'No');
+        //}
 
-        $scope.submitted_bids.push(bid);
-
-        var data = $scope.new_bids;
-        $scope.newBidTableParams.total(data.length);
-        $scope.newBidTableParams.reload();
+        //var data = $scope.new_bids;
+        //$scope.newBidTableParams.total(data.length);
+        //$scope.newBidTableParams.reload();
     };
   }
 ]);

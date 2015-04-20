@@ -4,6 +4,11 @@
   </div>
   <div class="col-md-12 row">
   </div>
+
+  <p> authenticated value: {{global.authenticated}} with username {{global.user.name}}</p>
+  <!-- <div data-ng-controller="NotifyController" ng-init="addNotification('000000004', 'info', 'test', 'testing', 'On')"></div> -->
+  <div data-ng-controller="NotifyController" ng-init="loadNotifications()"></div>
+  <!-- <div data-ng-controller="NotifyController" ng-init="loadNotifications()"><button ng-click="addNotification('blyssy', 'toast-info', 'test', 'testing', 'No')"> Add Notification</button></div> -->
   <div class="col-md-12 row">
     <div class="info col-md-6">
       <div class="docs">
