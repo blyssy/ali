@@ -141,7 +141,7 @@ function responsiveVideo() {
  * minimalizaSidebar - Directive for minimalize sidebar
 */
 function minimalizaSidebar($timeout) {
-    console.log('in the minimalizaSidebar directive!!!!!!!!');
+    //console.log('in the minimalizaSidebar directive!!!!!!!!');
     return {
         restrict: 'A',
         template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',

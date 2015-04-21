@@ -1,42 +1,52 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.bids').controller('BidsController', ['$scope', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService',
-  function($scope, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService) {
+angular.module('mean.bids').controller('BidRequestsController', ['$scope', 'Users', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService',
+  function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService) {
     $scope.global = Global;
     $scope.package = {
       name: 'bids'
-    };
-
-    $scope.pop = function() {
-    	toaster.pop('success', 'title', 'text');
     };
 
     $scope.init = function() {
     	$scope.editId = 1;
 
         Bids.query({}, function(bids) {
-            $scope.new_bids = $filter('filter')(bids, { bid_status: 'new' });
-            $scope.submitted_bids = $filter('filter')(bids, { bid_status: 'submitted' });
-            $scope.review_bids = $filter('filter')(bids, { bid_status: 'review' });
+            //$scope.new_bids = $filter('filter')(bids, { bid_status: 'new' });
+            //$scope.submitted_bids = $filter('filter')(bids, { bid_status: 'submitted' });
+            //$scope.review_bids = $filter('filter')(bids, { bid_status: 'review' });
+            $scope.requests = $filter('filter')(bids, { bid_status: 'submitted' });
+            Users.get({ userId: $scope.global.user._id}, function(user) {
+                console.log('getting the current user trade ' + user.trade);
+                //var trades = $scope.requests.bidding_trades[0].trade;
+                //$scope.user_requests = $filter('filter')($scope.requests, { trades: user.trade });
 
-            for(var i=0; i<$scope.submitted_bids.length; i=i+1) {
-            	var value = Math.floor((Math.random() * 100) + 1);
+                var user_requests = [];
 
-            	$scope.submitted_bids[i].bid_request_progress = value;
-            }
-	    	var data = $scope.new_bids;
-	        $scope.newBidTableParams = new NGTableParams({
-	            page: 1,
-	            count: 10
-	        },{
-	            total: data.length,
-	            getData: function($defer, params) {
-	                params.total(data.length);
-	                var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-	                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-	            }
-	        });
+                for(var i=0; i<$scope.requests.length; i=i+1) {
+                    for(var j=0; j<$scope.requests[i].bidding_trades.length; j=j+1){
+                        if($scope.requests[i].bidding_trades[j].trade === user.trade[0]) {
+                            user_requests.push($scope.requests[i]);
+                        }
+                    }
+                }
+
+                $scope.user_requests = user_requests;
+                //$scope.requests = $filter('filter')($scope.requests, { bidding_trades:  });
+
+    	    	var data = $scope.user_requests;
+    	        $scope.requestsBidTableParams = new NGTableParams({
+    	            page: 1,
+    	            count: 10
+    	        },{
+    	            total: data.length,
+    	            getData: function($defer, params) {
+    	                params.total(data.length);
+    	                var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+    	                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+    	            }
+    	        });
+            });
 	    });
     };
 

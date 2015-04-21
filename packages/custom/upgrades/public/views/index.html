@@ -1,0 +1,60 @@
+<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="UpgradesController" data-ng-init="init()">
+   <!--  <div class="row">
+        <div class="col-lg-12">
+            <div class="jumbotron">
+                <h2>Bid Control Center</h2>
+            </div>
+        </div>
+
+    </div> -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Add A New Upgrade List</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="addUpgradeForm" data-ng-submit="addUpgrade()">
+                        <div class="form-group">
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control m-b" data-ng-model="upgrade_name" placeholder="New Upgrade Name" />
+                            </div>
+                        </div>
+                            <button class="btn btn-primary " type="submit">
+                                <i class="fa fa-check"></i>
+                                  Add
+                            </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Saved Upgrades</h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content wizard">
+                    <table ng-table="upgradesTableParams" class="table">
+                        <tbody ng-repeat="p in $data">
+                            <tr id="tr{{p._id}}">
+                                <td class="col-sm-10" data-title="'Upgrade Name'" sortable="'upgrade_name'">{{p.upgrade_name}}</td>
+                                <td class="col-sm-1" >
+                                    <button class="btn btn-primary dim" type="button" ng-click="submitBid(p)"><i class="fa fa-edit"></i> Edit</button>
+                                </td>
+                                <td class="col-sm-1" >
+                                    <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i> Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>

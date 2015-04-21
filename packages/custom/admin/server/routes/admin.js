@@ -12,6 +12,10 @@ module.exports = function(Admin, app, auth, database) {
     app.get('/admin/users', auth.requiresAdmin, users.all);
     app.post('/admin/users', auth.requiresAdmin, users.create);
     app.put('/admin/users/:userId', auth.requiresAdmin, users.update);
+    app.get('/admin/users/:userId', auth.requiresLogin, users.show);
     app.delete('/admin/users/:userId', auth.requiresAdmin, users.destroy);
 
+
+    //this establishes the function to call to get a single user by id
+    app.param('userId', users.user);
 };

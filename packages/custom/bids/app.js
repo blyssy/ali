@@ -32,6 +32,14 @@ Bids.register(function(app, auth, database) {
     menu: 'main',
     icon: 'glyphicon glyphicon-leaf'
   });
+
+  Bids.menus.add({
+    title: 'Bid Requests',
+    link: 'bid requests',
+    roles: ['tm'],
+    menu: 'main',
+    icon: 'fa fa-binoculars'
+  });
   
   //Bids.aggregateAsset('css', 'bids.css');
   Bids.aggregateAsset('css', 'steps/jquery.steps.css');

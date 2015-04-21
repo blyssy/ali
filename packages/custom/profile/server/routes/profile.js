@@ -1,27 +1,24 @@
-'use strict';
-
+//'use strict';
 /* jshint -W098 */
-// The Package is past automatically as first parameter
-module.exports = function(Profile, app, auth, database) {
+/*var profiles = require('../controllers/profile');
 
-  app.get('/profile/example/anyone', function(req, res, next) {
-    res.send('Anyone can access this');
-  });
-
-  app.get('/profile/example/auth', auth.requiresLogin, function(req, res, next) {
-    res.send('Only authenticated users can access this');
-  });
-
-  app.get('/profile/example/admin', auth.requiresAdmin, function(req, res, next) {
-    res.send('Only users with Admin role can access this');
-  });
-
-  app.get('/profile/example/render', function(req, res, next) {
-    Profile.render('index', {
-      package: 'profile'
-    }, function(err, html) {
-      //Rendering a view from the Package server/views
-      res.send(html);
-    });
-  });
+// profile authorization helpers
+var hasAuthorization = function(req, res, next) {
+  if (!req.user.isAdmin && req.profile.user.id !== req.user.id) {
+    return res.status(401).send('User is not authorized');
+  }
+  next();
 };
+
+module.exports = function(Profiles, app, auth) {
+  
+  //app.route('/profile').get(profiles.all);
+  //app.route('/profile').post(auth.requiresLogin, profiles.createProfile);
+  //app.route('/profile/:profileId').get(auth.isMongoId, profiles.show);
+  //app.route('/profile/:profileId').delete(auth.requiresLogin, profiles.destroy);
+  //app.route('/profile/:profileId').put(auth.requiresLogin, profiles.update);
+
+  // Finish with setting up the profileId param
+  //app.param('profileId', profiles.profile);
+
+};*/

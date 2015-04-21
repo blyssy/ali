@@ -3,9 +3,10 @@
         <div class="row">
             <div class="form-group">
                 <span data-ng-repeat="field in userSchema">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3"> 
                         <input data-ng-if="(field['type'] == 'text' || field['type'] == 'password')" type="{{field['type']}}" class="form-control" data-ng-model="user[field['schemaKey']]" placeholder="{{field['title']}}"/>
-                    <!-- </div>
+                        <input data-ng-if="(field['type'] == 'phone')" type="{{field['type']}}" class="form-control" data-ng-model="user[field['schemaKey']]" ui-mask="(999) 999-9999" />
+                    <!-- </div> ui-mask="(999) 999-9999"
                     <div data-ng-if="field['title'] == 'Roles'" class="col-lg-3"> -->
                         <label data-ng-if="field['title'] == 'Roles'">hold ctrl for multiple</label><select class="form-control" data-ng-if="field['title'] == 'Roles'" data-ng-model="user[field['schemaKey']]" ng-multiple="true" multiple ng-options="option for option in field['options']" size="6">
                             <!-- <option value=""> Choose Role </option> -->
@@ -51,6 +52,7 @@
             </td>
             <td class="table-editable-cell" data-ng-repeat="field in userSchema" data-ng-if="field.inTable">
                 <span data-ng-if="(field['type'] == 'text')" class="editable-span" data-ng-editable="update(user)" data-ng-editable-model="user[field['schemaKey']]"></span>
+                <span data-ng-if="(field['type'] == 'phone')" class="editable-span" data-ng-editable="update(user)" data-ng-editable-model="user[field['schemaKey']]"></span>
                 <span data-ng-click="beforeSelect(field['schemaKey'], user)" data-ng-if="(field['type'] == 'select')" class="editable-span" data-ng-editable-select="update(user, field['schemaKey'])" data-ng-editable-select-model="user[field['schemaKey']]" data-ng-editable-select-options="field['options']">
                 </span>
             </td>

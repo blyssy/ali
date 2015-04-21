@@ -33,9 +33,10 @@ angular.module('mean.notifys').controller('NotifyController', ['$scope', '$rootS
 		Notifys.query({ receiver: $scope.global.user.username }, function(notifys){
 			//$scope.notifications = notifys;
 
+			console.log('in loadNotifications');
 			for(var i=0; i<notifys.length; i=i+1) {
 				$scope.displayNotification(notifys[i]);
-				//console.log('showing notification # ' + i);
+				console.log('showing notification # ' + i + ' with receiver ' + notifys[i].receiver);
 			}
 			//$scope.displayNotifications();
 		});
@@ -83,7 +84,7 @@ angular.module('mean.notifys').controller('NotifyController', ['$scope', '$rootS
 	});*/
 
 	$scope.$on('notificationAdded', function(event, toasterObj) {
-		console.log('in the scope.on function');
+		console.log('in the notificationAdded function');
 		//$scope.handleNotificationClick(toasterObj.notify);
 		$scope.loadNotifications();
 	});
@@ -120,6 +121,7 @@ angular.module('mean.notifys').controller('NotifyController', ['$scope', '$rootS
 				'trustedHtml', 
 				'');
 
+			console.log('calling remove on notification from displayNotifications ' + $scope.notifications[i].receiver);
 			$scope.notifications[i].$remove();
 			$scope.notifications.splice(i, 1);
 		}
@@ -146,6 +148,7 @@ angular.module('mean.notifys').controller('NotifyController', ['$scope', '$rootS
 
 		toaster.pop(item.type, item.title, item.message, sticky, 'trustedHtml', '');
 
+		console.log('calling remove on notification from displayNotification ' + item.receiver);
 		item.$remove();
 		//});
 	};

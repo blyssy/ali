@@ -6,6 +6,10 @@ angular.module('mean.admin').config(['$stateProvider', '$urlRouterProvider',
             .state('users', {
                 url: '/admin/users',
                 templateUrl: 'admin/views/users.html'
+            })
+            .state('admin', {
+                url: '/admin/profile',
+                templateUrl: 'admin/views/index.html'
             });
     }
 ]).config(['ngClipProvider',

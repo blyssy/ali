@@ -1,0 +1,36 @@
+<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="BidRequestsController" data-ng-init="init()">
+   <!--  <div class="row">
+        <div class="col-lg-12">
+            <div class="jumbotron">
+                <h2>Bid Control Center</h2>
+            </div>
+        </div>
+
+    </div> -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Bid Requests</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="requestBidForm">
+                        <table ng-table="requestsBidTableParams" class="table">
+                            <tbody ng-repeat="p in $data">
+                                <tr id="tr{{p._id}}">
+                                    <td class="col-sm-10" data-title="'Bid Name'" sortable="'bid_name'">{{p.bid_name}}</td>
+                                    <td class="col-sm-1" >
+                                        <button class="btn btn-primary dim" type="button" ng-click="submitBid(p)"><i class="fa fa-edit"></i> Edit</button>
+                                    </td>
+                                    <td class="col-sm-1" >
+                                        <button class="btn btn-primary dim" type="button" ng-click="remove(p)"><i class="fa fa-check"></i> Submit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

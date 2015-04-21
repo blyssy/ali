@@ -5,35 +5,33 @@
  */
 var Module = require('meanio').Module;
 
-var Profile = new Module('profile');
+var Upgrades = new Module('upgrades');
 
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Profile.register(function(system, app, auth, database) {
-
-  //this will override the default system views
-  //app.set('views', __dirname + '/server/views');
+Upgrades.register(function(app, auth, database) {
 
   //We enable routing. By default the Package Object is passed to the routes
-  //Profile.routes(app, auth, database);
+  Upgrades.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
-  //Profile.menus.add({
-  //  title: 'profile example page',
-  //  link: 'profile example page',
-  //  roles: ['authenticated'],
-  //  menu: 'main'
-  //});
-  //Profile.angularDependencies(['mean.admin']);
-  //Profile.aggregateAsset('css', 'profile.css');
+  Upgrades.menus.add({
+    title: 'Material Upgrades',
+    link: 'upgrades',
+    roles: ['builder'],
+    menu: 'main',
+    icon: 'fa fa-pencil'
+  });
+  
+  Upgrades.aggregateAsset('css', 'upgrades.css');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
     // Use this for saving data from administration pages
-    Profile.settings({
+    Upgrades.settings({
         'someSetting': 'some value'
     }, function(err, settings) {
         //you now have the settings object
@@ -41,15 +39,15 @@ Profile.register(function(system, app, auth, database) {
 
     // Another save settings example this time with no callback
     // This writes over the last settings.
-    Profile.settings({
+    Upgrades.settings({
         'anotherSettings': 'some value'
     });
 
     // Get settings. Retrieves latest saved settigns
-    Profile.settings(function(err, settings) {
+    Upgrades.settings(function(err, settings) {
         //you now have the settings object
     });
     */
 
-  return Profile;
+  return Upgrades;
 });

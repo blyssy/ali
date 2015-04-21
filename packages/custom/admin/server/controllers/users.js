@@ -32,6 +32,7 @@ exports.create = function(req, res, next) {
     // Hard coded for now. Will address this with the user permissions system in v0.3.5
     //user.roles = ['authenticated'];
     user.roles = req.body.roles;
+    user.trade = req.body.trade;
     user.save(function(err) {
         if (err) {
             console.log(err);
@@ -54,6 +55,7 @@ exports.create = function(req, res, next) {
  * Find user by id
  */
 exports.user = function(req, res, next, id) {
+    console.log('in the find user by id function');
     User
         .findOne({
             _id: id
@@ -77,6 +79,14 @@ exports.update = function(req, res) {
     user.save(function(err) {
         res.jsonp(user);
     });
+};
+
+/**
+ * Show a user
+ */
+exports.show = function(req, res) {
+    console.log('in show with req ' + req.body);
+    res.json(req.user);
 };
 
 /**

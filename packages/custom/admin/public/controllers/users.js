@@ -22,7 +22,7 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
             title: 'Roles',
             schemaKey: 'roles',
             type: 'select',
-            options: ['authenticated', 'foreman', 'tm', 'mtc', 'admin'],
+            options: ['authenticated', 'builder', 'foreman', 'tm', 'mtc', 'admin'],
             inTable: true
         }, {
             title: 'Password',
@@ -40,7 +40,7 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
         }, {
             title: 'Phone',
             schemaKey: 'phone',
-            type: 'text',
+            type: 'phone',
             inTable: true
         }];
 
@@ -74,7 +74,13 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
 
             //user.firstName = user.lastName = user.email = user.password = user.role = '';
 
-            this.firstName = this.lastName = this.email = this.password = this.role = this.trade = '';
+            $scope.user.name = '';
+            $scope.user.username = '';
+            $scope.user.email = '';
+            $scope.user.password = '';
+            $scope.user.roles = '';
+            $scope.user.trade = '';
+            $scope.user.phone = '';
         };
 
         $scope.remove = function(user) {
