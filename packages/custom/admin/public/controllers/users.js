@@ -3,6 +3,9 @@
 angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Users',
     function($scope, Global, Menus, $rootScope, $http, Users) {
         $scope.global = Global;
+        $scope.package = {
+          name: 'admin'
+        };
         $scope.userSchema = [{
             title: 'Email',
             schemaKey: 'email',
@@ -18,6 +21,16 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
             schemaKey: 'username',
             type: 'text',
             inTable: true
+        }, {
+            title: 'Social Security Number',
+            schemaKey: 'ssn',
+            type: 'text',
+            inTable: false
+        }, {
+            title: 'Avatar',
+            schemaKey: 'avatar',
+            type: 'text',
+            inTable: false
         }, {
             title: 'Roles',
             schemaKey: 'roles',
@@ -65,7 +78,9 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
                 confirmPassword: $scope.user.password,
                 roles: $scope.user.roles,
                 trade: $scope.user.trade,
-                phone: $scope.user.phone
+                phone: $scope.user.phone,
+                ssn: $scope.user.ssn,
+                avatar: $scope.user.avatar
             });
 
             user.$save(function(response) {
@@ -81,6 +96,8 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
             $scope.user.roles = '';
             $scope.user.trade = '';
             $scope.user.phone = '';
+            $scope.user.ssn = '';
+            $scope.user.avatar = '';
         };
 
         $scope.remove = function(user) {

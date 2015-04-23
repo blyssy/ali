@@ -3,6 +3,9 @@
 angular.module('mean.admin').controller('AdminController', ['$scope', 'Global', 'Menus', '$rootScope',
     function($scope, Global, Menus, $rootScope) {
         $scope.global = Global;
+        $scope.package = {
+          name: 'admin'
+        };
         $scope.menus = {};
         $scope.overIcon = false;
 
