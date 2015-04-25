@@ -72,10 +72,11 @@
                 <table ng-table="tableListMatParams" class="table">
                     <tbody ng-repeat="q in $data track by $index">
                     <tr id="tr{{q._id}}">
-                        <td class="rowTd" data-title="'Material Name'" sortable="'name'">{{q.name}}</td>
-                        <td class="rowTd" data-title="'Units'" sortable="'unit.unit'">{{q.unit.unit}}</td>
-                        <td class="rowTd" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
-                        <td class="rowTd" >
+                        <td class="col-md-3" data-title="'Material Name'" sortable="'name'">{{q.name}}</td>
+                        <td class="col-md-4" data-title="'Description'" sortable="'description'">{{q.description}}</td>
+                        <td class="col-md-2" data-title="'Units'" sortable="'unit.unit'">{{q.unit.unit}}</td>
+                        <td class="col-md-2" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
+                        <td class="col-md-1" >
                             <button class="btn btn-danger dim" type="button" ng-click="removeListMat(p, q, $index)"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
@@ -100,9 +101,10 @@
                 <table ng-table="tableListEquipParams" class="table">
                     <tbody ng-repeat="q in $data track by $index">
                     <tr id="tr{{q._id}}">
-                        <td class="rowTd" data-title="'Equipment Name'" sortable="'name'">{{q.name}}</td>
-                        <td class="rowTd" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
-                        <td class="rowTd" >
+                        <td class="col-md-3" data-title="'Equipment Name'" sortable="'name'">{{q.name}}</td>
+                        <td class="col-md-6" data-title="'Description'" sortable="'description'">{{q.description}}</td>
+                        <td class="col-md-2" data-title="'Delivery Offset'" sortable="'delivery_offset'">{{q.delivery_offset}}</td>
+                        <td class="col-md-1" >
                             <button class="btn btn-danger dim" type="button" ng-click="removeListEquip(p, q, $index)"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
