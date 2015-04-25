@@ -8,7 +8,7 @@
                         <input data-ng-if="(field['type'] == 'phone')" type="{{field['type']}}" class="form-control" data-ng-model="user[field['schemaKey']]" ui-mask="(999) 999-9999" />
                     <!-- </div> ui-mask="(999) 999-9999"
                     <div data-ng-if="field['title'] == 'Roles'" class="col-lg-3"> -->
-                        <label data-ng-if="field['title'] == 'Roles'">hold ctrl for multiple</label><select class="form-control" data-ng-if="field['title'] == 'Roles'" data-ng-model="user[field['schemaKey']]" ng-multiple="true" multiple ng-options="option for option in field['options']" size="6">
+                        <label data-ng-if="field['title'] == 'Roles'">hold ctrl for multiple</label><select class="form-control" data-ng-if="field['title'] == 'Roles'" data-ng-model="user[field['schemaKey']]" ng-multiple="true" multiple ng-options="option for option in field['options']" size="7">
                             <!-- <option value=""> Choose Role </option> -->
                         </select>
                     <!-- </div>

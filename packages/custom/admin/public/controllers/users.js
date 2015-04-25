@@ -24,18 +24,18 @@ angular.module('mean.admin').controller('UsersController', ['$scope', 'Global', 
         }, {
             title: 'Social Security Number',
             schemaKey: 'ssn',
-            type: 'text',
+            type: 'profile',
             inTable: false
         }, {
             title: 'Avatar',
             schemaKey: 'avatar',
-            type: 'text',
+            type: 'profile',
             inTable: false
         }, {
             title: 'Roles',
             schemaKey: 'roles',
             type: 'select',
-            options: ['authenticated', 'builder', 'foreman', 'tm', 'mtc', 'admin'],
+            options: ['authenticated', 'builder', 'foreman', 'tm', 'division', 'mtc', 'admin'],
             inTable: true
         }, {
             title: 'Password',
