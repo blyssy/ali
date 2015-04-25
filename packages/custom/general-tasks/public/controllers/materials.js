@@ -36,6 +36,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
 
             var material = new Materials({
                 name: $scope.name,
+                description: $scope.description,
                 unit: $scope.unit._id,
                 delivery_offset: $scope.delivery_offset
             });
@@ -48,7 +49,7 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
                 $scope.tableMaterialsParams.reload();
             });
 
-            this.name = this.unit = this.delivery_offset = '';
+            this.name = this.description = this.unit = this.delivery_offset = '';
         };
 
         $scope.remove = function(material) {

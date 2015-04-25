@@ -20,8 +20,11 @@
                 <div class="ibox-content">
                     <form id="material-add-form" class="form-group" name="addMaterialForm" data-ng-submit="addMaterial()">
                         <div class="row">
-                            <span class="col-sm-5">
+                            <span class="col-sm-2">
                                 <input type="text" data-ng-model="name" placeholder="Material Name" class="form-control m-b"/>
+                            </span>
+                            <span class="col-sm-6">
+                                <input type="text" data-ng-model="description" placeholder="Material Description" class="form-control m-b"/>
                             </span>
                             <span class="col-sm-2">
                                 <select ng-model="unit" class="form-control m-b" 
@@ -37,10 +40,14 @@
                             		<option value="Same Day">Same Day</option>
                         		</select>
                  			</span>
-                 			<button class="btn btn-primary " type="submit">
-                 				<i class="fa fa-check"></i>
-                 				  Add
-                 			</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                     			<button class="btn btn-primary pull-right" type="submit">
+                     				<i class="fa fa-check"></i>
+                     				  Add
+                     			</button>
+                            </div>
                         </div> 
                     </form> 
                 </div>
@@ -58,13 +65,14 @@
                     <table ng-table="tableMaterialsParams" class="table">
                         <tbody ng-repeat="p in $data">
                         <tr id="tr{{p._id}}">
-                            <td class="rowTd" data-title="'Name'" sortable="'name'">{{p.name}}</td>
-                            <td class="rowTd" data-title="'Units'" sortable="'unit'">{{p.unit.unit}}</td>
-                            <td class="rowTd" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
-                            <td class="rowTd" >
+                            <td class="col-lg-3" data-title="'Name'" sortable="'name'">{{p.name}}</td>
+                            <td class="col-lg-5" data-title="'Description'" sortable="'description'">{{p.description}}</td>
+                            <td class="col-sm-2" data-title="'Units'" sortable="'unit'">{{p.unit.unit}}</td>
+                            <td class="col-sm-2" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
+                            <td class="col-lg-1" >
                                 <button class="btn btn-primary dim" type="button" ng-click="setMaterialsEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
                             </td>
-                            <td class="rowTd" >
+                            <td class="col-lg-1" >
                                 <button class="btn btn-danger dim" type="button" ng-click="remove(p)"><i class="fa fa-trash"></i> Delete</button>
                             </td>                         
                         </tr>

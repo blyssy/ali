@@ -9,6 +9,11 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
     $scope.init = function() {
     	$scope.editId = 1;
+        $scope.formData.projectPlan = {};
+        $scope.formData.projectPlan.single = [];
+        $scope.formData.projectPlan.multi = {};
+        $scope.formData.projectPlan.multi.interior = [];
+        $scope.formData.projectPlan.multi.exterior = [];
 
         Bids.query({}, function(bids) {
             $scope.bids = bids;
@@ -18,6 +23,18 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
         Users.query({}, function(users) {
             $scope.users = users;
         });
+    };
+
+    $scope.addSinglePlan = function(){
+        $scope.formData.projectPlan.single.push({});
+    };
+
+    $scope.addMultiInterior = function(){
+        $scope.formData.projectPlan.multi.interior.push({});
+    };
+
+    $scope.addMultiExterior = function(){
+        $scope.formData.projectPlan.multi.exterior.push({});
     };
 
     $scope.onSelect = function(){

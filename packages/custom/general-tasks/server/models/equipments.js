@@ -9,6 +9,9 @@ var EquipmentSchema = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String
+    },
     delivery_offset: {
         type: String
     }

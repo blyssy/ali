@@ -9,6 +9,9 @@ var MaterialSchema = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String
+    },
     unit: {
         type: mongoose.Schema.ObjectId,
         ref: 'Unit'

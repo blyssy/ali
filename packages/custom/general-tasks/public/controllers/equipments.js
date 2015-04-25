@@ -34,6 +34,7 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
 
             var equipment = new Equipments({
                 name: $scope.name,
+                description: $scope.description,
                 delivery_offset: $scope.delivery_offset
             });
 
@@ -45,7 +46,7 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
                 $scope.tableEquipmentsParams.reload();
             });
 
-            this.name = this.unit = this.delivery_offset = '';
+            this.name = this.description = this.unit = this.delivery_offset = '';
         };
 
         $scope.remove = function(equipment) {

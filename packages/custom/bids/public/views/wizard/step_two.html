@@ -44,7 +44,7 @@
                     <input ng-model="formData.purchasingAgentEmail" type="text" class="form-control">
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-2">
                     <label># of Lots</label>
                     <input ng-model="formData.numberOfLots" type="text" class="form-control">
@@ -54,67 +54,99 @@
                     <input ng-model="formData.lotNumbers" type="text" class="form-control">
                     <span class="help-block">Comma Seperated (123, 456, 789)</span>
                 </div>
-            </div>
+            </div> -->
         </div>
         <br> 
-        <!-- <div class="col-md-4">
-            <div class="ibox ">
-                <div class="ibox-title">
-                    <h5>Google Reference Map</h5>
-                </div>
-                <div class="ibox-content">
-                    <p>
-                        Use this map to review lot/land locations.
-                    </p>
-                    <section id="map" ng-controller="GoogleMaps">
-                        <div ui-map="myMap" ui-options="mapOptions" class="google-map"></div>
-                    </section>
-                </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label>Construction Type</label><br>
+                <select chosen class="form-control m-b" ng-model="formData.projectType">
+                    <option value="" disabled selected>-- Select --</option>
+                    <option value="single">Single Family</option>
+                    <option value="multi">Multi-Family</option>
+                    <option value="commercial">Commercial</option>
+                </select>
             </div>
-        </div> -->
-    </div>
-    <div class="row">
-        <div class="col-lg-2" align="center">
-            <label>Phase One</label><br>
-            <label class="switch green"><input type="checkbox" ng-model="formData.phaseOneCheckbox"/><i></i></label>
-        </div>
-        <div class="col-lg-10">
-            <label>Phase One Lot Numbers</label>
-            <input ng-model="formData.phaseOneLotNumbers" type="text" class="form-control">
-            <span class="help-block">Comma Seperated (123, 456, 789)</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2" align="center">
-            <label>Phase Two</label><br>
-            <label class="switch green"><input type="checkbox" ng-model="formData.phaseTwoCheckbox"/><i></i></label>
-        </div>
-        <div class="col-lg-10">
-            <label>Phase Two Lot Numbers</label>
-            <input ng-model="formData.phaseTwoLotNumbers" type="text" class="form-control">
-            <span class="help-block">Comma Seperated (123, 456, 789)</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2" align="center">
-            <label>Phase Three</label><br>
-            <label class="switch green"><input type="checkbox" ng-model="formData.phaseThreeCheckbox"/><i></i></label>
-        </div>
-        <div class="col-lg-10">
-            <label>Phase Three Lot Numbers</label>
-            <input ng-model="formData.phaseThreeLotNumbers" type="text" class="form-control">
-            <span class="help-block">Comma Seperated (123, 456, 789)</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2" align="center">
-            <label>Phase Four</label><br>
-            <label class="switch green"><input type="checkbox" ng-model="formData.phaseFourCheckbox"/><i></i></label>
-        </div>
-        <div class="col-lg-10">
-            <label>Phase Four Lot Numbers</label>
-            <input ng-model="formData.phaseFourLotNumbers" type="text" class="form-control">
-            <span class="help-block">Comma Seperated (123, 456, 789)</span>
+            <div ng-show="formData.projectType == 'single'">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="row" align="center">
+                            <div class="col-md-2">
+                                <label>Plan Number </lable>
+                            </div>
+                            <div class="col-md-4">
+                                <label> Elevations</label>
+                            </div>
+                        </div>
+                        <div ng-repeat="item in formData.projectPlan.single">
+                            <ng-form role="form" name="projectPlanForm">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control m-l" name="number" ng-model="item.number">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control m-l" name="elevations" ng-model="item.elevations">
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary " ng-click="addSinglePlan()">
+                    <i class="fa fa-plus"></i>
+                      Add Plan Number
+                </button>
+            </div>
+            <div ng-show="formData.projectType == 'multi' || formData.projectType == 'commercial'">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="row" align="center">
+                            <div class="col-md-3">
+                                <label>Plan (Interior) </lable>
+                            </div>
+                        </div>
+                        <div ng-repeat="item in formData.projectPlan.multi.interior">
+                            <ng-form role="form" name="projectPlanForm">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control m-l" name="interior" ng-model="item.interior">
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary " ng-click="addMultiInterior()">
+                    <i class="fa fa-plus"></i>
+                      Add Plan Interior
+                </button>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="form-group">        
+                        <div class="row" align="center">
+                            <div class="col-md-3">
+                                <label>Building Type (Exterior)</label>
+                            </div>
+                        </div>
+                        <div ng-repeat="item in formData.projectPlan.multi.exterior">
+                            <ng-form role="form" name="projectPlanForm">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control m-l" name="exterior" ng-model="item.exterior">
+                                    </div>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary " ng-click="addMultiExterior()">
+                    <i class="fa fa-plus"></i>
+                      Add Exterior
+                </button>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -126,3 +158,49 @@
         </div>
     </div>
 </fieldset>
+
+
+        <!-- <div class="row">
+            <div class="col-lg-2" align="center">
+                <label>Phase One</label><br>
+                <label class="switch green"><input type="checkbox" ng-model="formData.phaseOneCheckbox"/><i></i></label>
+            </div>
+            <div class="col-lg-10">
+                <label>Phase One Lot Numbers</label>
+                <input ng-model="formData.phaseOneLotNumbers" type="text" class="form-control">
+                <span class="help-block">Comma Seperated (123, 456, 789)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2" align="center">
+                <label>Phase Two</label><br>
+                <label class="switch green"><input type="checkbox" ng-model="formData.phaseTwoCheckbox"/><i></i></label>
+            </div>
+            <div class="col-lg-10">
+                <label>Phase Two Lot Numbers</label>
+                <input ng-model="formData.phaseTwoLotNumbers" type="text" class="form-control">
+                <span class="help-block">Comma Seperated (123, 456, 789)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2" align="center">
+                <label>Phase Three</label><br>
+                <label class="switch green"><input type="checkbox" ng-model="formData.phaseThreeCheckbox"/><i></i></label>
+            </div>
+            <div class="col-lg-10">
+                <label>Phase Three Lot Numbers</label>
+                <input ng-model="formData.phaseThreeLotNumbers" type="text" class="form-control">
+                <span class="help-block">Comma Seperated (123, 456, 789)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2" align="center">
+                <label>Phase Four</label><br>
+                <label class="switch green"><input type="checkbox" ng-model="formData.phaseFourCheckbox"/><i></i></label>
+            </div>
+            <div class="col-lg-10">
+                <label>Phase Four Lot Numbers</label>
+                <input ng-model="formData.phaseFourLotNumbers" type="text" class="form-control">
+                <span class="help-block">Comma Seperated (123, 456, 789)</span>
+            </div>
+        </div> -->
