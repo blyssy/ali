@@ -1,8 +1,11 @@
 'use strict';
 
-angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users', 'toaster', 
-  function($scope, Global, Bids, Users, toaster) {
+angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 'Bids', 'Users', 'toaster', 'GeneralTasks', 'Subtasks', 'Materials', 'Units', 'Equipments',
+  function($scope, Global, Bids, Users, toaster, GeneralTasks, Subtasks, Materials, Units, Equipments) {
     $scope.global = Global;
+
+    $scope.tasks = [];
+    $scope.subtasks = [];
 
     // All data will be store in this object
     $scope.formData = {};
@@ -17,6 +20,10 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
         Bids.query({}, function(bids) {
             $scope.bids = bids;
+        });
+
+        Subtasks.query({}, function(subtasks) {
+            $scope.subtasks = subtasks;
         });
 
         //$scope.formData.builderName = 'test name';
@@ -35,6 +42,90 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
     $scope.addMultiExterior = function(){
         $scope.formData.projectPlan.multi.exterior.push({});
+    };
+
+    $scope.attachTaskList = function(){
+        GeneralTasks.query({}, function(tasks) {
+
+            tasks.sort(function(a, b){
+                return a.order - b.order;
+            });
+
+            tasks.forEach(function(task, index){
+                $scope.selectedItem.task_list.push({
+                    _id: task.order,
+                    trade: task.trade,
+                    task: task.task,
+                    name: task.task_name,
+                    materials: [],
+                    equipment: [],
+                    subtasks: []
+                });
+
+                var material_index = 0;
+                task.materials.forEach(function(item, idx) {
+                    Materials.query({}, function(materials) {
+                        materials.forEach(function(mat, ii) {
+                            if(mat._id === item) {
+                                $scope.selectedItem.task_list[index].materials.push({
+                                    _id: material_index,
+                                    name: mat.name,
+                                    description: mat.description,
+                                    unit: mat.unit.unit,
+                                    delivery_offset: mat.delivery_offset
+                                });
+                                material_index = material_index + 1;
+                            }
+                        });
+                    });
+                });  
+
+                var equipment_index = 0;
+                task.equipment.forEach(function(item, idx) {
+                    Equipments.query({}, function(equipments) {
+                        equipments.forEach(function(equip, ii) {
+                            if(equip._id === item) {
+                                $scope.selectedItem.task_list[index].equipment.push({
+                                    _id: equipment_index,
+                                    name: equip.name,
+                                    description: equip.description,
+                                    delivery_offset: equip.delivery_offset
+                                });
+                                equipment_index = equipment_index + 1;
+                            }
+                        });
+                    });
+                });  
+            });
+
+            var subtask_index = 0;
+            for(var i=0; i<tasks.length; i=i+1){
+                subtask_index = 0;
+                for(var j=0; j<$scope.subtasks.length; j=j+1){
+                    //console.log('Task code: ' + tasks[i].task_code);
+                    if(tasks[i].task_code === $scope.subtasks[j].subtask_code) {
+                        $scope.selectedItem.task_list[i].subtasks.push({
+                            _id: subtask_index,
+                            trade: $scope.subtasks[j].subtask_trade,
+                            task: $scope.subtasks[j].subtask,
+                            name: $scope.subtasks[j].subtask_name
+                        });
+                        subtask_index = subtask_index + 1;
+                    }
+                }
+            }
+
+        });
+
+        // for(var i=0; i<$scope.tasks.length; i=i+1){
+        //     for(var j=0; j<$scope.subtasks.length; j=j+1){
+        //         console.log('Task code: ' + $scope.tasks[i].task_code);
+        //         if(tasks[i].task_code === subtasks[j].subtask_code)
+        //           console.log('Subtask code: ' + subtasks[j].subtask_code);
+        //     }
+        // }
+
+        $scope.formData.taskListAttached = true;
     };
 
     $scope.onSelect = function(){
@@ -62,9 +153,14 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
             $scope.formData.purchasingAgent = bid.purchasing_agent_name;
             $scope.formData.purchasingAgentPhone = bid.purchasing_agent_phone_number;
             $scope.formData.purchasingAgentEmail = bid.purchasing_agent_email;
-            //$scope.formData. = $scope.selectedItem.project_type; //not yet impled
-            $scope.formData.numberOfLots = bid.project_number_of_lots;
-            $scope.formData.lotNumbers = bid.project_lot_numbers;
+            $scope.formData.projectType = bid.project_type; //not yet impled
+            $scope.formData.projectPlan = bid.project_plan;
+            $scope.formData.projectPlan.single = bid.project_plan.single;
+            $scope.formData.projectPlan.multi = bid.project_plan.multi;
+            //$scope.formData.projectPlan.multi.interior = [];
+            //$scope.formData.projectPlan.multi.exterior = [];
+            //$scope.formData.numberOfLots = bid.project_number_of_lots;
+            //$scope.formData.lotNumbers = bid.project_lot_numbers;
             //$scope.formData. = $scope.selectedItem.project_phases; //need to figure this one out
             $scope.formData.mtcName = bid.mtc_name;
             $scope.formData.mtcDivision = bid.mtc_division;
@@ -365,8 +461,14 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
         $scope.selectedItem.purchasing_agent_phone_number = $scope.formData.purchasingAgentPhone;
         $scope.selectedItem.purchasing_agent_email = $scope.formData.purchasingAgentEmail;
         //$scope.formData. = $scope.selectedItem.project_type; //not yet impled
-        $scope.selectedItem.project_number_of_lots = $scope.formData.numberOfLots;
-        $scope.selectedItem.project_lot_numbers = $scope.formData.lotNumbers;
+        $scope.selectedItem.project_type = $scope.formData.projectType; //not yet impled
+        $scope.selectedItem.project_plan = $scope.formData.projectPlan;
+        $scope.selectedItem.project_plan.single = $scope.formData.projectPlan.single;
+        $scope.selectedItem.project_plan.single.number = $scope.formData.projectPlan.single.number;
+        $scope.selectedItem.project_plan.single.elevations = $scope.formData.projectPlan.single.elevations;
+        $scope.selectedItem.project_plan.multi = $scope.formData.projectPlan.multi;
+        //$scope.selectedItem.project_number_of_lots = $scope.formData.numberOfLots;
+        //$scope.selectedItem.project_lot_numbers = $scope.formData.lotNumbers;
         //$scope.formData. = $scope.selectedItem.project_phases; //need to figure this one out
         $scope.selectedItem.mtc_name = $scope.formData.mtcName;
         $scope.selectedItem.mtc_division = $scope.formData.mtcDivision;

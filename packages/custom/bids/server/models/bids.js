@@ -69,6 +69,24 @@ var BidSchema = new Schema({
     project_type: {  //not in the html at this point but should track multi-home, single family, etc...
         type: String
     },
+    project_plan: {
+        single: [{
+            number: {
+                type: String
+            },
+            elevations: {
+                type: String
+            }
+        }],
+        multi: {
+            interior: [{
+                type: String
+            }],
+            exterior: [{
+                type: String
+            }]
+        }
+    },
     project_number_of_lots: {
         type: Number
     },
@@ -120,6 +138,99 @@ var BidSchema = new Schema({
         phone: {
             type: String
         }
+    }],
+    task_list_attached: {
+        type: String
+    },
+    task_list: [{
+        _id: {
+            type: Number
+        },
+        trade: {
+            type: String
+        },
+        task: {
+            type: String
+        },
+        name: {
+            type: String
+        },
+        materials: [{
+            _id: {
+                type: Number
+            },
+            name: {
+                type: String
+            },
+            description: {
+                type: String
+            },
+            unit: {
+                type: String
+            },
+            delivery_offset: {
+                type: String
+            }
+        }],
+        equipment: [{
+            _id: {
+                type: Number
+            },
+            name: {
+                type: String
+            },
+            description: {
+                type: String
+            },
+            delivery_offset: {
+                type: String
+            }
+        }],
+        subtasks: [{
+            _id: {
+                type: Number
+            },
+            trade: {
+                type: String
+            },
+            task: {
+                type: String
+            },
+            name: {
+                type: String
+            },
+            materials: [{
+                _id: {
+                    type: Number
+                },
+                name: {
+                    type: String
+                },
+                description: {
+                    type: String
+                },
+                unit: {
+                    type: String
+                },
+                delivery_offset: {
+                    type: String
+                }
+            }],
+            equipment: [{
+                _id: {
+                    type: Number
+                },
+                name: {
+                    type: String
+                },
+                description: {
+                    type: String
+                },
+                delivery_offset: {
+                    type: String
+                }
+            }]
+        }]
     }]
 });
 

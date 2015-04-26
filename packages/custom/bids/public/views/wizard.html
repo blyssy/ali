@@ -2,11 +2,18 @@
     <div class="col-lg-12">
         <div class="jumbotron">
             <h2>Bid Selected - {{selectedItem.bid_name}}</h2>
+            <button class="btn btn-primary pull-left" data-ng-if="(selectedItem && !formData.taskListAttached)" ng-click="attachTaskList()">
+                <i class="fa fa-plus"></i>
+                  Attach Tasks
+            </button>
+            {{selectedItem.task_list}}
             <span class="pull-right">
-                <label>Select Bid </label>
-                <div class="input-group">
-                    <select chosen class="form-control m-b" ng-model="selectedItem" ng-change='onSelect()' class="chosen-select" style="width:200px;" tabindex="4" ng-options="s.bid_name for s in bids | filter: { bid_status: 'new'}">
-                    </select>
+                <div class="row">
+                    <label>Select Bid </label>
+                    <div class="input-group">
+                        <select chosen class="form-control m-b" ng-model="selectedItem" ng-change='onSelect()' class="chosen-select" style="width:200px;" tabindex="4" ng-options="s.bid_name for s in bids | filter: { bid_status: 'new'}">
+                        </select>
+                    </div>
                 </div>
             </span><br><br>
         </div>
