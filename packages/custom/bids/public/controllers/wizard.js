@@ -7,6 +7,21 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
     $scope.tasks = [];
     $scope.subtasks = [];
 
+    $scope.minDate = new Date();
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 0,
+        showWeeks: false
+    };
+
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+
     // All data will be store in this object
     $scope.formData = {};
 
@@ -20,6 +35,14 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
         Bids.query({}, function(bids) {
             $scope.bids = bids;
+        });
+
+        Materials.query({}, function(materials) { 
+            $scope.materials = materials;
+        });
+
+        Equipments.query({}, function(equipment) {
+            $scope.equipment = equipment;
         });
 
         Subtasks.query({}, function(subtasks) {
@@ -64,68 +87,87 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
                 var material_index = 0;
                 task.materials.forEach(function(item, idx) {
-                    Materials.query({}, function(materials) {
-                        materials.forEach(function(mat, ii) {
-                            if(mat._id === item) {
-                                $scope.selectedItem.task_list[index].materials.push({
-                                    _id: material_index,
-                                    name: mat.name,
-                                    description: mat.description,
-                                    unit: mat.unit.unit,
-                                    delivery_offset: mat.delivery_offset
-                                });
-                                material_index = material_index + 1;
-                            }
-                        });
+                    $scope.materials.forEach(function(mat, ii) {
+                        if(mat._id === item) {
+                            $scope.selectedItem.task_list[index].materials.push({
+                                _id: material_index,
+                                name: mat.name,
+                                description: mat.description,
+                                unit: mat.unit.unit,
+                                delivery_offset: mat.delivery_offset
+                            });
+                            material_index = material_index + 1;
+                        }
                     });
-                });  
+                });
 
                 var equipment_index = 0;
                 task.equipment.forEach(function(item, idx) {
-                    Equipments.query({}, function(equipments) {
-                        equipments.forEach(function(equip, ii) {
-                            if(equip._id === item) {
-                                $scope.selectedItem.task_list[index].equipment.push({
-                                    _id: equipment_index,
-                                    name: equip.name,
-                                    description: equip.description,
-                                    delivery_offset: equip.delivery_offset
-                                });
-                                equipment_index = equipment_index + 1;
-                            }
-                        });
+                    $scope.equipment.forEach(function(equip, ii) {
+                        if(equip._id === item) {
+                            $scope.selectedItem.task_list[index].equipment.push({
+                                _id: equipment_index,
+                                name: equip.name,
+                                description: equip.description,
+                                delivery_offset: equip.delivery_offset
+                            });
+                            equipment_index = equipment_index + 1;
+                        }
                     });
                 });  
-            });
 
-            var subtask_index = 0;
-            for(var i=0; i<tasks.length; i=i+1){
-                subtask_index = 0;
-                for(var j=0; j<$scope.subtasks.length; j=j+1){
-                    //console.log('Task code: ' + tasks[i].task_code);
-                    if(tasks[i].task_code === $scope.subtasks[j].subtask_code) {
-                        $scope.selectedItem.task_list[i].subtasks.push({
+                var subtask_index = 0;
+            
+                $scope.subtasks.forEach(function(subtask, j) {
+                    if(task.task_code === subtask.subtask_code) {
+                        $scope.selectedItem.task_list[index].subtasks.push({
                             _id: subtask_index,
-                            trade: $scope.subtasks[j].subtask_trade,
-                            task: $scope.subtasks[j].subtask,
-                            name: $scope.subtasks[j].subtask_name
+                            trade: subtask.subtask_trade,
+                            task: subtask.subtask,
+                            name: subtask.subtask_name,
+                            materials: [],
+                            equipment: []
+                        });
+
+                        material_index = 0;
+                        subtask.materials.forEach(function(item, idx) {
+                            $scope.materials.forEach(function(mat, ii) {
+                                if(mat._id === item) {
+                                    $scope.selectedItem.task_list[index].subtasks[subtask_index].materials.push({
+                                        _id: material_index,
+                                        name: mat.name,
+                                        description: mat.description,
+                                        unit: mat.unit.unit,
+                                        delivery_offset: mat.delivery_offset
+                                    });
+                                    material_index = material_index + 1;
+                                }
+                            });
+                        });
+
+                        equipment_index = 0;
+                        subtask.equipment.forEach(function(item, idx) {
+                            $scope.equipment.forEach(function(equip, ii) {
+                                if(equip._id === item) {
+                                    $scope.selectedItem.task_list[index].subtasks[subtask_index].equipment.push({
+                                        _id: equipment_index,
+                                        name: equip.name,
+                                        description: equip.description,
+                                        delivery_offset: equip.delivery_offset
+                                    });
+                                    equipment_index = equipment_index + 1;
+                                }
+                            });
                         });
                         subtask_index = subtask_index + 1;
                     }
-                }
-            }
+                });
+            });
 
+            $scope.formData.taskListAttached = true;
+            $scope.selectedItem.task_list_attached = true;
+            $scope.selectedItem.$update();
         });
-
-        // for(var i=0; i<$scope.tasks.length; i=i+1){
-        //     for(var j=0; j<$scope.subtasks.length; j=j+1){
-        //         console.log('Task code: ' + $scope.tasks[i].task_code);
-        //         if(tasks[i].task_code === subtasks[j].subtask_code)
-        //           console.log('Subtask code: ' + subtasks[j].subtask_code);
-        //     }
-        // }
-
-        $scope.formData.taskListAttached = true;
     };
 
     $scope.onSelect = function(){
@@ -137,6 +179,7 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
             $scope.current_bid_name = bid.bid_name;
             $scope.current_bid_status = bid.bid_status;
+            $scope.formData.bidDateRequested = bid.bid_date_requested;
             $scope.formData.builderName = bid.builder_name;
             $scope.formData.builderDivision = bid.builder_division;
             $scope.formData.builderAddress = bid.builder_address;
@@ -157,6 +200,7 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
             $scope.formData.projectPlan = bid.project_plan;
             $scope.formData.projectPlan.single = bid.project_plan.single;
             $scope.formData.projectPlan.multi = bid.project_plan.multi;
+            $scope.formData.taskListAttached = bid.task_list_attached;
             //$scope.formData.projectPlan.multi.interior = [];
             //$scope.formData.projectPlan.multi.exterior = [];
             //$scope.formData.numberOfLots = bid.project_number_of_lots;
@@ -443,7 +487,7 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
         } else {
             console.log('formD.phaseOneCheckbox is set to false');
         }*/
-        
+        $scope.selectedItem.bid_date_requested = $scope.formData.bidDateRequested;
         $scope.selectedItem.builder_name = $scope.formData.builderName;
         $scope.selectedItem.builder_division = $scope.formData.builderDivision;
         $scope.selectedItem.builder_address = $scope.formData.builderAddress;

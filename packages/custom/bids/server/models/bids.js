@@ -18,6 +18,12 @@ var BidSchema = new Schema({
     bid_request_progress: {
         type: String
     },
+    bid_date_submitted: {
+        type: Date
+    },
+    bid_date_requested: {
+        type: Date
+    },
     builder_name: {
         type: String
     }, 
@@ -137,7 +143,41 @@ var BidSchema = new Schema({
         },
         phone: {
             type: String
-        }
+        },
+        date_completed: {
+            type: Date
+        },
+        bid: [{
+            plan_code: {
+                type: String
+            },
+            task_id: {
+                type: Number
+            },
+            labor: {
+                type: String
+            },
+            equipment: {
+                type: String
+            },
+            material: {
+                type: String
+            },
+            subtasks: [{
+                task_id: {
+                    type: Number
+                },
+                labor: {
+                    type: String
+                },
+                equipment: {
+                    type: String
+                },
+                material: {
+                    type: String
+                }
+            }]
+        }]
     }],
     task_list_attached: {
         type: String
