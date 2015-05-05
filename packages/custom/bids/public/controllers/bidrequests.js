@@ -1,8 +1,8 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('mean.bids').controller('BidRequestsController', ['$scope', 'Users', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService',
-  function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService) {
+angular.module('mean.bids').controller('BidRequestsController', ['$scope', 'Users', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService', 'BidRequestEdit',
+  function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService, BidRequestEdit) {
     $scope.global = Global;
     $scope.package = {
       name: 'bids'
@@ -101,6 +101,11 @@ angular.module('mean.bids').controller('BidRequestsController', ['$scope', 'User
     	return 'warning';
     };
 
+    $scope.editBid = function(bid) {
+        console.log('setting the bid to be editted.');
+        BidRequestEdit.set(bid);
+    };
+
     $scope.submitBid = function(bid) {
     	//for (var i in $scope.new_bids) {
         //    if ($scope.new_bids[i] === bid) {
@@ -110,6 +115,9 @@ angular.module('mean.bids').controller('BidRequestsController', ['$scope', 'User
 
         //bid.bid_status = 'submitted';
         //bid.$update();
+
+        //probably use the date_completed variable for the bidding trade when the bid request is completed by
+        //each trade manager.
 
         for(var j=0; j<bid.bidding_trades.length; j=j+1) {
             NotifyService.addNotification(bid.bidding_trades[j].username, 'toast-info', 'New Bid', 'There is a new bid request for you to fill out and return', 'No');

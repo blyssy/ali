@@ -16,7 +16,7 @@
                         <p class="input-group date">
                           <input type="text" class="form-control" datepicker-popup="MM.dd.yyyy" ng-model="formData.bidDateRequested" is-open="opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                           <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
+                            <button type="button" class="btn btn-primary" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
                           </span>
                         </p>
                     </div>
@@ -62,14 +62,14 @@
                     </div>
                     <div class="wizard">
                         <div class="content">
-    <form name="signupForm" ng-submit="processForm()" class="p-lg">
-        <div ng-show="editId===1" ng-if="editId===1" ng-include src="'/bids/views/wizard/step_one.html'"></div>
-        <div ng-show="editId===2" ng-if="editId===2" ng-include src="'/bids/views/wizard/step_two.html'"></div>
-        <div ng-show="editId===3" ng-if="editId===3" ng-include src="'/bids/views/wizard/step_three.html'"></div>
-        <div ng-show="editId===4" ng-if="editId===4" ng-include src="'/bids/views/wizard/step_four.html'"></div>
-    </form>
+                            <form name="signupForm" ng-submit="processForm()" class="p-lg">
+                                <div ng-show="editId===1" ng-if="editId===1" ng-include src="'/bids/views/wizard/step_one.html'"></div>
+                                <div ng-show="editId===2" ng-if="editId===2" ng-include src="'/bids/views/wizard/step_two.html'"></div>
+                                <div ng-show="editId===3" ng-if="editId===3" ng-include src="'/bids/views/wizard/step_three.html'"></div>
+                                <div ng-show="editId===4" ng-if="editId===4" ng-include src="'/bids/views/wizard/step_four.html'"></div>
+                            </form>
                         </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

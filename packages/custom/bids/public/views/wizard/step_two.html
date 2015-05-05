@@ -107,11 +107,11 @@
                                 <label>Plan (Interior) </lable>
                             </div>
                         </div>
-                        <div ng-repeat="item in formData.projectPlan.multi.interior">
+                        <div ng-repeat="interior in formData.projectPlan.multi.interior">
                             <ng-form role="form" name="projectPlanForm">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <input type="text" class="form-control m-l" name="interior" ng-model="item.interior">
+                                        <input type="text" class="form-control m-l" name="interior" ng-model="interior.item">
                                     </div>
                                 </div>
                             </ng-form>
@@ -131,11 +131,11 @@
                                 <label>Building Type (Exterior)</label>
                             </div>
                         </div>
-                        <div ng-repeat="item in formData.projectPlan.multi.exterior">
+                        <div ng-repeat="exterior in formData.projectPlan.multi.exterior">
                             <ng-form role="form" name="projectPlanForm">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <input type="text" class="form-control m-l" name="exterior" ng-model="item.exterior">
+                                        <input type="text" class="form-control m-l" name="exterior" ng-model="exterior.item">
                                     </div>
                                 </div>
                             </ng-form>

@@ -27,11 +27,11 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
 
     $scope.init = function() {
     	$scope.editId = 1;
-        $scope.formData.projectPlan = {};
-        $scope.formData.projectPlan.single = [];
-        $scope.formData.projectPlan.multi = {};
-        $scope.formData.projectPlan.multi.interior = [];
-        $scope.formData.projectPlan.multi.exterior = [];
+        //$scope.formData.projectPlan = {};
+        //$scope.formData.projectPlan.single = [];
+        //$scope.formData.projectPlan.multi = {};
+        //$scope.formData.projectPlan.multi.interior = [];
+        //$scope.formData.projectPlan.multi.exterior = [];
 
         Bids.query({}, function(bids) {
             $scope.bids = bids;
@@ -201,8 +201,8 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
             $scope.formData.projectPlan.single = bid.project_plan.single;
             $scope.formData.projectPlan.multi = bid.project_plan.multi;
             $scope.formData.taskListAttached = bid.task_list_attached;
-            //$scope.formData.projectPlan.multi.interior = [];
-            //$scope.formData.projectPlan.multi.exterior = [];
+            $scope.formData.projectPlan.multi.interior = bid.project_plan.multi.interior;
+            $scope.formData.projectPlan.multi.exterior = bid.project_plan.multi.exterior;
             //$scope.formData.numberOfLots = bid.project_number_of_lots;
             //$scope.formData.lotNumbers = bid.project_lot_numbers;
             //$scope.formData. = $scope.selectedItem.project_phases; //need to figure this one out
@@ -511,6 +511,8 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
         $scope.selectedItem.project_plan.single.number = $scope.formData.projectPlan.single.number;
         $scope.selectedItem.project_plan.single.elevations = $scope.formData.projectPlan.single.elevations;
         $scope.selectedItem.project_plan.multi = $scope.formData.projectPlan.multi;
+        $scope.selectedItem.project_plan.multi.interior = $scope.formData.projectPlan.multi.interior;
+        $scope.selectedItem.project_plan.multi.exterior = $scope.formData.projectPlan.multi.exterior;
         //$scope.selectedItem.project_number_of_lots = $scope.formData.numberOfLots;
         //$scope.selectedItem.project_lot_numbers = $scope.formData.lotNumbers;
         //$scope.formData. = $scope.selectedItem.project_phases; //need to figure this one out

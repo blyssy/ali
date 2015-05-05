@@ -86,10 +86,14 @@ var BidSchema = new Schema({
         }],
         multi: {
             interior: [{
-                type: String
+                item: {
+                    type: String
+                }
             }],
             exterior: [{
-                type: String
+                item: {
+                    type: String
+                }
             }]
         }
     },

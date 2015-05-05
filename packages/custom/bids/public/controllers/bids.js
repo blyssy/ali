@@ -92,28 +92,39 @@ angular.module('mean.bids').controller('BidsController', ['$scope', 'Global', 'B
     };
 
     $scope.submitBid = function(bid) {
-    	//for (var i in $scope.new_bids) {
-        //    if ($scope.new_bids[i] === bid) {
-        //        $scope.new_bids.splice(i, 1);
-        //    }
-        //}
+        if(!bid.bid_date_requested) {
+            alert('Trade Manager submission date not set');
+            return;
+        }
 
-        //bid.bid_status = 'submitted';
-        //bid.$update();
+        if(bid.task_list.length === 0) {
+            alert('Task list is not attached');
+            return;
+        }
+
+        if(bid.bidding_trades.length === 0) {
+            alert('No bidding trades selected');
+            return;
+        }
+
+    	for (var i in $scope.new_bids) {
+           if ($scope.new_bids[i] === bid) {
+               $scope.new_bids.splice(i, 1);
+           }
+        }
+
+        bid.bid_status = 'submitted';
+        bid.$update();
 
         for(var j=0; j<bid.bidding_trades.length; j=j+1) {
             NotifyService.addNotification(bid.bidding_trades[j].username, 'toast-info', 'New Bid', 'There is a new bid request for you to fill out and return', 'No');
         }
         $scope.$broadcast('notificationAdded');
-        //$scope.submitted_bids.push(bid);
+        $scope.submitted_bids.push(bid);
 
-        //for(var j=0; bid.bidding_trades.length; j=j+1) {
-        //    Notifys.addNotification(bid.bidding_trades[j].username, 'toast-info', 'New Bid', 'There is a new bid request for you to fill out and return', 'No');
-        //}
-
-        //var data = $scope.new_bids;
-        //$scope.newBidTableParams.total(data.length);
-        //$scope.newBidTableParams.reload();
+        var data = $scope.new_bids;
+        $scope.newBidTableParams.total(data.length);
+        $scope.newBidTableParams.reload();
     };
   }
 ]);

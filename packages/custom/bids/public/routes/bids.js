@@ -37,6 +37,13 @@ angular.module('mean.bids').config(['$stateProvider',
           loggedin: checkLoggedin
         }
       })
+      .state('bid request edit', {
+        url: '/request/edit',
+        templateUrl: 'bids/views/bid_request_edit.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
       .state('bid wizard', {
         url: '/wizard',
         templateUrl: '/bids/views/wizard.html',

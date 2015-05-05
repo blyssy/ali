@@ -1,0 +1,92 @@
+<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="BidRequestEditController" data-ng-init="init()">
+	<h1>Bid Request Edit</h1>
+	<!-- <p>{{bid_menu}}</p> 
+
+	<div data-ng-if="(construction_single)">Single {{bid.project_plan.single}}</div>
+
+	<div data-ng-if="(construction_multi)">Multi {{bid.project_plan.multi}}</div> -->
+
+	<div class="row">
+		<div class="col-md-1">
+		    <label>Select Plan </label>
+		    <div class="input-group">
+		        <select chosen class="form-control" data-ng-init="current_plan = bid_menu[0]" ng-model="current_plan" ng-change='onSelect()' ng-options="s.item for s in bid_menu" size="30" autofocus>
+		        </select>
+		    </div>
+		</div>
+		<div class="col-lg-11">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Plan: {{current_plan.item}} Totals</h5>
+				</div>
+				<div class="ibox-content">
+					<table class="table">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Total</th>
+								<th>Direct Labor</th>
+								<th>Material</th>
+								<th>Equipment</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Bid Amount</td>
+								<td>{{bid_total}}</td>
+								<td>{{bid_direct_labor}}</td>
+								<td>{{bid_material}}</td>
+								<td>{{bid_equipment}}</td>
+							</tr>
+							<tr>
+								<td>% of Bid</td>
+								<td>{{bid_total}}</td>
+								<td>{{bid_direct_labor}}</td>
+								<td>{{bid_material}}</td>
+								<td>{{bid_equipment}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	<!-- </div>
+	<div class="row"> -->
+		<!-- <div class="col-md-1"></div> -->
+		<div class="col-lg-11">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Plan: {{current_plan.item}} Tasks</h5>
+				</div>
+				<div class="ibox-content">
+					<table ng-table="bidTasksTableParams" class="table">
+						<thead>
+							<tr>
+								<th>Task Name</th>
+								<th>Labor Total</th>
+								<th>Material Total</th>
+								<th>Equipment Total</th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="p in $data">
+							<tr id="tr{{p._id}}">
+								<td class="col-sm-4" data-title="'Task Name'" sortable="'task_name'">{{p.name}}</td>
+								<td class="col-sm-2">{{bid_total}}</td>
+								<td class="col-sm-2">{{bid_direct_labor}}</td>
+								<td class="col-sm-2">{{bid_material}}</td>
+								<td class="col-sm-1">
+	                                <button class="btn btn-primary dim" type="button" ng-click="setTaskEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
+	                            </td>                      
+	                        </tr>
+	                        <tr ng-show="taskEditId===p._id" ng-if="taskEditId===p._id">
+	                            <td colspan="4" ng-include src="'/bids/views/editRow/task.html'"></td>
+	                        </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
