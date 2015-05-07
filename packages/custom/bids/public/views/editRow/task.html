@@ -1,1 +1,35 @@
-<h1>Task</h1>
+<div class="ibox-content">
+	<div class="well">      
+      <div><h4 class="control-label">Plan Task Totals:</h4>
+      	<div class="row">
+	      	<div class="col-md-2">
+	      	  <label>Labor</label>
+		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
+		      <input type="text" ng-model="p.labor" class="form-control m-b" value="{{p.labor}}">
+		    </div>
+		    <div class="col-md-2">
+		      <label>Materials</label>
+		      <input type="text" ng-model="p.materials" class="form-control m-b" value="{{p.materials}}">
+		    </div>
+		    <div class="col-md-2">
+		      <label>Subtasks</label>
+		      <input type="text" ng-model="p.subtasks" class="form-control m-b" value="{{p.subtasks}}">
+		    </div>
+		</div>
+		<div class="row">
+			<div data-ng-if="p.subtasks.length">
+				<div ng-repeat="item in p.subtasks">
+					<h4>{{item.name}}</h4>
+					<label>Labor</label>
+					<input type="text" ng-model="item.labor" class="form-control m-b" value="{{item.labor}}">
+				</div>
+			</div>
+		</div>
+  	  </div>
+  
+      <div class="pull-right">
+      	<button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i> Save</button>
+      	<button class="btn btn-primary dim" type="button" ng-click="setUnitsEditId(-1)"><i class="fa fa-times"></i> Cancel</button>
+      </div>
+	</div>
+</div>

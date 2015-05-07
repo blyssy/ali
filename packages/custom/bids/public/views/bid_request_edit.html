@@ -33,8 +33,8 @@
 						<tbody>
 							<tr>
 								<td>Bid Amount</td>
-								<td>{{bid_total}}</td>
-								<td>{{bid_direct_labor}}</td>
+								<td>{{bid_total | currency}}</td>
+								<td>{{bid_direct_labor | currency}}</td>
 								<td>{{bid_material}}</td>
 								<td>{{bid_equipment}}</td>
 							</tr>
@@ -71,10 +71,10 @@
 						</thead>
 						<tbody ng-repeat="p in $data">
 							<tr id="tr{{p._id}}">
-								<td class="col-sm-4" data-title="'Task Name'" sortable="'task_name'">{{p.name}}</td>
-								<td class="col-sm-2">{{bid_total}}</td>
-								<td class="col-sm-2">{{bid_direct_labor}}</td>
-								<td class="col-sm-2">{{bid_material}}</td>
+								<td class="col-sm-4" data-title="'Task Name'" sortable="'name'">{{p.name}}</td>
+								<td class="col-sm-2" data-title="'Labor'" sortable="'task_labor'">{{p.task_labor}}</td>
+								<td class="col-sm-2" data-title="'Material'" sortable="'task_material'">{{p.task_material}}</td>
+								<td class="col-sm-2" data-title="'Equipment'" sortable="'task_equipment'">{{p.task_equipment}}</td>
 								<td class="col-sm-1">
 	                                <button class="btn btn-primary dim" type="button" ng-click="setTaskEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
 	                            </td>                      
