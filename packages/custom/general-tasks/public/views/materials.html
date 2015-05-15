@@ -20,17 +20,23 @@
                 <div class="ibox-content">
                     <form id="material-add-form" class="form-group" name="addMaterialForm" data-ng-submit="addMaterial()">
                         <div class="row">
-                            <span class="col-sm-2">
+                            <span class="col-sm-5">
                                 <input type="text" data-ng-model="name" placeholder="Material Name" class="form-control m-b"/>
                             </span>
-                            <span class="col-sm-6">
+                            <span class="col-sm-7">
                                 <input type="text" data-ng-model="description" placeholder="Material Description" class="form-control m-b"/>
+                            </span><br><br><br>
+                            <span class="col-sm-2">
+                                <input type="text" data-ng-model="price_per_unit" placeholder="Price/Unit" class="form-control m-b"/>
                             </span>
                             <span class="col-sm-2">
                                 <select ng-model="unit" class="form-control m-b" 
                                     ng-options="obj.unit for obj in units track by obj._id">
                                     <option value="" disabled selected>Unit of Measure</option>
                                 </select>
+                            </span>
+                            <span class="col-sm-2">
+                                <input type="text" data-ng-model="delivery_price" placeholder="Delivery Price" class="form-control m-b"/>
                             </span>
                             <span class="col-sm-2">
                             	<select data-ng-model="delivery_offset" class="form-control m-b">
@@ -41,9 +47,10 @@
                         		</select>
                  			</span>
                         </div>
+                        <div class="hr-line-dashed"></div>
                         <div class="row">
-                            <div class="col-md-12">
-                     			<button class="btn btn-primary pull-right" type="submit">
+                            <div class="col-md-4 col-md-offset-6">
+                     			<button class="btn btn-primary" type="submit">
                      				<i class="fa fa-check"></i>
                      				  Add
                      			</button>
@@ -66,8 +73,10 @@
                         <tbody ng-repeat="p in $data">
                         <tr id="tr{{p._id}}">
                             <td class="col-lg-3" data-title="'Name'" sortable="'name'">{{p.name}}</td>
-                            <td class="col-lg-5" data-title="'Description'" sortable="'description'">{{p.description}}</td>
-                            <td class="col-sm-2" data-title="'Units'" sortable="'unit'">{{p.unit.unit}}</td>
+                            <td class="col-lg-3" data-title="'Description'" sortable="'description'">{{p.description}}</td>
+                            <td class="col-sm-1" data-title="'Price/Unit'" sortable="'price_per_unit'">{{p.price_per_unit|currency}}</td>
+                            <td class="col-sm-1" data-title="'Units'" sortable="'unit'">{{p.unit.unit}}</td>
+                            <td class="col-sm-1" data-title="'Delivery Price'" sortable="'delivery_price'">{{p.delivery_price|currency}}</td>
                             <td class="col-sm-2" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
                             <td class="col-lg-1" >
                                 <button class="btn btn-primary dim" type="button" ng-click="setMaterialsEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>

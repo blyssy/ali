@@ -12,6 +12,12 @@ var MaterialSchema = new Schema({
     description: {
         type: String
     },
+    price_per_unit: {
+        type: Number
+    },
+    delivery_price: {
+        type: Number
+    },
     unit: {
         type: mongoose.Schema.ObjectId,
         ref: 'Unit'
