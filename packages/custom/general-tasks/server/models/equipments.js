@@ -12,6 +12,15 @@ var EquipmentSchema = new Schema({
     description: {
         type: String
     },
+    trade: {
+        type: String
+    },
+    price: {
+        type: Number
+    },
+    delivery_price: {
+        type: Number
+    },
     delivery_offset: {
         type: String
     }

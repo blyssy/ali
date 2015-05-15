@@ -20,11 +20,42 @@
                 <div class="ibox-content">
                     <form id="equipment-add-form" class="form-group" name="addEquipmentForm" data-ng-submit="add()">
                         <div class="row">
-                            <span class="col-sm-3">
+                            <span class="col-sm-5">
                                 <input type="text" data-ng-model="name" placeholder="Equipement Name" class="form-control m-b"/>
                             </span>
-                            <span class="col-sm-6">
+                            <span class="col-sm-7">
                                 <input type="text" data-ng-model="description" placeholder="Material Description" class="form-control m-b"/>
+                            </span><br><br><br>
+                            <span class="col-sm-2">
+                                <select class="form-control m-b" data-ng-model="trade">
+                                    <option value="" disabled selected>Trade</option>
+                                    <option value="01">01 - Concrete</option>
+                                    <option value="02">02 - Plumbing</option>
+                                    <option value="03">03 - Grader</option>
+                                    <option value="04">04 - Framer</option>
+                                    <option value="05">05 - Drywall</option>
+                                    <option value="06">06 - Roofer</option>
+                                    <option value="07">07 - HVAC</option>
+                                    <option value="08">08 - Stucco</option>
+                                    <option value="09">09 - Electrician</option>
+                                    <option value="10">10 - Unused</option>
+                                    <option value="11">11 - Fire Sprinkler</option>
+                                    <option value="12">12 - Insulation</option>
+                                    <option value="13">13 - Painter</option>
+                                    <option value="14">14 - Cabinets</option>
+                                    <option value="15">15 - Masonry</option>
+                                    <option value="16">16 - Finish Trim</option>
+                                    <option value="17">17 - Tile</option>
+                                    <option value="18">18 - Flooring</option>
+                                    <option value="19">19 - Fencing</option>
+                                    <option value="20">20 - Landscaping</option>
+                                </select>
+                            </span>
+                            <span class="col-sm-2">
+                                <input type="text" data-ng-model="price" placeholder="Price" class="form-control m-b"/>
+                            </span>
+                            <span class="col-sm-2">
+                                <input type="text" data-ng-model="delivery_price" placeholder="Delivery Price" class="form-control m-b"/>
                             </span>
                             <span class="col-sm-2">
                             	<select data-ng-model="delivery_offset" class="form-control m-b">
@@ -35,9 +66,10 @@
                         		</select>
                  			</span>
                         </div>
+                        <div class="hr-line-dashed"></div>
                         <div class="row">
-                            <div class="col-md-12">
-                     			<button class="btn btn-primary pull-right" type="submit">
+                            <div class="col-md-4 col-md-offset-6">
+                     			<button class="btn btn-primary" type="submit">
                      				<i class="fa fa-check"></i>
                      				  Add
                      			</button>
@@ -59,9 +91,12 @@
                     <table ng-table="tableEquipmentsParams" class="table">
                         <tbody ng-repeat="p in $data">
                         <tr id="tr{{p._id}}">
-                            <td class="col-lg-3" data-title="'Name'" sortable="'name'">{{p.name}}</td>
-                            <td class="col-lg-5" data-title="'Description'" sortable="'description'">{{p.description}}</td>
-                            <td class="col-lg-2" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
+                            <td class="col-lg-1" data-title="'Trade'" sortable="'trade'">{{p.trade}} - {{getTradeName(p.trade)}}</td>
+                            <td class="col-lg-2" data-title="'Name'" sortable="'name'">{{p.name}}</td>
+                            <td class="col-lg-3" data-title="'Description'" sortable="'description'">{{p.description}}</td>
+                            <td class="col-lg-1" data-title="'Price'" sortable="'price'">{{p.price|currency}}</td>
+                            <td class="col-lg-1" data-title="'Delivery Price'" sortable="'delivery_price'">{{p.delivery_price|currency}}</td>
+                            <td class="col-lg-1" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
                             <td class="col-lg-1" >
                                 <button class="btn btn-primary dim" type="button" ng-click="setEquipmentsEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
                             </td>

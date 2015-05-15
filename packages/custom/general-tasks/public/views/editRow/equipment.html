@@ -1,9 +1,38 @@
 <div class="ibox-content">
 	<div class="well">      
+    <div><label class="control-label">Trade:</label>
+            <select class="form-control m-b" data-ng-model="p.trade">
+                <!-- <option value="" disabled selected>Trade</option> -->
+                <option value="01">01 - Concrete</option>
+                <option value="02">02 - Plumbing</option>
+                <option value="03">03 - Grader</option>
+                <option value="04">04 - Framer</option>
+                <option value="05">05 - Drywall</option>
+                <option value="06">06 - Roofer</option>
+                <option value="07">07 - HVAC</option>
+                <option value="08">08 - Stucco</option>
+                <option value="09">09 - Electrician</option>
+                <option value="10">10 - Unused</option>
+                <option value="11">11 - Fire Sprinkler</option>
+                <option value="12">12 - Insulation</option>
+                <option value="13">13 - Painter</option>
+                <option value="14">14 - Cabinets</option>
+                <option value="15">15 - Masonry</option>
+                <option value="16">16 - Finish Trim</option>
+                <option value="17">17 - Tile</option>
+                <option value="18">18 - Flooring</option>
+                <option value="19">19 - Fencing</option>
+                <option value="20">20 - Landscaping</option>
+            </select>
+        </div>
       <div><label class="control-label">Equipment:</label>
       <input type="text" ng-model="p.name" class="form-control m-b" value="{{p.name}}"></div>
       <div><label class="control-label">Description:</label>
       <input type="text" ng-model="p.description" class="form-control m-b" value="{{p.description}}"></div>
+      <div><label class="control-label">Price:</label>
+      <input type="text" ng-model="p.price" class="form-control m-b" value="{{p.price}}" my-currency></div>
+      <div><label class="control-label">Delivery Price:</label>
+      <input type="text" ng-model="p.delivery_price" class="form-control m-b" value="{{p.delivery_price}}" my-currency></div>
   		<div><label class="control-label">Delivery Offset:</label>
       	<select data-ng-model="p.delivery_offset" class="form-control m-b">
       		<option value="Two Days Prior">Two Days Prior</option>

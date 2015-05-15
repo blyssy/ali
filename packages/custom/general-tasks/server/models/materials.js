@@ -12,6 +12,9 @@ var MaterialSchema = new Schema({
     description: {
         type: String
     },
+    trade: {
+        type: String
+    },
     price_per_unit: {
         type: Number
     },

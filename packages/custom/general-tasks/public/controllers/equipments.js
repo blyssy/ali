@@ -70,5 +70,72 @@ angular.module('mean.general-tasks').controller('EquipmentsController', ['$scope
         $scope.setEquipmentsEditId =  function(pid) {
             $scope.equipmentsEditId = pid;
         };
+
+        $scope.getTradeName = function(id) {
+            var tradeText = '';
+            switch(id){
+                case '01':
+                  tradeText = 'Concrete';
+                  break;
+                case '02':
+                  tradeText = 'Plumbing';
+                  break;
+                case '03':
+                  tradeText = 'Grader';
+                  break;
+                case '04':
+                  tradeText = 'Framer';
+                  break;
+                case '05':
+                  tradeText = 'Drywall';
+                  break;
+                case '06':
+                  tradeText = 'Roofer';
+                  break;
+                case '07':
+                  tradeText = 'HVAC';
+                  break;
+                case '08':
+                  tradeText = 'Stucco';
+                  break;
+                case '09':
+                  tradeText = 'Electrician';
+                  break;
+                case '10':
+                  tradeText = 'Unused';
+                  break;
+                case '11':
+                  tradeText = 'Fire Sprinkler';
+                  break;
+                case '12':
+                  tradeText = 'Insulation';
+                  break;
+                case '13':
+                  tradeText = 'Painter';
+                  break;
+                case '14':
+                  tradeText = 'Cabinets';
+                  break;
+                case '15':
+                  tradeText = 'Masonry';
+                  break;
+                case '16':
+                  tradeText = 'Finish Trim';
+                  break;
+                case '17':
+                  tradeText = 'Tile';
+                  break;
+                case '18':
+                  tradeText = 'Flooring';
+                  break;
+                case '19':
+                  tradeText = 'Fencing';
+                  break;
+                case '20':
+                  tradeText = 'Lanscaping';
+                  break;
+            }
+            return tradeText;
+        };
     }
 ]);
