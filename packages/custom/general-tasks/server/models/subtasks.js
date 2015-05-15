@@ -23,6 +23,15 @@ var SubtaskSchema = new Schema({
         type: String,
         required: true
     },
+    piece_rate: {
+        type: Number
+    },
+    crew_rate: {
+        type: Number
+    },
+    piece_per_hour_rate: {
+        type: Number
+    },
     materials: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Material'

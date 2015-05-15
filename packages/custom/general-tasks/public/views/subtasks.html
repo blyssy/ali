@@ -19,11 +19,8 @@
                 <h5>Add A Sub Task</h5>
             </div>
             <div class="ibox-content">
-                <form name="addSubtaskForm" data-ng-submit="add()">
+                <form name="addSubtaskForm" data-ng-submit="add()" class="form-horizontal">
                     <div class="form-group">
-                        <!-- <div class="col-sm-2">
-                            <input type="text" class="form-control m-b" data-ng-model="subtask_code" placeholder="Code" />
-                        </div> -->
                         <div class="col-sm-2">
                             <select class="form-control m-b" data-ng-model="subtask_trade">
                                 <option value="" disabled selected>Trade</option>
@@ -81,16 +78,30 @@
                             </select>
                             <!-- <input type="text" data-ng-model="subtask" placeholder="Task#" /> -->
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-8">
                             <input type="text" class="form-control m-b" data-ng-model="subtask_name" placeholder="Subtask Name" />
                         </div>
                     </div>
-
-                        <button class="btn btn-primary " type="submit">
-                            <i class="fa fa-check"></i>
-                              Add
-                        </button>
-                    
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control m-b" data-ng-model="piece_rate" placeholder="Piece Rate" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control m-b" data-ng-model="crew_rate" placeholder="Crew Rate" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control m-b" data-ng-model="piece_per_hour_rate" placeholder="Piece/Hour (if known)" />
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-6">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fa fa-check"></i>
+                                  Add
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -108,10 +119,13 @@
                 <table ng-table="subtaskTableParams" class="table">
                     <tbody ng-repeat="p in $data">
                     <tr id="tr{{p._id}}">
-                        <td class="rowTd" data-title="'Subtask Code'" sortable="'subtask_code'">{{p.subtask_code}}</td>
+                        <td class="rowTd" data-title="'Code'" sortable="'subtask_code'">{{p.subtask_code}}</td>
                         <td class="rowTd" data-title="'Trade'" sortable="'subtask_trade'">{{p.subtask_trade}} - {{getTradeName(p.subtask_trade)}}</td>
                         <td class="rowTd" data-title="'Task'" sortable="'subtask'">{{p.subtask}}</td>
                         <td class="rowTd" data-title="'Subtask Name'" sortable="'subtask_name'">{{p.subtask_name}}</td>
+                        <td class="rowTd" data-title="'Piece Rate'" sortable="'piece_rate'">{{p.piece_rate}}</td>
+                        <td class="rowTd" data-title="'Crew Rate'" sortable="'crew_rate'">{{p.crew_rate | currency}}</td>
+                        <td class="rowTd" data-title="'Piece/Hour'" sortable="'piece_per_hour_rate'">{{p.piece_per_hour_rate}}</td>
                         <td class="rowTd" >
                             <button class="btn btn-primary dim" type="button" ng-click="setEditSubId(p._id)"><i class="fa fa-edit"></i> Edit</button>
                         </td>
