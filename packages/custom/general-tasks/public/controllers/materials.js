@@ -37,6 +37,10 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
             var material = new Materials({
                 name: $scope.name,
                 description: $scope.description,
+                trade: $scope.trade,
+                units_per_order: $scope.units_per_order,
+                price_per_order: $scope.price_per_order,
+                delivery_price: $scope.delivery_price,
                 unit: $scope.unit._id,
                 delivery_offset: $scope.delivery_offset
             });
@@ -66,9 +70,13 @@ angular.module('mean.general-tasks').controller('MaterialsController', ['$scope'
         };
 
         $scope.update = function(material, materialField) {
-            console.log('in the update function');
-            material.$update();
-            $scope.materialsEditId = -1;
+          //material.unit = material.unit._id;
+            //console.log('in the update function' + material.unit);
+          material.$update();
+          $scope.materialsEditId = -1;
+          var data = $scope.materials;
+          $scope.tableMaterialsParams.total(data.length);
+          $scope.tableMaterialsParams.reload();
         };
 
         $scope.setMaterialsEditId =  function(pid) {

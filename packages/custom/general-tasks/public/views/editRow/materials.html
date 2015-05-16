@@ -42,13 +42,15 @@
       <input type="text" ng-model="p.name" class="form-control m-b" value="{{p.name}}"></div>
       <div><label class="control-label">Description:</label>
       <input type="text" ng-model="p.description" class="form-control m-b" value="{{p.description}}"></div>
-      <div><label class="control-label">Price/Unit:</label>
-      <input type="text" ng-model="p.price_per_unit" class="form-control m-b" value="{{p.price_per_unit}}" my-currency></div>
       <div><label class="control-label">Units:</label>
-      	<select data-ng-model="p.unit" class="form-control m-b" 
+        <select data-ng-model="p.unit" class="form-control m-b" 
                    ng-options="obj as obj.unit for obj in units">
         </select>
       </div>
+      <div><label class="control-label">Units/Order:</label>
+      <input type="text" ng-model="p.units_per_order" class="form-control m-b" value="{{p.units_per_order}}" my-currency></div>
+      <div><label class="control-label">Price/Order:</label>
+      <input type="text" ng-model="p.price_per_order" class="form-control m-b" value="{{p.price_per_order}}" my-currency></div>
       <div><label class="control-label">Delivery Price:</label>
       <input type="text" ng-model="p.delivery_price" class="form-control m-b" value="{{p.delivery_price}}" my-currency></div>
       <div><label class="control-label">Delivery Offset:</label>

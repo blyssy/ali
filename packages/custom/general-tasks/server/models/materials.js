@@ -15,7 +15,10 @@ var MaterialSchema = new Schema({
     trade: {
         type: String
     },
-    price_per_unit: {
+    units_per_order: {
+        type: Number
+    },
+    price_per_order: {
         type: Number
     },
     delivery_price: {

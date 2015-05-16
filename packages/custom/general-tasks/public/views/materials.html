@@ -52,14 +52,18 @@
                                 </select>
                             </span>
                             <span class="col-sm-2">
-                                <input type="text" data-ng-model="price_per_unit" placeholder="Price/Unit" class="form-control m-b"/>
-                            </span>
-                            <span class="col-sm-2">
                                 <select ng-model="unit" class="form-control m-b" 
                                     ng-options="obj.unit for obj in units track by obj._id">
                                     <option value="" disabled selected>Unit of Measure</option>
                                 </select>
                             </span>
+                            <span class="col-sm-2">
+                                <input type="text" data-ng-model="units_per_order" placeholder="Units/Order" class="form-control m-b"/>
+                            </span>
+                            <span class="col-sm-2">
+                                <input type="text" data-ng-model="price_per_order" placeholder="Price/Order" class="form-control m-b"/>
+                            </span>
+                            
                             <span class="col-sm-2">
                                 <input type="text" data-ng-model="delivery_price" placeholder="Delivery Price" class="form-control m-b"/>
                             </span>
@@ -100,8 +104,9 @@
                             <td class="col-lg-1" data-title="'Trade'" sortable="'trade'">{{p.trade}} - {{getTradeName(p.trade)}}</td>
                             <td class="col-lg-3" data-title="'Name'" sortable="'name'">{{p.name}}</td>
                             <td class="col-lg-3" data-title="'Description'" sortable="'description'">{{p.description}}</td>
-                            <td class="col-sm-1" data-title="'Price/Unit'" sortable="'price_per_unit'">{{p.price_per_unit|currency}}</td>
-                            <td class="col-sm-1" data-title="'Units'" sortable="'unit'">{{p.unit.unit}}</td>
+                            <td class="col-sm-1" data-title="'Units'" sortable="'unit.unit'">{{p.unit.unit}}</td>
+                            <td class="col-sm-1" data-title="'Units/Order'" sortable="'units_per_order'">{{p.units_per_order}}</td>
+                            <td class="col-sm-1" data-title="'Price/Order'" sortable="'price_per_order'">{{p.price_per_order|currency}}</td>
                             <td class="col-sm-1" data-title="'Delivery Price'" sortable="'delivery_price'">{{p.delivery_price|currency}}</td>
                             <td class="col-sm-1" data-title="'Days Offset'" sortable="'delivery_offset'">{{p.delivery_offset}}</td>
                             <td class="col-lg-1" >

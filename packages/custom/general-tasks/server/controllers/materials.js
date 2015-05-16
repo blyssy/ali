@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Material = mongoose.model('Material'),
-    //Unit = mongoose.model('Unit'),
+    Unit = mongoose.model('Unit'),
     _ = require('lodash');
 
 //material = _.extend(material, req.body);
@@ -56,14 +56,25 @@ exports.update = function(req, res) {
     var material = req.material;
     material = _.extend(material, req.body);
 
-    console.log('in the mat update function');
+    if(!material.unit){
+        console.log('material.unit does not exist...setting to ' + req.body.unit);
+        material.unit = new Unit(req.body.unit);
+        //material.unit = mongoose.Types.ObjectId(req.body.unit._id);
+        material.unit = {
+           _id: req.body.unit._id,
+           unit: req.body.unit.unit
+        };
+    }
+
+    console.log('in the mat update function ');
+    console.log(material);
 
     material.save(function(err) {
         if (err) {
             return res.status(500).json({
                 error: 'Cannot save the material of measure'
             });
-        }
+        } 
 
         res.json(material);
     });
