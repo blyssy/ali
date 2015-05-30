@@ -51,7 +51,10 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                 subtask_code: $scope.subtask_code,
                 subtask_trade: $scope.subtask_trade,
                 subtask: $scope.subtask,
-                subtask_name: $scope.subtask_name
+                subtask_name: $scope.subtask_name,
+                piece_rate: $scope.piece_rate,
+                crew_rate: $scope.crew_rate,
+                piece_per_hour_rate: $scope.piece_per_hour_rate
             });
 
             subtask.$save(function(response) {
@@ -62,7 +65,13 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                 $scope.subtaskTableParams.reload();
             });
 
-            this.subtask_code = this.subtask_trade = this.subtask = this.subtask_name = '';
+            this.subtask_code = 
+            this.subtask_trade = 
+            this.subtask = 
+            this.subtask_name = 
+            this.piece_rate =
+            this.crew_rate = 
+            this.piece_per_hour_rate = '';
         };
 
         $scope.addNewMaterial = function(subtask, material) {
@@ -73,6 +82,9 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                 subtask_trade: subtask.subtask_trade,
                 subtask: subtask.subtask,
                 subtask_name: subtask.subtask_name,
+                piece_rate: subtask.piece_rate,
+                crew_rate: subtask.crew_rate,
+                piece_per_hour_rate: subtask.piece_per_hour_rate,
                 materials: subtask.materials,
                 equipment: subtask.equipment
             });
@@ -95,6 +107,9 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                 subtask_trade: subtask.subtask_trade,
                 subtask: subtask.subtask,
                 subtask_name: subtask.subtask_name,
+                piece_rate: subtask.piece_rate,
+                crew_rate: subtask.crew_rate,
+                piece_per_hour_rate: subtask.piece_per_hour_rate,
                 materials: subtask.materials,
                 equipment: subtask.equipment
             });

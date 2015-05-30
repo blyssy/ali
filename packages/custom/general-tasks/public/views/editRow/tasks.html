@@ -83,7 +83,7 @@
                     </tbody>
                 </table>
                 <select data-ng-model="p.materials_list" class="form-control m-b" 
-                           ng-options="obj as obj.name for obj in materials_list">
+                           ng-options="obj as obj.name for obj in materials_list | filter:{ trade: p.trade }">
                            <option value="" disabled selected>Select Material Type</option>
                 </select>
                 <button class="btn btn-primary" type="submit" ng-click="addNewMaterial(p, p.materials_list)">
@@ -111,7 +111,7 @@
                     </tbody>
                 </table>
                 <select data-ng-model="p.equipments_list" class="form-control m-b" 
-                           ng-options="obj as obj.name for obj in equipments_list">
+                           ng-options="obj as obj.name for obj in equipments_list | filter:{ trade: p.trade }">
                            <option value="" disabled selected>Select Equipment Type</option>
                 </select>
                 <button class="btn btn-primary" type="submit" ng-click="addNewEquipment(p, p.equipments_list)">
