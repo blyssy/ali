@@ -94,6 +94,10 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
                                 name: mat.name,
                                 description: mat.description,
                                 unit: mat.unit.unit,
+                                trade: mat.trade,
+                                units_per_order: mat.units_per_order,
+                                price_per_order: mat.price_per_order,
+                                delivery_price: mat.delivery_price,
                                 delivery_offset: mat.delivery_offset
                             });
                             material_index = material_index + 1;
@@ -109,6 +113,9 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
                                 _id: equipment_index,
                                 name: equip.name,
                                 description: equip.description,
+                                trade: equip.trade,
+                                price: equip.price,
+                                delivery_price: equip.delivery_price,
                                 delivery_offset: equip.delivery_offset
                             });
                             equipment_index = equipment_index + 1;
@@ -122,9 +129,13 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
                     if(task.task_code === subtask.subtask_code) {
                         $scope.selectedItem.task_list[index].subtasks.push({
                             _id: subtask_index,
+                            code: subtask.subtask_code,
                             trade: subtask.subtask_trade,
                             task: subtask.subtask,
                             name: subtask.subtask_name,
+                            piece_rate: subtask.piece_rate,
+                            crew_rate: subtask.crew_rate,
+                            piece_per_hour_rate: subtask.piece_per_hour_rate,
                             materials: [],
                             equipment: []
                         });
@@ -138,6 +149,10 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
                                         name: mat.name,
                                         description: mat.description,
                                         unit: mat.unit.unit,
+                                        trade: mat.trade,
+                                        units_per_order: mat.units_per_order,
+                                        price_per_order: mat.price_per_order,
+                                        delivery_price: mat.delivery_price,
                                         delivery_offset: mat.delivery_offset
                                     });
                                     material_index = material_index + 1;
@@ -153,6 +168,9 @@ angular.module('mean.bids').controller('WizardController', ['$scope', 'Global', 
                                         _id: equipment_index,
                                         name: equip.name,
                                         description: equip.description,
+                                        trade: equip.trade,
+                                        price: equip.price,
+                                        delivery_price: equip.delivery_price,
                                         delivery_offset: equip.delivery_offset
                                     });
                                     equipment_index = equipment_index + 1;

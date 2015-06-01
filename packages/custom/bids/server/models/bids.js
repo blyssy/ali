@@ -212,6 +212,18 @@ var BidSchema = new Schema({
             unit: {
                 type: String
             },
+            trade: {
+                type: String
+            },
+            units_per_order: {
+                type: Number
+            },
+            price_per_order: {
+                type: Number
+            },
+            delivery_price: {
+                type: Number
+            },
             delivery_offset: {
                 type: String
             }
@@ -226,6 +238,15 @@ var BidSchema = new Schema({
             description: {
                 type: String
             },
+            trade: {
+                type: String
+            },
+            price: {
+                type: Number
+            },
+            delivery_price: {
+                type: Number
+            },
             delivery_offset: {
                 type: String
             }
@@ -233,6 +254,9 @@ var BidSchema = new Schema({
         subtasks: [{
             _id: {
                 type: Number
+            },
+            code: {
+                type: String
             },
             trade: {
                 type: String
@@ -242,6 +266,15 @@ var BidSchema = new Schema({
             },
             name: {
                 type: String
+            },
+            piece_rate: {
+                type: Number
+            },
+            crew_rate: {
+                type: Number
+            },
+            piece_per_hour_rate: {
+                type: Number
             },
             materials: [{
                 _id: {
@@ -256,6 +289,18 @@ var BidSchema = new Schema({
                 unit: {
                     type: String
                 },
+                trade: {
+                    type: String
+                },
+                units_per_order: {
+                    type: Number
+                },
+                price_per_order: {
+                    type: Number
+                },
+                delivery_price: {
+                    type: Number
+                },
                 delivery_offset: {
                     type: String
                 }
@@ -269,6 +314,15 @@ var BidSchema = new Schema({
                 },
                 description: {
                     type: String
+                },
+                trade: {
+                    type: String
+                },
+                price: {
+                    type: Number
+                },
+                delivery_price: {
+                    type: Number
                 },
                 delivery_offset: {
                     type: String
