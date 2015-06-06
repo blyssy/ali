@@ -43,18 +43,29 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     	var current_bid_index = 0;
 
     	Users.get({ userId: $scope.global.user._id}, function(user) {
+            $scope.my_bid_trade = $scope.getTradeCode(user.trade[0]);
 	    	$scope.bid.task_list.forEach(function(task, index){
-	    		var code = $scope.getTradeCode(user.trade[0]);
+	    		var code = $scope.my_bid_trade;
 	    		//console.log('code value ' + code + ' task code value ' + task.trade);
 	    		if( task.trade === code ){
 	    			bid_tasks.push(task);
 	    			$scope.bid.bidding_trades.forEach(function(bid, ii){
 	    				if(bid.trade === user.trade[0]) {
+                            //need to get bid_hours and quantities for each bid menu
+                            //start with a basic
+
+                            //bid_tasks[current_bid_index].subtasks[0].quantity = 100; //bid.bid[0].subtasks[0].quantity;
+                            //bid_tasks[current_bid_index].subtasks[0].bid_hours = 23; //bid.bid[0].subtasks[0].bid_hours;
+                            bid_tasks[current_bid_index].subtasks.forEach(function(subtask, idx){
+                                subtask.quantity = idx + 100;
+                                subtask.bid_hours = idx + 10;
+                            });
 	    					console.log('this is where we need to add to the list for actual bid numbers ' + code);
 	    					//dummy values for now.  need to pull from the first bid index for the bidder
 	    					bid_tasks[current_bid_index].task_labor = index;
 	    					bid_tasks[current_bid_index].task_equipment = index;
 	    					bid_tasks[current_bid_index].task_material = index;
+
 	    					current_bid_index = current_bid_index + 1;
 	    				}
 	    			});
@@ -67,7 +78,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
 	    	var data = bid_tasks;
 	        $scope.bidTasksTableParams = new NGTableParams({
 	            page: 1,
-	            count: 10
+	            count: 100
 	        },{
 	            total: data.length,
 	            getData: function($defer, params) {
@@ -85,6 +96,21 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
 
     $scope.setTaskEditId =  function(pid) {
         $scope.taskEditId = pid;
+    };
+
+    $scope.next =  function(pid) {
+        //pid -1 is the index of the current task so lets just start with the next task and iterate
+        var current_task_idx = pid;
+        for(; current_task_idx < $scope.bid.task_list.length; current_task_idx = current_task_idx + 1) {
+            if($scope.bid.task_list[current_task_idx].trade === $scope.my_bid_trade) {
+                $scope.taskEditId = $scope.bid.task_list[current_task_idx]._id;
+                break;
+            }
+        }
+    };
+
+    $scope.update = function(item) {
+        console.log('this is where we save to the individuals bid information' + $scope);
     };
 
     $scope.getTradeCode = function(trade) {

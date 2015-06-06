@@ -161,25 +161,75 @@ var BidSchema = new Schema({
             labor: {
                 type: String
             },
-            equipment: {
-                type: String
-            },
-            material: {
-                type: String
-            },
+            equipment: [{
+                equipment_id: {
+                    type: Number
+                },
+                quantity: {
+                    type: Number
+                },
+                price_per_order: {
+                    type: Number
+                },
+                delivery_price: {
+                    type: Number
+                }
+            }],
+            material: [{
+                material_id: {
+                    type: Number
+                },
+                quantity: {
+                    type: Number
+                },
+                price_per_order: {
+                    type: Number
+                },
+                delivery_price: {
+                    type: Number
+                }
+            }],
             subtasks: [{
                 task_id: {
+                    type: Number
+                },
+                quantity: {
+                    type: Number
+                },
+                bid_hours: {
                     type: Number
                 },
                 labor: {
                     type: String
                 },
-                equipment: {
-                    type: String
-                },
-                material: {
-                    type: String
-                }
+                equipment: [{
+                    equipment_id: {
+                        type: Number
+                    },
+                    quantity: {
+                        type: Number
+                    },
+                    price_per_order: {
+                        type: Number
+                    },
+                    delivery_price: {
+                        type: Number
+                    }
+                }],
+                material: [{
+                    material_id: {
+                        type: Number
+                    },
+                    quantity: {
+                        type: Number
+                    },
+                    price_per_order: {
+                        type: Number
+                    },
+                    delivery_price: {
+                        type: Number
+                    }
+                }]
             }]
         }]
     }],

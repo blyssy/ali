@@ -1,6 +1,6 @@
 <div class="ibox-content">
 	<div class="well">      
-      <div><h4 class="control-label">Plan Task Totals:</h4>
+      <div><h3 class="control-label">Plan Task Totals:</h3>
       	<div class="row">
 	      	<div class="col-md-2">
 	      	  <label>Labor</label>
@@ -15,43 +15,172 @@
 		      <label>Subtasks</label>
 		      <input type="text" ng-model="p.subtasks" class="form-control m-b" value="{{p.subtasks}}">
 		    </div>
-		</div>
+		</div><hr>
+		<div data-ng-if="p.subtasks.length"><h3 class="control-label">Sub Tasks:</h3></div>
 		<div class="row">
-			<div data-ng-if="p.materials.length">
-				<div ng-repeat="item in p.materials">
-					<!-- <div class="row"> -->
-					<h4>{{item.name}}</h4>
+			<div data-ng-if="p.subtasks.length">
+				<div ng-repeat="item in p.subtasks">
+					<h4>{{item.name}} - {{item.code}}</h4>
 					<div class="col-md-2">
 						<label>Quantity</label>
 						<input type="text" ng-model="item.quantity" class="form-control m-b" value="{{item.quantity}}">
 					</div>
 					<div class="col-md-2">
-						<label>Units</label>
-						<input type="text" ng-model="item.unit" class="form-control m-b" value="{{item.unit}}" disabled>
+						<label>Piece Rate</label>
+						<input type="text" ng-model="item.piece_rate" class="form-control m-b" value="{{item.piece_rate}}" disabled>
 					</div>
 					<div class="col-md-2">
-						<label>Units Per Order</label>
-						<input type="text" ng-model="item.units_per_order" class="form-control m-b" value="{{item.units_per_order}}" disabled>
+						<label>Crew Rate</label>
+						<input type="text" ng-model="item.crew_rate" class="form-control m-b" value="{{item.crew_rate}}" disabled>
 					</div>
+					<!-- <div class="col-md-2">
+						<label>Piece/Hour Rate</label>
+						<input type="text" ng-model="item.piece_per_hour_rate" class="form-control m-b" value="{{item.piece_per_hour_rate}}">
+					</div> -->
 					<div class="col-md-2">
-						<label>Price Per Order</label>
-						<span class="form-control m-b">{{item.price_per_order}}</span>
+						<label>Hours Bid</label>
+						<input type="text" ng-model="item.bid_hours" class="form-control m-b" value="{{item.bid_hours}}">
+						<!-- <input type="text" ng-model="item.hours_bid" class="form-control m-b" value="{{item.quantity*(item.piece_rate/item.piece_per_hour_rate)}}"> -->
 					</div>
 					<div class="col-md-2">
 						<label>Total</label>
-						<span class="form-control m-b">{{(item.quantity/item.units_per_order)*item.price_per_order | currency}}</span>
+						<span class="form-control m-b" disabled>{{item.quantity*item.crew_rate | currency}}</span>
 					</div>
+
 					<br><br><br><br>
-					<!-- </div> -->
+					
+					<div data-ng-if="item.materials.length">
+						<div class="ibox-content">
+							<div class="row">
+								<div class="well well-lg"><h3 class="control-label">{{item.name}} Materials:</h3>
+									<div ng-repeat="mat in item.materials">
+										<h4>{{mat.name}} - {{mat.description}}</h4>
+										<div class="col-md-2">
+											<label class="control-label">Quantity</label>
+											<input type="text" ng-model="mat.quantity" class="form-control m-b" value="{{mat.quantity}}">
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Measurement</label>
+											<input type="text" ng-model="mat.unit" class="form-control m-b" value="{{mat.unit}}" disabled>
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Units/Order</label>
+											<input type="text" ng-model="mat.units_per_order" class="form-control m-b" value="{{mat.units_per_order}}" disabled>
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Price/Order</label>
+											<span ng-model="mat.price_per_order" class="form-control m-b" disabled>{{mat.price_per_order | currency}}</span>
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Delivery Price</label>
+											<span class="form-control m-b" disabled>{{mat.delivery_price | currency}}</span>
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Mat. Total</label>
+											<span class="form-control m-b" disabled>{{mat.quantity*mat.price_per_order | currency}}
+										</div>
+										<div class="row"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br><br><br><br>
+					<div data-ng-if="item.equipment.length">
+						<div class="ibox-content">
+							<div class="row">
+								<div class="well well-lg"><h3 class="control-label">{{item.name}} Equipment:</h3>
+									<div ng-repeat="equip in item.equipment">
+										<h4>{{equip.name}} - {{equip.description}}</h4>
+										<div class="col-md-2">
+											<label class="control-label">Quantity</label>
+											<input type="text" ng-model="equip.quantity" class="form-control m-b" value="{{equip.quantity}}">
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Price</label>
+											<span ng-model="equip.price" class="form-control m-b" disabled>{{equip.price | currency}}</span>
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Delivery Price</label>
+											<span class="form-control m-b" disabled>{{equip.delivery_price | currency}}</span>
+										</div>
+										<div class="col-md-2">
+											<label class="control-label">Equip. Total</label>
+											<span class="form-control m-b" disabled>{{equip.quantity*equip.price | currency}}
+										</div>
+										<div class="row"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br><br><br><br>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div data-ng-if="p.subtasks.length">
-				<div ng-repeat="item in p.subtasks">
-					<h4>{{item.name}}</h4>
-					<label>Labor</label>
-					<input type="text" ng-model="item.labor" class="form-control m-b" value="{{item.labor}}">
+
+		<!-- <hr><br><br><br> -->
+		
+		<div data-ng-if="p.materials.length">
+			<div class="ibox-content">
+				<div class="well"><h3 class="control-label">Task Materials:</h3>
+					<div class="row">
+						<div ng-repeat="item in p.materials">
+							<h4>{{item.name}}</h4>
+							<div class="col-md-2">
+								<label>Quantity</label>
+								<input type="text" ng-model="item.quantity" class="form-control m-b" value="{{item.quantity}}">
+							</div>
+							<div class="col-md-2">
+								<label>Measurement</label>
+								<input type="text" ng-model="item.unit" class="form-control m-b" value="{{item.unit}}" disabled>
+							</div>
+							<div class="col-md-2">
+								<label>Units Per Order</label>
+								<input type="text" ng-model="item.units_per_order" class="form-control m-b" value="{{item.units_per_order}}" disabled>
+							</div>
+							<div class="col-md-2">
+								<label>Price Per Order</label>
+								<span class="form-control m-b" disabled>{{item.price_per_order}}</span>
+							</div>
+							<div class="col-md-2">
+								<label>Delivery Price</label>
+								<span class="form-control m-b" disabled>{{item.delivery_price | currency}}</span>
+							</div>
+							<div class="col-md-2">
+								<label>Total</label>
+								<span class="form-control m-b" disabled>{{item.quantity*item.price_per_order | currency}}</span>
+							</div>
+							<br><br><br><br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div data-ng-if="p.equipment.length">
+			<div class="ibox-content">
+				<div class="well"><h3 class="control-label">Task Equipment:</h3>
+					<div class="row">
+						<div ng-repeat="equip in p.equipment">
+							<h4>{{equip.name}} - {{equip.description}}</h4>
+							<div class="col-md-2">
+								<label class="control-label">Quantity</label>
+								<input type="text" ng-model="equip.quantity" class="form-control m-b" value="{{equip.quantity}}">
+							</div>
+							<div class="col-md-2">
+								<label class="control-label">Price</label>
+								<span ng-model="equip.price" class="form-control m-b" disabled>{{equip.price | currency}}</span>
+							</div>
+							<div class="col-md-2">
+								<label class="control-label">Delivery Price</label>
+								<span class="form-control m-b" disabled>{{equip.delivery_price | currency}}</span>
+							</div>
+							<div class="col-md-2">
+								<label class="control-label">Equip. Total</label>
+								<span class="form-control m-b" disabled>{{equip.quantity*equip.price | currency}}
+							</div>
+							<div class="row"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -59,7 +188,8 @@
   
       <div class="pull-right">
       	<button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i> Save</button>
-      	<button class="btn btn-primary dim" type="button" ng-click="setUnitsEditId(-1)"><i class="fa fa-times"></i> Cancel</button>
+      	<button class="btn btn-primary dim" type="button" ng-click="next(p._id)"><i class="fa fa-arrow-circle-o-right"></i> Next</button>
+      	<button class="btn btn-primary dim" type="button" ng-click="setTaskEditId(-1)"><i class="fa fa-times"></i> Close</button>
       </div>
 	</div>
 </div>
