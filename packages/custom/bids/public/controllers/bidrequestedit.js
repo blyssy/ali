@@ -46,7 +46,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
 	    	$scope.bid.task_list.forEach(function(task, index){
 	    		if( task.trade === $scope.my_bid_trade){
 	    			$scope.bid.bidding_trades.forEach(function(bidder, ii){
-	    				if(bidder.trade === user.trade[0]) {
+	    				if(bidder.trade === user.trade[ii]) {
                             //need to get bid_hours, quantities, etc... for each bid menu
                             //make sure the plan and task id's match up.
                             bidder.bid.forEach(function(bid, ii) {
@@ -135,8 +135,146 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
 	    });
     };
 
+    $scope.updateTablePlan = function() {
+        var new_bid_tasks = [];
+
+        //already know this users bid trade
+        $scope.bid.task_list.forEach(function(task, index){
+            if( task.trade === $scope.my_bid_trade){
+                $scope.bid.bidding_trades.forEach(function(bidder, ii){
+                    if($scope.getTradeCode(bidder.trade) === task.trade) {
+                        //need to get bid_hours, quantities, etc... for each bid menu
+                        //make sure the plan and task id's match up.
+                        bidder.bid.forEach(function(bid, ii) {
+                            
+                            if(bid.task_id === task._id) {
+                                if(bid.plan_code === $scope.current_plan.item) {
+                                    //console.log('task %s (plan %s) is updating for plan %s', task.name, bid.plan_code, $scope.current_plan.item);
+                                    
+                                    bid.equipment.forEach(function(eq, eidx) {
+                                        task.equipment.forEach(function(teq, teidx) {
+                                            if(eq.equipment_id === teq._id) {
+                                                teq.quantity = eq.quantity;
+                                                if(eq.price_per_order)
+                                                  teq.price_per_order = eq.price_per_order;
+                                                if(eq.delivery_price)
+                                                  teq.delivery_price = eq.delivery_price;
+                                            }
+                                        });
+                                    });
+                                    bid.materials.forEach(function(mq, midx) {
+                                        task.materials.forEach(function(tmq, tmidx) {
+                                            if(mq.material_id === tmq._id) {
+                                                tmq.quantity = mq.quantity;
+                                                if(mq.price_per_order)
+                                                  tmq.price_per_order = mq.price_per_order;
+                                                if(mq.delivery_price)
+                                                  tmq.delivery_price = mq.delivery_price;
+                                            }
+                                        });
+                                    });
+                                    bid.subtasks.forEach(function(subtask, si) {
+                                        task.subtasks.forEach(function(tsub, tsi) {
+                                            if(subtask.task_id === tsub._id) {
+                                                tsub.quantity = subtask.quantity;
+                                                tsub.bid_hours = subtask.bid_hours;
+                                                tsub.labor = subtask.labor;
+
+                                                subtask.equipment.forEach(function(seq, sei) {
+                                                    tsub.equipment.forEach(function(tseq, tsei) {
+                                                        if(seq.equipment_id === tseq._id){
+                                                            tseq.quantity = seq.quantity;
+                                                            if(seq.price_per_order)
+                                                              tseq.price_per_order = seq.price_per_order;
+                                                            if(seq.delivery_price)
+                                                              tseq.delivery_price = seq.delivery_price;
+                                                        }
+                                                    });
+                                                });
+                                                subtask.materials.forEach(function(smq, smi) {
+                                                    tsub.materials.forEach(function(tsmq, tsmi) {
+                                                        if(smq.material_id === tsmq._id){
+                                                            tsmq.quantity = smq.quantity;
+                                                            if(smq.price_per_order)
+                                                              tsmq.price_per_order = smq.price_per_order;
+                                                            if(smq.delivery_price)
+                                                              tsmq.delivery_price = smq.delivery_price;
+                                                        }
+                                                    });
+                                                });
+                                            }
+                                        });
+                                    });
+                                } else {
+                                    //this bid does not match the current plan but it matches the task.
+                                    //we need to see if there is a plan/bid for this task.
+                                    //if there is we need to leave it alone, if there is not
+                                    //then we should clear it out.
+                                    var bid_found = false;
+                                    for(var i=0; i<bidder.bid.length; i=i+1){
+                                        if(bidder.bid[i].task_id === task._id &&
+                                            bidder.bid[i].plan_code === $scope.current_plan.item)
+                                          bid_found = true;
+                                    }
+
+                                    if(!bid_found){
+                                        //console.log('task %s (plan %s) is clearing data for plan %s', task.name, bid.plan_code, $scope.current_plan.item);
+                                        task.equipment.forEach(function(mat){
+                                            mat.quantity = '';
+                                        });
+                                        task.materials.forEach(function(eq) {
+                                            eq.quantity = '';
+                                        });
+                                        task.subtasks.forEach(function(sub) {
+                                            sub.quantity = '';
+                                            sub.bid_hours = '';
+                                            sub.materials.forEach(function(smat) {
+                                                smat.quantity = '';
+                                            });
+                                            sub.equipment.forEach(function(seq) {
+                                                seq.quantity = '';
+                                            });
+                                        });
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+                });
+
+                new_bid_tasks.push(task);
+            }
+        });
+
+        $scope.bid_total = '2000';
+        $scope.bid_direct_labor = '900';
+
+        //$scope.current_table_data = [];
+
+        //$scope.current_table_data = new_bid_tasks;
+
+        var data = new_bid_tasks;
+        $scope.bidTasksTableParams = new NGTableParams({
+            page: 1,
+            count: 100
+        },{
+            total: data.length,
+            counts: [], //remove the pagination controller
+            getData: function($defer, params) {
+                params.total(data.length);
+                var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+        });
+
+
+        $scope.bidTasksTableParams.reload();
+    };
+
     $scope.onSelect = function() {
-    	console.log('in the onSelect function ' + $scope.current_plan.item);
+    	//console.log('in the onSelect function ' + $scope.current_plan.item);
+        $scope.updateTablePlan();
     };
 
     $scope.setTaskEditId =  function(pid) {
@@ -163,63 +301,65 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 var updated = false;
                 trade.bid.forEach(function(bid, bi) {
                     if(bid.task_id === item._id){
-                        //found the task.  update with new info
-                        updated = true;
-                        bid.labor = item.labor;
+                        if(bid.plan_code === $scope.current_plan.item) {
+                            //found the task.  update with new info
+                            updated = true;
+                            bid.labor = item.labor;
 
-                        bid.materials = [];
-                        item.materials.forEach(function(tmat,tmi) {
-                            bid.materials.push({
-                                material_id: tmat._id,
-                                quantity: tmat.quantity,
-                                price_per_order: tmat.price_per_order,
-                                delivery_price: tmat.delivery_price,
-                            });
-                        });
-
-                        bid.equipment = [];
-                        item.equipment.forEach(function(teqt, tei) {
-                            bid.equipment.push({
-                                equipment_id: teqt._id,
-                                quantity: teqt.quantity,
-                                price_per_order: teqt.price_per_order,
-                                delivery_price: teqt.delivery_price
-                            });
-                        });
-
-                        bid.subtasks = [];
-                        item.subtasks.forEach(function(tsub, tsi) {
-                            bid.subtasks.push({
-                                task_id: tsub._id,
-                                quantity: tsub.quantity,
-                                bid_hours: tsub.bid_hours,
-                                labor: tsub.labor,
-                                materials: [],
-                                equipment: []
-                            });
-                        });
-
-                        item.subtasks.forEach(function(tsub, tsi) {
-                            bid.subtasks[tsi].materials = [];
-                            tsub.materials.forEach(function(tsmat, tsmi) {
-                                bid.subtasks[tsi].materials.push({
-                                    material_id: tsmat._id,
-                                    quantity: tsmat.quantity,
-                                    price_per_order: tsmat.price_per_order,
-                                    delivery_price: tsmat.delivery_price
+                            bid.materials = [];
+                            item.materials.forEach(function(tmat,tmi) {
+                                bid.materials.push({
+                                    material_id: tmat._id,
+                                    quantity: tmat.quantity,
+                                    price_per_order: tmat.price_per_order,
+                                    delivery_price: tmat.delivery_price,
                                 });
                             });
 
-                            bid.subtasks[tsi].equipment = [];
-                            tsub.equipment.forEach(function(tseq, tsei) {
-                                bid.subtasks[tsi].equipment.push({
-                                    equipment_id: tseq._id,
-                                    quantity: tseq.quantity,
-                                    price_per_order: tseq.price_per_order,
-                                    delivery_price: tseq.delivery_price
+                            bid.equipment = [];
+                            item.equipment.forEach(function(teqt, tei) {
+                                bid.equipment.push({
+                                    equipment_id: teqt._id,
+                                    quantity: teqt.quantity,
+                                    price_per_order: teqt.price_per_order,
+                                    delivery_price: teqt.delivery_price
                                 });
                             });
-                        });
+
+                            bid.subtasks = [];
+                            item.subtasks.forEach(function(tsub, tsi) {
+                                bid.subtasks.push({
+                                    task_id: tsub._id,
+                                    quantity: tsub.quantity,
+                                    bid_hours: tsub.bid_hours,
+                                    labor: tsub.labor,
+                                    materials: [],
+                                    equipment: []
+                                });
+                            });
+
+                            item.subtasks.forEach(function(tsub, tsi) {
+                                bid.subtasks[tsi].materials = [];
+                                tsub.materials.forEach(function(tsmat, tsmi) {
+                                    bid.subtasks[tsi].materials.push({
+                                        material_id: tsmat._id,
+                                        quantity: tsmat.quantity,
+                                        price_per_order: tsmat.price_per_order,
+                                        delivery_price: tsmat.delivery_price
+                                    });
+                                });
+
+                                bid.subtasks[tsi].equipment = [];
+                                tsub.equipment.forEach(function(tseq, tsei) {
+                                    bid.subtasks[tsi].equipment.push({
+                                        equipment_id: tseq._id,
+                                        quantity: tseq.quantity,
+                                        price_per_order: tseq.price_per_order,
+                                        delivery_price: tseq.delivery_price
+                                    });
+                                });
+                            });
+                        }
                     }
                 });
 
@@ -291,171 +431,6 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 $scope.bid.$update();
             }
         });
-
-
-        // $scope.bidTasksTableParams.data.forEach(function(task,idx) {
-        //     //find the item in the list of tasks from the table
-        //     if(task._id === item._id) {
-        //         var updated = false;
-
-        //         $scope.bid.bidding_trades.forEach(function(trade, index){
-        //             //find my trade in the list of bidding trades
-        //             if($scope.getTradeCode(trade.trade) === $scope.my_bid_trade) {
-        //                 //see if any bids exist
-        //                 var i = 0;
-        //                 trade.bid.forEach(function(bid, bi) {
-        //                     //make sure we are updating the proper plan code
-        //                     if(bid.plan_code === $scope.current_plan.item){
-        //                         //do we have this task stored in the bid array
-        //                         //if so, then update
-        //                         if(bid.task_id === item._id) {
-        //                             updated = true;
-        //                             bid.labor = item.labor;
-
-        //                             task.materials.forEach(function(tmat,tmi) {
-        //                                 bid.materials = [];
-        //                                 bid.materials.push({
-        //                                     material_id: tmat._id,
-        //                                     quantity: tmat.quantity,
-        //                                     price_per_order: tmat.price_per_order,
-        //                                     delivery_price: tmat.delivery_price,
-        //                                 });
-        //                             });
-
-        //                             task.equipment.forEach(function(teqt, tei) {
-        //                                 bid.equipment = [];
-        //                                 bid.equipment.push({
-        //                                     equipment_id: teqt._id,
-        //                                     quantity: teqt.quantity,
-        //                                     price_per_order: teqt.price_per_order,
-        //                                     delivery_price: teqt.delivery_price
-        //                                 });
-        //                             });
-
-        //                             task.subtasks.forEach(function(tsub, tsi) {
-        //                                 bid.subtasks = [];
-        //                                 bid.subtasks.push({
-        //                                     task_id: tsub._id,
-        //                                     quantity: tsub.quantity,
-        //                                     bid_hours: tsub.bid_hours,
-        //                                     labor: tsub.labor,
-        //                                     materials: [],
-        //                                     equipment: []
-        //                                 });
-        //                             });
-
-        //                             task.subtasks.forEach(function(tsub, tsi) {
-        //                                 tsub.materials.forEach(function(tsmat, tsmi) {
-        //                                     bid.subtasks[tsi].materials = [];
-        //                                     bid.subtasks[tsi].materials.push({
-        //                                         material_id: tsmat._id,
-        //                                         quantity: tsmat.quantity,
-        //                                         price_per_order: tsmat.price_per_order,
-        //                                         delivery_price: tsmat.delivery_price
-        //                                     });
-        //                                 });
-
-        //                                 tsub.equipment.forEach(function(tseq, tsei) {
-        //                                     bid.subtasks[tsi].equipment = [];
-        //                                     bid.subtasks[tsi].equipment.push({
-        //                                         equipment_id: tseq._id,
-        //                                         quantity: tseq.quantity,
-        //                                         price_per_order: tseq.price_per_order,
-        //                                         delivery_price: tseq.delivery_price
-        //                                     });
-        //                                 });
-        //                             });
-        //                         }
-        //                     }
-
-        //                     i = i + 1;
-        //                 });
-
-        //                 // if(trade.bid.length === i && !updated) {
-        //                 //     trade.bid.push({
-        //                 //         plan_code: $scope.current_plan.item,
-        //                 //         task_id: task._id,
-        //                 //         labor: task.labor,
-        //                 //         materials: [],
-        //                 //         equipment: [],
-        //                 //         subtasks: []
-        //                 //     });
-
-        //                 //     if(task.materials.length) {
-        //                 //         task.materials.forEach(function(mat, mi) {
-        //                 //             trade.bid[0].materials.push({
-        //                 //                 material_id: mat._id,
-        //                 //                 quantity: mat.quantity,
-        //                 //                 price_per_order: mat.price_per_order,
-        //                 //                 delivery_price: mat.delivery_price
-        //                 //             });
-        //                 //         });
-        //                 //     }
-        //                 //     if(task.equipment.length) {
-        //                 //         task.equipment.forEach(function(mat, mi) {
-        //                 //             trade.bid[0].equipment.push({
-        //                 //                 equipment_id: mat._id,
-        //                 //                 quantity: mat.quantity,
-        //                 //                 price_per_order: mat.price_per_order,
-        //                 //                 delivery_price: mat.delivery_price
-        //                 //             });
-        //                 //         });
-        //                 //     }
-        //                 //     if(task.subtasks.length) {
-        //                 //         task.subtasks.forEach(function(sub, si) {
-        //                 //             trade.bid[0].subtasks.push({
-        //                 //                 task_id: sub._id,
-        //                 //                 quantity: sub.quantity,
-        //                 //                 bid_hours: sub.bid_hours,
-        //                 //                 labor: sub.labor,
-        //                 //                 materials: [],
-        //                 //                 equipment: []
-        //                 //             });
-        //                 //             if(sub.materials.length) {
-        //                 //                 sub.materials.forEach(function(smat, smi) {
-        //                 //                     trade.bid[0].subtasks[smi].materials.push({
-        //                 //                         material_id: smat._id,
-        //                 //                         quantity: smat.quantity,
-        //                 //                         price_per_order: smat.price_per_order,
-        //                 //                         delivery_price: smat.delivery_price
-        //                 //                     });
-        //                 //                 });
-        //                 //             }
-        //                 //             if(sub.equipment.length) {
-        //                 //                 sub.equipment.forEach(function(smat, sei) {
-        //                 //                     trade.bid[0].subtasks[sei].equipment.push({
-        //                 //                         equipment_id: smat._id,
-        //                 //                         quantity: smat.quantity,
-        //                 //                         price_per_order: smat.price_per_order,
-        //                 //                         delivery_price: smat.delivery_price
-        //                 //                     });
-        //                 //                 });
-        //                 //             }
-        //                 //         });
-        //                 //     }
-        //                 // } 
-
-        //                 //  else {
-        //                     //find the menu item
-        //                     // trade.bid.forEach(function(bid, number) {
-        //                     //     if(bid.plan_code === $scope.current_plan.item) {
-        //                     //         console.log('found the task ' + task.name + ' with quantity ' + task.quantity);
-        //                     //         task.subtasks.forEach(function(sub, ii) {
-        //                     //             console.log('subtask ' + sub.name + ' with quantity ' + sub.quantity);
-        //                     //         });
-        //                     //     }
-        //                         // if(number === trade.bid.length) {
-        //                         //     console.log('add the bid here because it is not in the list');
-        //                         // }
-        //                 //     });
-        //                 // }
-
-        //                 $scope.bid.$update();
-        //             }
-        //         });
-        //     }
-        // });
-        //console.log('this is where we save to the individuals bid information' + $scope);
     };
 
     $scope.getTradeCode = function(trade) {

@@ -72,6 +72,7 @@
 						</thead>
 						<tbody ng-repeat="p in $data | orderBy : 'task'">
 							<tr id="tr{{p._id}}">
+								<td class="col-sm-2" data-title="'Task'" sortable="'task'">{{p.task}}</td>
 								<td class="col-sm-4" data-title="'Task Name'" sortable="'name'">{{p.name}}</td>
 								<td class="col-sm-2" data-title="'Task'" sortable="'task'">{{p.task}}</td>
 								<td class="col-sm-2" data-title="'Labor'" sortable="'task_labor'">{{p.task_labor}}</td>
