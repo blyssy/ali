@@ -175,7 +175,7 @@ var BidSchema = new Schema({
                     type: Number
                 }
             }],
-            material: [{
+            materials: [{
                 material_id: {
                     type: Number
                 },
@@ -216,7 +216,7 @@ var BidSchema = new Schema({
                         type: Number
                     }
                 }],
-                material: [{
+                materials: [{
                     material_id: {
                         type: Number
                     },
