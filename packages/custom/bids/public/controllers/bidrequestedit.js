@@ -1,8 +1,16 @@
 'use strict';
 
-angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'Users', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService', 'BidRequestEdit',
-  function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService, BidRequestEdit) {
+angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'Users', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService', 'BidRequestEdit', '$state',
+  function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService, BidRequestEdit, $state) {
     $scope.global = Global;
+
+    var data = [];
+
+    $scope.$on('bidTableListRefresh', function(event, table_data) {
+        var data = table_data;
+        $scope.bidTasksTableParams.total(data.length);
+        $scope.bidTasksTableParams.reload();
+    });
 
     $scope.init = function() {
     	$scope.bid = BidRequestEdit.get();
@@ -119,7 +127,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
 	    	$scope.bid_total = '2000';
 	    	$scope.bid_direct_labor = '900';
 
-	    	var data = bid_tasks;
+	    	data = bid_tasks;
 	        $scope.bidTasksTableParams = new NGTableParams({
 	            page: 1,
 	            count: 100
@@ -136,7 +144,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     };
 
     $scope.updateTablePlan = function() {
-        var new_bid_tasks = [];
+        var bid_tasks = [];
 
         //already know this users bid trade
         $scope.bid.task_list.forEach(function(task, index){
@@ -218,21 +226,21 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                                     }
 
                                     if(!bid_found){
-                                        //console.log('task %s (plan %s) is clearing data for plan %s', task.name, bid.plan_code, $scope.current_plan.item);
+                                        console.log('task %s (plan %s) is clearing data for plan %s', task.name, bid.plan_code, $scope.current_plan.item);
                                         task.equipment.forEach(function(mat){
-                                            mat.quantity = '';
+                                            mat.quantity = '0';
                                         });
                                         task.materials.forEach(function(eq) {
-                                            eq.quantity = '';
+                                            eq.quantity = '0';
                                         });
                                         task.subtasks.forEach(function(sub) {
-                                            sub.quantity = '';
-                                            sub.bid_hours = '';
+                                            sub.quantity = '0';
+                                            sub.bid_hours = '0';
                                             sub.materials.forEach(function(smat) {
-                                                smat.quantity = '';
+                                                smat.quantity = '0';
                                             });
                                             sub.equipment.forEach(function(seq) {
-                                                seq.quantity = '';
+                                                seq.quantity = '0';
                                             });
                                         });
                                     }
@@ -243,36 +251,20 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                     }
                 });
 
-                new_bid_tasks.push(task);
+                bid_tasks.push(task);
             }
         });
 
-        $scope.bid_total = '2000';
-        $scope.bid_direct_labor = '900';
+        //$scope.bid_total = '2000';
+        //$scope.bid_direct_labor = '900';
 
-        //$scope.current_table_data = [];
-
-        //$scope.current_table_data = new_bid_tasks;
-
-        var data = new_bid_tasks;
-        $scope.bidTasksTableParams = new NGTableParams({
-            page: 1,
-            count: 100
-        },{
-            total: data.length,
-            counts: [], //remove the pagination controller
-            getData: function($defer, params) {
-                params.total(data.length);
-                var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-        });
-
+        data = bid_tasks;
 
         $scope.bidTasksTableParams.reload();
     };
 
     $scope.onSelect = function() {
+        //$scope.taskEditId = -1;
     	//console.log('in the onSelect function ' + $scope.current_plan.item);
         $scope.updateTablePlan();
     };
@@ -429,6 +421,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 }
 
                 $scope.bid.$update();
+                //$scope.updateTablePlan();
             }
         });
     };

@@ -61,20 +61,10 @@
 				</div>
 				<div class="ibox-content">
 					<table ng-table="bidTasksTableParams" class="table">
-						<thead>
-							<tr>
-								<th>Task Name</th>
-								<th>Task</th>
-								<th>Labor Total</th>
-								<th>Material Total</th>
-								<th>Equipment Total</th>
-							</tr>
-						</thead>
-						<tbody ng-repeat="p in $data | orderBy : 'task'">
+						<tbody ng-repeat="p in $data | orderBy : '_id'">
 							<tr id="tr{{p._id}}">
-								<td class="col-sm-2" data-title="'Task'" sortable="'task'">{{p.task}}</td>
+								<td class="col-sm-2" data-title="'Task #'" sortable="'task'">{{p.task}}</td>
 								<td class="col-sm-4" data-title="'Task Name'" sortable="'name'">{{p.name}}</td>
-								<td class="col-sm-2" data-title="'Task'" sortable="'task'">{{p.task}}</td>
 								<td class="col-sm-2" data-title="'Labor'" sortable="'task_labor'">{{p.task_labor}}</td>
 								<td class="col-sm-2" data-title="'Material'" sortable="'task_material'">{{p.task_material}}</td>
 								<td class="col-sm-2" data-title="'Equipment'" sortable="'task_equipment'">{{p.task_equipment}}</td>
