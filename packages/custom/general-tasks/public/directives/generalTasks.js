@@ -6,6 +6,7 @@ angular.module('mean.general-tasks').directive('myCurrency', ['$filter',
 		require: 'ngModel',
 		link: function(elem, $scope, attrs, ngModel){
             ngModel.$formatters.push(function(val){
+                if(!val) val = 0;
                 return '$ ' + $filter('number')(val, 2);
             });
             ngModel.$parsers.push(function(val){

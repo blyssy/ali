@@ -1,19 +1,17 @@
 'use strict';
 
-angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'Users', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService', 'BidRequestEdit', '$state',
-  function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService, BidRequestEdit, $state) {
+angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'Users', 'Global', 'Bids', '$filter', 'ngTableParams', '$sce', 'toaster', 'NotifyService', 'BidRequestEdit', 'CompanyFactors',
+  function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService, BidRequestEdit, CompanyFactors) {
     $scope.global = Global;
 
     var data = [];
 
-    $scope.$on('bidTableListRefresh', function(event, table_data) {
-        var data = table_data;
-        $scope.bidTasksTableParams.total(data.length);
-        $scope.bidTasksTableParams.reload();
-    });
-
     $scope.init = function() {
     	$scope.bid = BidRequestEdit.get();
+
+        CompanyFactors.query({}, function(company_factors) {
+            $scope.company_factors = company_factors;
+        });
 
     	$scope.bid_menu = [];
 
@@ -71,6 +69,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                                                 }
                                             });
                                         });
+
                                         bid.materials.forEach(function(mq, midx) {
                                             task.materials.forEach(function(tmq, tmidx) {
                                                 if(mq.material_id === tmq._id) {
@@ -82,6 +81,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                                                 }
                                             });
                                         });
+                                        
                                         bid.subtasks.forEach(function(subtask, si) {
                                             task.subtasks.forEach(function(tsub, tsi) {
                                                 if(subtask.task_id === tsub._id) {
@@ -100,14 +100,17 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                                                             }
                                                         });
                                                     });
+
                                                     subtask.materials.forEach(function(smq, smi) {
                                                         tsub.materials.forEach(function(tsmq, tsmi) {
                                                             if(smq.material_id === tsmq._id){
                                                                 tsmq.quantity = smq.quantity;
                                                                 if(smq.price_per_order)
                                                                   tsmq.price_per_order = smq.price_per_order;
-                                                                if(smq.delivery_price)
+                                                                if(smq.delivery_price) {
                                                                   tsmq.delivery_price = smq.delivery_price;
+                                                                  tsmq.delivery_sub_total = tsmq.delivery_sub_total + smq.delivery_price;
+                                                                }
                                                             }
                                                         });
                                                     });
@@ -123,6 +126,8 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                     bid_tasks.push(task);
 	    		}
 	    	});
+
+            $scope.applayCalculations(bid_tasks);
 
 	    	$scope.bid_total = '2000';
 	    	$scope.bid_direct_labor = '900';
@@ -157,8 +162,6 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                             
                             if(bid.task_id === task._id) {
                                 if(bid.plan_code === $scope.current_plan.item) {
-                                    //console.log('task %s (plan %s) is updating for plan %s', task.name, bid.plan_code, $scope.current_plan.item);
-                                    
                                     bid.equipment.forEach(function(eq, eidx) {
                                         task.equipment.forEach(function(teq, teidx) {
                                             if(eq.equipment_id === teq._id) {
@@ -226,21 +229,20 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                                     }
 
                                     if(!bid_found){
-                                        console.log('task %s (plan %s) is clearing data for plan %s', task.name, bid.plan_code, $scope.current_plan.item);
                                         task.equipment.forEach(function(mat){
-                                            mat.quantity = '0';
+                                            mat.quantity = '';
                                         });
                                         task.materials.forEach(function(eq) {
-                                            eq.quantity = '0';
+                                            eq.quantity = '';
                                         });
                                         task.subtasks.forEach(function(sub) {
-                                            sub.quantity = '0';
-                                            sub.bid_hours = '0';
+                                            sub.quantity = '';
+                                            sub.bid_hours = '';
                                             sub.materials.forEach(function(smat) {
-                                                smat.quantity = '0';
+                                                smat.quantity = '';
                                             });
                                             sub.equipment.forEach(function(seq) {
-                                                seq.quantity = '0';
+                                                seq.quantity = '';
                                             });
                                         });
                                     }
@@ -255,6 +257,8 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
             }
         });
 
+        $scope.applayCalculations(bid_tasks);
+
         //$scope.bid_total = '2000';
         //$scope.bid_direct_labor = '900';
 
@@ -263,9 +267,75 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         $scope.bidTasksTableParams.reload();
     };
 
+    $scope.currentNetPay = function(bid_hours, current_crew_rate, quantity, piece_rate) {
+        var val = 0;
+
+        if(bid_hours > 0) {
+            val = bid_hours * current_crew_rate;
+        } else {
+            val = quantity * piece_rate;
+        }
+
+        return val;
+    };
+
+    $scope.directLaborCosts = function(bid_hours, quantity, ali_crew_rate) {
+        var val = 0;
+        if(bid_hours === 0) {
+            val = quantity * ali_crew_rate;
+        } else {
+            val = bid_hours * ali_crew_rate;
+        }
+
+        return val;
+    };
+
+    $scope.aliCrewRate = function(bid_hours, piece_rate, current_crew_rate, ali_crew_net_pay) {
+        var val = 0;
+
+        if(bid_hours === 0) {
+            val = piece_rate * ali_crew_net_pay;
+        } else {
+            val = current_crew_rate * ali_crew_net_pay;
+        }
+
+        return val;
+    };
+
+    $scope.aliCrewNetPay = function(direct_labor_costs, training_and_education) {
+        return direct_labor_costs - training_and_education;
+    };
+
+    // $scope.increasePay = function(ali_crew_net_pay, current_net_pay) {
+    //     return ali_crew_net_pay - current_net_pay;
+    // };
+
+    $scope.hoursAllowed = function(bid_hours, current_net_pay, current_crew_rate) {
+        var val = 0;
+
+        if(bid_hours === 0) {
+            val = current_net_pay / current_crew_rate;
+        } else {
+            val = bid_hours;
+        }
+
+        return val;
+    };
+
+    $scope.trainingAndEducation = function(hours_allowed, training_and_education) {
+        return hours_allowed * training_and_education;
+    };
+
+    $scope.employeeBenefits = function(hours_allowed, benefits) {
+        return hours_allowed * benefits;
+    };
+
+    $scope.applayCalculations = function(tasks) {
+        //this is where we take a built task list and add the
+        //extra calculations of items that do not get stored.
+    };
+
     $scope.onSelect = function() {
-        //$scope.taskEditId = -1;
-    	//console.log('in the onSelect function ' + $scope.current_plan.item);
         $scope.updateTablePlan();
     };
 
