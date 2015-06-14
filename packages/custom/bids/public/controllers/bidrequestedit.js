@@ -4,9 +4,20 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
   function($scope, Users, Global, Bids, $filter, NGTableParams, $sce, toaster, NotifyService, BidRequestEdit, CompanyFactors) {
     $scope.global = Global;
 
+    $scope.expanded_table = 'true';
+
     var data = [];
 
+    $scope.toggleTableColumns = function() {
+        if($scope.expanded_table === 'true') {
+            $scope.expanded_table = 'false';
+        } else {
+            $scope.expanded_table = 'true';
+        }
+    };
+
     $scope.init = function() {
+        $scope.expanded_table = 'false';
     	$scope.bid = BidRequestEdit.get();
 
         CompanyFactors.query({}, function(company_factors) {
@@ -44,6 +55,10 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     	} else {
     		alert('unknown construction type');
     	}
+
+        $scope.bid_menu.push({
+            item: 'Cover'
+        });
 
     	var bid_tasks = [];
 
@@ -336,7 +351,12 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     };
 
     $scope.onSelect = function() {
-        $scope.updateTablePlan();
+        if($scope.current_plan.item === 'Cover') {
+            data = [];
+            $scope.bidTasksTableParams.reload();
+        } else {
+            $scope.updateTablePlan();
+        }
     };
 
     $scope.setTaskEditId =  function(pid) {
