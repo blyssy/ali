@@ -47,15 +47,15 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>{{bid_total*10 | currency}}</td>
-									<td>{{bid_direct_labor*10 | currency}}</td>
-									<td>10%</td>
-									<td>{{5000 | currency}}</td>
-									<td>10%</td>
-									<td>{{2000 | currency}}</td>
-									<td>10%</td>
-									<td>{{bid_direct_labor | currency}}</td>
-									<td>10%</td>
+									<td>{{bid_total | currency}}</td>
+									<td>{{bid_total_labor | currency}}</td>
+									<td>{{ (bid_total_labor / bid_total) * 100 | number: 2}}%</td>
+									<td>{{bid_total_materials | currency}}</td>
+									<td>{{ (bid_total_materials / bid_total) * 100 | number: 2}}%</td>
+									<td>{{bid_total_equipment | currency}}</td>
+									<td>{{ (bid_total_equipment / bid_total) * 100 | number: 2}}%</td>
+									<td>{{bid_general_liability | currency}}</td>
+									<td>{{ (bid_general_liability / bid_total) * 100 | number: 2}}%</td>
 										<td>{{bid_direct_labor | currency}}</td>
 										<td>10%</td>
 										<td>{{bid_direct_labor | currency}}</td>
@@ -96,15 +96,15 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>{{bid_total*10 | currency}}</td>
-									<td>{{bid_direct_labor*10 | currency}}</td>
-									<td>10%</td>
-									<td>{{5000 | currency}}</td>
-									<td>10%</td>
-									<td>{{2000 | currency}}</td>
-									<td>10%</td>
-									<td>{{bid_direct_labor | currency}}</td>
-									<td>10%</td>
+									<td>{{bid_total | currency}}</td>
+									<td>{{bid_total_labor | currency}}</td>
+									<td>{{ (bid_total_labor / bid_total) * 100 | number: 2}}%</td>
+									<td>{{bid_total_materials | currency}}</td>
+									<td>{{ (bid_total_materials / bid_total) * 100 | number: 2}}%</td>
+									<td>{{bid_total_equipment | currency}}</td>
+									<td>{{ (bid_total_equipment / bid_total) * 100 | number: 2}}%</td>
+									<td>{{bid_general_liability | currency}}</td>
+									<td>{{ (bid_general_liability / bid_total) * 100 | number: 2}}%</td>
 								</tr>
 							</tbody>
 						</table>

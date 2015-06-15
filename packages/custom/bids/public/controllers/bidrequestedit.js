@@ -5,6 +5,11 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     $scope.global = Global;
 
     $scope.expanded_table = 'true';
+    $scope.bid_total_labor = 0;
+    $scope.bid_total_materials = 0;
+    $scope.bid_total_equipment = 0;
+    $scope.bid_total = 0;
+    $scope.bid_general_liability = 0;
 
     var data = [];
 
@@ -19,10 +24,6 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     $scope.init = function() {
         $scope.expanded_table = 'false';
     	$scope.bid = BidRequestEdit.get();
-
-        CompanyFactors.query({}, function(company_factors) {
-            $scope.company_factors = company_factors;
-        });
 
     	$scope.bid_menu = [];
 
@@ -141,25 +142,36 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                     bid_tasks.push(task);
 	    		}
 	    	});
+        
 
-            $scope.applayCalculations(bid_tasks);
+            CompanyFactors.query({}, function(company_factors) {
+                company_factors.forEach(function(company_factor) {
+                    if(company_factor.trade_code === $scope.my_bid_trade) {
+                
+                        $scope.company_factors = company_factor;
+                    
+                        // if($scope.company_factors)
+                        $scope.applayCalculations(bid_tasks);
 
-	    	$scope.bid_total = '2000';
-	    	$scope.bid_direct_labor = '900';
+            	    	//$scope.bid_total = '2000';
+            	    	//$scope.bid_direct_labor = '900';
 
-	    	data = bid_tasks;
-	        $scope.bidTasksTableParams = new NGTableParams({
-	            page: 1,
-	            count: 100
-	        },{
-	            total: data.length,
-                counts: [], //remove the pagination controller
-	            getData: function($defer, params) {
-	                params.total(data.length);
-	                var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-	                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-	            }
-	        });
+            	    	data = bid_tasks;
+            	        $scope.bidTasksTableParams = new NGTableParams({
+            	            page: 1,
+            	            count: 100
+            	        },{
+            	            total: data.length,
+                            counts: [], //remove the pagination controller
+            	            getData: function($defer, params) {
+            	                params.total(data.length);
+            	                var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+            	                $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            	            }
+            	        });
+                    }
+                });
+            });
 	    });
     };
 
@@ -282,11 +294,11 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         $scope.bidTasksTableParams.reload();
     };
 
-    $scope.currentNetPay = function(bid_hours, current_crew_rate, quantity, piece_rate) {
+    $scope.currentNetPay = function(bid_hours, crew_rate, quantity, piece_rate) {
         var val = 0;
 
         if(bid_hours > 0) {
-            val = bid_hours * current_crew_rate;
+            val = bid_hours * crew_rate;
         } else {
             val = quantity * piece_rate;
         }
@@ -305,13 +317,13 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         return val;
     };
 
-    $scope.aliCrewRate = function(bid_hours, piece_rate, current_crew_rate, ali_crew_net_pay) {
+    $scope.aliCrewRate = function(bid_hours, piece_rate, crew_rate, ali_crew_net_pay) {
         var val = 0;
 
         if(bid_hours === 0) {
             val = piece_rate * ali_crew_net_pay;
         } else {
-            val = current_crew_rate * ali_crew_net_pay;
+            val = crew_rate * ali_crew_net_pay;
         }
 
         return val;
@@ -325,16 +337,20 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     //     return ali_crew_net_pay - current_net_pay;
     // };
 
-    $scope.hoursAllowed = function(bid_hours, current_net_pay, current_crew_rate) {
-        var val = 0;
+    $scope.hoursAllowed = function(bid_hours, current_net_pay, crew_rate) {
+        var temp_value = 0;
+
+        if(!bid_hours) bid_hours = 0;
+        if(!current_net_pay) current_net_pay = 0;
+        if(!crew_rate) crew_rate = 0;
 
         if(bid_hours === 0) {
-            val = current_net_pay / current_crew_rate;
+            temp_value = (current_net_pay / crew_rate);
         } else {
-            val = bid_hours;
+            temp_value = bid_hours;
         }
 
-        return val;
+        return $filter('number')(temp_value, 2);
     };
 
     $scope.trainingAndEducation = function(hours_allowed, training_and_education) {
@@ -348,6 +364,121 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
     $scope.applayCalculations = function(tasks) {
         //this is where we take a built task list and add the
         //extra calculations of items that do not get stored.
+        $scope.bid_total_labor = 0;
+        $scope.bid_total_materials = 0;
+        $scope.bid_total_equipment = 0;
+        $scope.bid_total = 0;
+        var subtask_mat_subtotal;
+        var subtask_mat_dev_subtotal;
+        var subtask_eq_subtotal;
+        var subtask_eq_dev_subtotal;
+        var task_material_total;
+        var task_equipment_total;
+        var task_total_labor;
+        var total_labor = 0;
+
+        tasks.forEach(function(task, index) {
+            task_material_total = 0;
+            task_equipment_total = 0;
+            subtask_eq_subtotal = 0;
+            subtask_eq_dev_subtotal = 0;
+            task_total_labor = 0;
+
+            //iterate over the subtasks and add up
+            task.subtasks.forEach(function(subtask, ii) {
+                subtask_mat_subtotal = 0;
+                subtask_mat_dev_subtotal = 0;
+                subtask_eq_subtotal = 0;
+                subtask_eq_dev_subtotal = 0;
+                
+                subtask.materials.forEach(function(smat) {
+                    if(!smat.quantity) smat.quantity = 0;
+                    if(!smat.price_per_order) smat.price_per_order = 0;
+                    if(!smat.delivery_price) smat.delivery_price = 0;
+
+                    subtask_mat_subtotal += smat.quantity * smat.price_per_order;
+                    subtask_mat_dev_subtotal += smat.delivery_price;
+                });
+
+                subtask.equipment.forEach(function(seq) {
+                    if(!seq.quantity) seq.quantity = 0;
+                    if(!seq.price) seq.price = 0;
+                    if(!seq.delivery_price) seq.delivery_price = 0;
+                    
+                    subtask_eq_subtotal += seq.quantity * seq.price;
+                    subtask_eq_dev_subtotal += seq.delivery_price;
+                });
+
+                subtask.material_subtotal = subtask_mat_subtotal;
+                subtask.material_delivery_subtotal = subtask_mat_dev_subtotal;
+                subtask.equipment_subtotal = subtask_eq_subtotal;
+                subtask.equipment_delivery_subtotal = subtask_eq_dev_subtotal;
+
+                subtask.total_materials = (subtask.material_subtotal + 
+                    (subtask.material_subtotal * $scope.company_factors.sales_tax )) + subtask.material_delivery_subtotal;
+                
+                subtask.total_equipment = subtask.equipment_subtotal + subtask.equipment_delivery_subtotal;
+
+                task_material_total += subtask.total_materials;
+                task_equipment_total += subtask.total_equipment;
+
+                subtask.current_net_pay = 
+                    $scope.currentNetPay(subtask.bid_hours, subtask.crew_rate, subtask.quantity, subtask.piece_rate);
+                subtask.hours_allowed = 
+                    $scope.hoursAllowed(subtask.bid_hours, subtask.current_net_pay, subtask.crew_rate);
+
+                task_total_labor += subtask.current_net_pay;
+            });
+
+            task.total_labor = task_total_labor;
+
+            var materials_subtotal = 0;
+            var materials_dev_subtotal = 0;
+            task.materials.forEach(function(mat, ii) {
+                if(!mat.quantity) mat.quantity = 0;
+                if(!mat.price_per_order) mat.price_per_order = 0;
+                if(!mat.delivery_price) mat.delivery_price = 0;
+                
+                materials_subtotal += mat.quantity * mat.price_per_order;
+                materials_dev_subtotal += mat.delivery_price;
+            });
+
+            task.materials_subtotal = materials_subtotal;
+            task.materials_dev_subtotal = materials_dev_subtotal;
+
+            var equipment_subtotal = 0;
+            var equipment_dev_subtotal = 0;
+            task.equipment.forEach(function(eq, ii) {
+                if(!eq.quantity) eq.quantity = 0;
+                if(!eq.price) eq.price = 0;
+                if(!eq.delivery_price) eq.delivery_price = 0;
+                
+                equipment_subtotal += eq.quantity * eq.price;
+                equipment_dev_subtotal += eq.delivery_price;
+            });
+
+            task.equipment_subtotal = equipment_subtotal;
+            task.equipment_dev_subtotal = equipment_dev_subtotal;
+
+            task.total_materials = task_material_total + 
+                (task.materials_subtotal + (task.materials_subtotal * $scope.company_factors.sales_tax)) +
+                task.materials_dev_subtotal;
+
+            task.total_equipment = task_equipment_total + equipment_subtotal + equipment_dev_subtotal;
+
+            if(!task_total_labor) task_total_labor = 0;
+            if(!task.total_materials) task.total_materials = 0;
+            if(!task.total_equipment) task.total_equipment = 0;
+
+            $scope.bid_total_labor += task_total_labor;
+            $scope.bid_total_materials += task.total_materials;
+            $scope.bid_total_equipment += task.total_equipment;
+        });
+
+        $scope.bid_total = $scope.bid_total_labor + $scope.bid_total_materials + $scope.bid_total_equipment;
+        $scope.bid_general_liability = $scope.bid_total * $scope.company_factors.general_liability;
+        //$scope.bid_total_labor = total_labor;
+        console.log('setting total labor to ' + total_labor);
     };
 
     $scope.onSelect = function() {
@@ -415,6 +546,10 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                                     quantity: tsub.quantity,
                                     bid_hours: tsub.bid_hours,
                                     labor: tsub.labor,
+                                    // material_subtotal: tsub.material_subtotal,
+                                    // material_delivery_subtotal: tsub.material_delivery_subtotal,
+                                    // equipment_subtotal: tsub.equipment_subtotal,
+                                    // equipment_delivery_subtotal: tsub.equipment_delivery_subtotal,
                                     materials: [],
                                     equipment: []
                                 });
@@ -511,7 +646,8 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 }
 
                 $scope.bid.$update();
-                //$scope.updateTablePlan();
+                
+                $scope.updateTablePlan();
             }
         });
     };

@@ -5,48 +5,48 @@
       		<div class="col-md-2">
 	      	  <label>Total Labor</label>
 		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_labor | currency}}</span>
 		    </div>
 	      	<div class="col-md-2">
 	      	  <label>Total Materials</label>
 		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_materials | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
 		      <label>Total Equipment</label>
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_equipment | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
 		      <label>Total General Liability</label>
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_general_liability | currency}}</span>
 		    </div>
 		</div>
 		<div class="row">
 	      	<div class="col-md-2">
-	      	  <label>Total Hours</label>
+	      	  <label>Total Hours Allowed</label>
 		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_hours_allowed}}</span>
 		    </div>
 		    <div class="col-md-2">
 		      <label>Current Net Pay</label>
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_current_net_pay | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
 		      <label>Total Workers Comp</label>
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_workers_comp | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
 	      	  <label>Total Payroll Taxes</label>
 		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_payroll_taxes | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
 		      <label>Employee Benefits</label>
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_employee_benefits | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
 		      <label>Training & Education</label>
-		      <span class="form-control m-b" disabled>{{2000 | currency}}</span>
+		      <span class="form-control m-b" disabled>{{p.total_training_and_education | currency}}</span>
 		    </div>
 		</div><hr>
 		<!-- <div data-ng-if="p.subtasks.length"><h3 class="control-label">Sub Tasks:</h3></div> -->
@@ -59,19 +59,19 @@
 							<h2 class="control-label">{{item.name}}</h2>
 							<div class="col-md-2">
 						      	<label>Total Current Net Pay</label>
-						      	<span class="form-control m-b" disabled>{{2000 | currency}}</span>
+						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
 						    </div>
 						    <div class="col-md-2">
-						      	<label>Total Hours</label>
-						      	<span class="form-control m-b" disabled>{{2000 | currency}}</span>
+						      	<label>Hours Allowed</label>
+						      	<span class="form-control m-b" disabled>{{hoursAllowed(item.bid_hours, currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate), item.crew_rate)}}</span>
 						    </div>
 						    <div class="col-md-2">
 						      	<label>Total Materials</label>
-						      	<span class="form-control m-b" disabled>{{2000 | currency}}</span>
+						      	<span class="form-control m-b" disabled>{{item.total_materials | currency}}</span>
 						    </div>
 						    <div class="col-md-2">
 						      	<label>Total Equipment</label>
-						      	<span class="form-control m-b" disabled>{{2000 | currency}}</span>
+						      	<span class="form-control m-b" disabled>{{item.total_equipment | currency}}</span>
 						    </div>
 						    <br><br><br><br>
 							<div class="col-md-2">
@@ -108,7 +108,7 @@
 						    </div>
 							<div class="col-md-2">
 								<label>Total</label>
-								<span class="form-control m-b" disabled>{{item.quantity*item.crew_rate | currency}}</span>
+								<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
 							</div>
 
 							<br><br><br><br>
@@ -150,11 +150,11 @@
 												<div class="col-md-8"></div>
 												<div class="col-md-2">
 													<label class="control-label">Delivery Sub Total</label>
-													<span class="form-control m-b" disabled>{{item.materials.delivery_sub_total | currency}}</span>
+													<span class="form-control m-b" disabled>{{item.material_delivery_subtotal | currency}}</span>
 												</div>
 												<div class="col-md-2">
 													<label class="control-label">Sub Total</label>
-													<span class="form-control m-b" disabled>{{item.materials.sub_total | currency}}</span>
+													<span class="form-control m-b" disabled>{{item.material_subtotal | currency}}</span>
 												</div>
 											</div>
 										</div>
@@ -190,11 +190,11 @@
 												<div class="col-md-8"></div>
 												<div class="col-md-2">
 													<label class="control-label">Delivery Sub Total</label>
-													<span class="form-control m-b" disabled>{{item.equipment.delivery_sub_total | currency}}</span>
+													<span class="form-control m-b" disabled>{{item.equipment_delivery_subtotal | currency}}</span>
 												</div>
 												<div class="col-md-2">
 													<label class="control-label">Sub Total</label>
-													<span class="form-control m-b" disabled>{{item.equipment.sub_total | currency}}</span>
+													<span class="form-control m-b" disabled>{{item.equipment_subtotal | currency}}</span>
 												</div>
 											</div>
 										</div>
@@ -247,11 +247,11 @@
 							<div class="col-md-8"></div>
 							<div class="col-md-2">
 								<label class="control-label">Delivery Sub Total</label>
-								<span class="form-control m-b" disabled>{{p.materials.delivery_sub_total | currency}}</span>
+								<span class="form-control m-b" disabled>{{p.materials_dev_subtotal | currency}}</span>
 							</div>
 							<div class="col-md-2">
 								<label class="control-label">Sub Total</label>
-								<span class="form-control m-b" disabled>{{p.materials.sub_total | currency}}</span>
+								<span class="form-control m-b" disabled>{{p.materials_subtotal | currency}}</span>
 							</div>
 						</div>
 					</div>
@@ -287,11 +287,11 @@
 							<div class="col-md-8"></div>
 							<div class="col-md-2">
 								<label class="control-label">Delivery Sub Total</label>
-								<span class="form-control m-b" disabled>{{p.equipment.delivery_sub_total | currency}}</span>
+								<span class="form-control m-b" disabled>{{p.equipment_dev_subtotal | currency}}</span>
 							</div>
 							<div class="col-md-2">
 								<label class="control-label">Sub Total</label>
-								<span class="form-control m-b" disabled>{{p.equipment.sub_total | currency}}</span>
+								<span class="form-control m-b" disabled>{{p.equipment_subtotal | currency}}</span>
 							</div>
 						</div>
 					</div>
