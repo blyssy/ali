@@ -345,7 +345,10 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         if(!crew_rate) crew_rate = 0;
 
         if(bid_hours === 0) {
-            temp_value = (current_net_pay / crew_rate);
+            if(crew_rate)
+              temp_value = (current_net_pay / crew_rate);
+            else
+              temp_value = 0;
         } else {
             temp_value = bid_hours;
         }
@@ -376,6 +379,9 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         var task_equipment_total;
         var task_total_labor;
         var total_labor = 0;
+        var task_total_hours_allowed = 0;
+        var task_employee_benefits;
+        var task_traning_and_education;
 
         tasks.forEach(function(task, index) {
             task_material_total = 0;
@@ -383,6 +389,9 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
             subtask_eq_subtotal = 0;
             subtask_eq_dev_subtotal = 0;
             task_total_labor = 0;
+            task_total_hours_allowed = 0;
+            task_employee_benefits = 0;
+            task_traning_and_education = 0;
 
             //iterate over the subtasks and add up
             task.subtasks.forEach(function(subtask, ii) {
@@ -426,11 +435,23 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                     $scope.currentNetPay(subtask.bid_hours, subtask.crew_rate, subtask.quantity, subtask.piece_rate);
                 subtask.hours_allowed = 
                     $scope.hoursAllowed(subtask.bid_hours, subtask.current_net_pay, subtask.crew_rate);
+                subtask.employee_benefits = 
+                    $scope.employeeBenefits(subtask.hours_allowed, $scope.company_factors.benefits);
+                subtask.training_and_education = 
+                    $scope.trainingAndEducation(subtask.hours_allowed, $scope.company_factors.training_education);
 
+                task_employee_benefits += subtask.employee_benefits;
+                task_traning_and_education += subtask.training_and_education;
                 task_total_labor += subtask.current_net_pay;
+                task_total_hours_allowed = parseFloat(task_total_hours_allowed) + parseFloat(subtask.hours_allowed);
+                task_total_hours_allowed.toFixed(2);
             });
 
             task.total_labor = task_total_labor;
+            task.total_current_net_pay = task_total_labor;
+            task.total_hours_allowed = task_total_hours_allowed;
+            task.total_employee_benefits = task_employee_benefits;
+            task.total_training_and_education = task_traning_and_education;
 
             var materials_subtotal = 0;
             var materials_dev_subtotal = 0;
@@ -467,6 +488,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
             task.total_equipment = task_equipment_total + equipment_subtotal + equipment_dev_subtotal;
 
             if(!task_total_labor) task_total_labor = 0;
+            if(!task.total_hours_allowed) task.total_hours_allowed = 0;
             if(!task.total_materials) task.total_materials = 0;
             if(!task.total_equipment) task.total_equipment = 0;
 

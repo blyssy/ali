@@ -3,49 +3,29 @@
       <div><h2 class="control-label">Plan Task {{p.name}}  - {{p.trade}}{{p.task}} Totals:</h2>
       	<div class="row">
       		<div class="col-md-2">
-	      	  <label>Total Labor</label>
-		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
-		      <span class="form-control m-b" disabled>{{p.total_labor | currency}}</span>
+		      <label>Task Direct Labor</label>
+		      <span class="form-control m-b" disabled>{{p.total_current_net_pay | currency}}</span>
 		    </div>
 	      	<div class="col-md-2">
-	      	  <label>Total Materials</label>
+	      	  <label>Task Materials</label>
 		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
 		      <span class="form-control m-b" disabled>{{p.total_materials | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
-		      <label>Total Equipment</label>
+		      <label>Task Equipment</label>
 		      <span class="form-control m-b" disabled>{{p.total_equipment | currency}}</span>
 		    </div>
-		    <div class="col-md-2">
-		      <label>Total General Liability</label>
-		      <span class="form-control m-b" disabled>{{p.total_general_liability | currency}}</span>
-		    </div>
-		</div>
-		<div class="row">
 	      	<div class="col-md-2">
-	      	  <label>Total Hours Allowed</label>
+	      	  <label>Task Hours Allowed</label>
 		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
 		      <span class="form-control m-b" disabled>{{p.total_hours_allowed}}</span>
 		    </div>
 		    <div class="col-md-2">
-		      <label>Current Net Pay</label>
-		      <span class="form-control m-b" disabled>{{p.total_current_net_pay | currency}}</span>
-		    </div>
-		    <div class="col-md-2">
-		      <label>Total Workers Comp</label>
-		      <span class="form-control m-b" disabled>{{p.total_workers_comp | currency}}</span>
-		    </div>
-		    <div class="col-md-2">
-	      	  <label>Total Payroll Taxes</label>
-		      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
-		      <span class="form-control m-b" disabled>{{p.total_payroll_taxes | currency}}</span>
-		    </div>
-		    <div class="col-md-2">
-		      <label>Employee Benefits</label>
+		      <label>Task Emp. Benefits</label>
 		      <span class="form-control m-b" disabled>{{p.total_employee_benefits | currency}}</span>
 		    </div>
 		    <div class="col-md-2">
-		      <label>Training & Education</label>
+		      <label>Task T&E</label>
 		      <span class="form-control m-b" disabled>{{p.total_training_and_education | currency}}</span>
 		    </div>
 		</div><hr>
@@ -57,23 +37,6 @@
 					<div data-ng-if="p.subtasks.length">
 						<div ng-repeat="item in p.subtasks">
 							<h2 class="control-label">{{item.name}}</h2>
-							<div class="col-md-2">
-						      	<label>Total Current Net Pay</label>
-						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
-						    </div>
-						    <div class="col-md-2">
-						      	<label>Hours Allowed</label>
-						      	<span class="form-control m-b" disabled>{{hoursAllowed(item.bid_hours, currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate), item.crew_rate)}}</span>
-						    </div>
-						    <div class="col-md-2">
-						      	<label>Total Materials</label>
-						      	<span class="form-control m-b" disabled>{{item.total_materials | currency}}</span>
-						    </div>
-						    <div class="col-md-2">
-						      	<label>Total Equipment</label>
-						      	<span class="form-control m-b" disabled>{{item.total_equipment | currency}}</span>
-						    </div>
-						    <br><br><br><br>
 							<div class="col-md-2">
 								<!-- <div data-ng-if="!item.bid_hours"> -->
 									<label>Quantity</label>
@@ -102,14 +65,13 @@
 								<!-- <input type="text" ng-model="item.hours_bid" class="form-control m-b" value="{{item.quantity*(item.piece_rate/item.piece_per_hour_rate)}}"> -->
 							</div>
 							<div class="col-md-2">
-					      	  <!-- <label>Current Net Pay</label> -->
-						      <!-- <input type="text" ng-model="p.name" class="col-md-2" value="{{p.name}}" disabled> -->
-						      <!-- <input type="text" ng-model="p.labor" class="form-control m-b" value="{{p.labor}}"> -->
+						      	<label>Hours Allowed</label>
+						      	<span class="form-control m-b" disabled>{{hoursAllowed(item.bid_hours, currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate), item.crew_rate)}}</span>
 						    </div>
 							<div class="col-md-2">
-								<label>Total</label>
-								<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
-							</div>
+						      	<label>Direct Labor Costs</label>
+						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
+						    </div>
 
 							<br><br><br><br>
 							
