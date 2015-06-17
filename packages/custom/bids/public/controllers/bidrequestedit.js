@@ -497,8 +497,12 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
             $scope.bid_total_equipment += task.total_equipment;
         });
 
-        $scope.bid_total = $scope.bid_total_labor + $scope.bid_total_materials + $scope.bid_total_equipment;
-        $scope.bid_general_liability = $scope.bid_total * $scope.company_factors.general_liability;
+        $scope.bid_general_liability = $scope.bid_total_labor * $scope.company_factors.general_liability;
+        $scope.bid_general_liability += $scope.bid_total_materials * $scope.company_factors.general_liability;
+        $scope.bid_general_liability += $scope.bid_total_equipment * $scope.company_factors.general_liability;
+
+        $scope.bid_total = $scope.bid_total_labor + $scope.bid_total_materials + $scope.bid_total_equipment + $scope.bid_general_liability;
+        //$scope.bid_general_liability = $scope.bid_total * $scope.company_factors.general_liability;
         //$scope.bid_total_labor = total_labor;
         console.log('setting total labor to ' + total_labor);
     };
