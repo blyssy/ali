@@ -59,6 +59,11 @@
                 <option value="25">25</option>
             </select>
         </div>
+        <div><label class="control-label">Units:</label>
+            <select data-ng-model="p.unit" class="form-control m-b" 
+                       ng-options="obj as obj.unit for obj in units">
+            </select>
+        </div>
         <div><label class="control-label">Piece Rate:</label>
             <input type="text" ng-model="p.piece_rate" class="form-control m-b" value="{{p.piece_rate}}">
         </div>

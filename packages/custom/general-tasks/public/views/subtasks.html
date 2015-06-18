@@ -83,6 +83,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <span class="col-sm-2">
+                            <select ng-model="unit" class="form-control m-b" 
+                                ng-options="obj.unit for obj in units track by obj._id">
+                                <option value="" disabled selected>Unit of Measure</option>
+                            </select>
+                        </span>
                         <div class="col-sm-2">
                             <input type="text" class="form-control m-b" data-ng-model="piece_rate" placeholder="Piece Rate" />
                         </div>
@@ -123,6 +129,7 @@
                         <td class="rowTd" data-title="'Trade'" sortable="'subtask_trade'">{{p.subtask_trade}} - {{getTradeName(p.subtask_trade)}}</td>
                         <td class="rowTd" data-title="'Task'" sortable="'subtask'">{{p.subtask}}</td>
                         <td class="rowTd" data-title="'Subtask Name'" sortable="'subtask_name'">{{p.subtask_name}}</td>
+                        <td class="col-sm-1" data-title="'Units'" sortable="'unit.unit'">{{p.unit.unit}}</td>
                         <td class="rowTd" data-title="'Piece Rate'" sortable="'piece_rate'">{{p.piece_rate}}</td>
                         <td class="rowTd" data-title="'Crew Rate'" sortable="'crew_rate'">{{p.crew_rate | currency}}</td>
                         <td class="rowTd" data-title="'Piece/Hour'" sortable="'piece_per_hour_rate'">{{p.piece_per_hour_rate}}</td>

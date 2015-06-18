@@ -32,6 +32,10 @@ var SubtaskSchema = new Schema({
     piece_per_hour_rate: {
         type: Number
     },
+    unit: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Unit'
+    },
     materials: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Material'
@@ -45,14 +49,14 @@ var SubtaskSchema = new Schema({
 /**
  * Validations
  */
-SubtaskSchema.path('subtask_code').validate(function(subtask_code) {
+/*SubtaskSchema.path('subtask_code').validate(function(subtask_code) {
   return !!subtask_code;
 }, 'SubTask Code cannot be blank');
 
 SubtaskSchema.path('subtask_name').validate(function(subtask_name) {
   return !!subtask_name;
 }, 'SubTask Name cannot be blank');
-
+*/
 
 /**
  * Statics
@@ -60,7 +64,7 @@ SubtaskSchema.path('subtask_name').validate(function(subtask_name) {
 SubtaskSchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
-  });
+  }).populate('unit', 'unit').exec(cb);
 };
 
 mongoose.model('Subtask', SubtaskSchema);

@@ -75,7 +75,7 @@
 
 							<br><br><br><br>
 							
-							<div data-ng-if="item.materials.length">
+							<!-- <div data-ng-if="item.materials.length">
 								<div class="ibox-title"><h3 class="control-label">{{item.name}} - Materials:</h3></div>
 								<div class="ibox-content">
 									<div class="row">
@@ -163,14 +163,128 @@
 									</div>
 								</div>
 								<br><br><br><br>
-							</div>
+							</div> -->
+						</div>
+					
+						<div class="row">
+							<div class="col-md-8"></div>
+							<div class="col-md-2">
+						      	<label>Hours Allowed Sub Total</label>
+						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
+						    </div>
+							<div class="col-md-2">
+						      	<label>Labor Sub Total</label>
+						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
+						    </div>
+						</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div data-ng-if="p.subtasks.length">
+				<div ng-repeat="item in p.subtasks">
+					<div data-ng-if="item.materials.length">
+						<!-- <div class="ibox-title"><h3 class="control-label">Subtask Materials</h3></div> -->
+						<div class="ibox-content">
+							<!-- <div class="well well-lg"> -->
+						
+								<!-- <h2 class="control-label">{{item.name}}</h2> -->
+								<!-- <div data-ng-if="item.materials.length"> -->
+									<div class="ibox-title"><h3 class="control-label">{{item.name}} - Materials:</h3></div>
+									<div class="ibox-content">
+										<div class="row">
+											<!-- <div class="well well-lg"> -->
+												<div ng-repeat="mat in item.materials">
+													<h4>{{mat.description}}</h4>
+													<div class="col-md-2">
+														<label class="control-label">Quantity</label>
+														<input type="text" ng-model="mat.quantity" class="form-control m-b" value="{{mat.quantity}}">
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Measurement</label>
+														<input type="text" ng-model="mat.unit" class="form-control m-b" value="{{mat.unit}}" disabled>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Units/Order</label>
+														<input type="text" ng-model="mat.units_per_order" class="form-control m-b" value="{{mat.units_per_order}}" disabled>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Price/Order</label>
+														<span ng-model="mat.price_per_order" class="form-control m-b" disabled>{{mat.price_per_order | currency}}</span>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Delivery Price</label>
+														<input type="text" ng-model="mat.delivery_price" class="form-control m-b" value="{{mat.delivery_price}}" my-currency>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Mat. Total</label>
+														<span class="form-control m-b" disabled>{{mat.quantity*mat.price_per_order | currency}}
+													</div>
+													<div class="row"></div>
+												</div>
+												<div class="row">
+													<div class="col-md-8"></div>
+													<div class="col-md-2">
+														<label class="control-label">Delivery Sub Total</label>
+														<span class="form-control m-b" disabled>{{item.material_delivery_subtotal | currency}}</span>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Sub Total</label>
+														<span class="form-control m-b" disabled>{{item.material_subtotal | currency}}</span>
+													</div>
+												</div>
+											<!-- </div> -->
+										</div>
+									</div>
+								<!-- </div> -->
+								<div data-ng-if="item.equipment.length">
+									<div class="ibox-title"><h3 class="control-label">{{item.name}} - Equipment:</h3></div>
+									<div class="ibox-content">
+										<div class="row">
+											<!-- <div class="well well-lg"> -->
+												<div ng-repeat="equip in item.equipment">
+													<h4>{{equip.name}} - {{equip.description}}</h4>
+													<div class="col-md-2">
+														<label class="control-label">Quantity</label>
+														<input type="text" ng-model="equip.quantity" class="form-control m-b" value="{{equip.quantity}}">
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Price</label>
+														<span ng-model="equip.price" class="form-control m-b" disabled>{{equip.price | currency}}</span>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Delivery Price</label>
+														<input type="text" ng-model="equip.delivery_price" class="form-control m-b" value="{{equip.delivery_price}}" my-currency>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Equip. Total</label>
+														<span class="form-control m-b" disabled>{{equip.quantity*equip.price | currency}}
+													</div>
+													<div class="row"></div>
+												</div>
+												<div class="row">
+													<div class="col-md-8"></div>
+													<div class="col-md-2">
+														<label class="control-label">Delivery Sub Total</label>
+														<span class="form-control m-b" disabled>{{item.equipment_delivery_subtotal | currency}}</span>
+													</div>
+													<div class="col-md-2">
+														<label class="control-label">Sub Total</label>
+														<span class="form-control m-b" disabled>{{item.equipment_subtotal | currency}}</span>
+													</div>
+												</div>
+											<!-- </div> -->
+										</div>
+									</div>
+								</div>
+							<!-- </div> -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!-- <hr><br><br><br> -->
 		
 		<div data-ng-if="p.materials.length">
 			<div class="ibox-title"><h3 class="control-label">Task Materials:</h3></div>

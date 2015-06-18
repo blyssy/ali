@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.general-tasks').controller('SubTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Subtasks', '$filter', 'ngTableParams', 'Materials', 'Equipments',
-    function($scope, Global, Menus, $rootScope, $http, Subtasks, $filter, NGTableParams, Materials, Equipments) {
+angular.module('mean.general-tasks').controller('SubTasksController', ['$scope', 'Global', 'Menus', '$rootScope', '$http', 'Subtasks', '$filter', 'ngTableParams', 'Materials', 'Equipments', 'Units',
+    function($scope, Global, Menus, $rootScope, $http, Subtasks, $filter, NGTableParams, Materials, Equipments, Units) {
         $scope.global = Global;
         $scope.subtasks = [];
         $scope.subtasks.materials = [];
@@ -20,6 +20,8 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                     //get the materials list
                     $scope.materials_list = materials;
                 });
+
+                $scope.units = Units.query();
 
                 Equipments.query({}, function(equipments) {
                     //get the equipments list
@@ -52,6 +54,7 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                 subtask_trade: $scope.subtask_trade,
                 subtask: $scope.subtask,
                 subtask_name: $scope.subtask_name,
+                unit: $scope.unit._id,
                 piece_rate: $scope.piece_rate,
                 crew_rate: $scope.crew_rate,
                 piece_per_hour_rate: $scope.piece_per_hour_rate
@@ -69,6 +72,7 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
             this.subtask_trade = 
             this.subtask = 
             this.subtask_name = 
+            this.unit =
             this.piece_rate =
             this.crew_rate = 
             this.piece_per_hour_rate = '';
@@ -82,6 +86,7 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                 subtask_trade: subtask.subtask_trade,
                 subtask: subtask.subtask,
                 subtask_name: subtask.subtask_name,
+                unit: subtask.unit._id,
                 piece_rate: subtask.piece_rate,
                 crew_rate: subtask.crew_rate,
                 piece_per_hour_rate: subtask.piece_per_hour_rate,
@@ -107,6 +112,7 @@ angular.module('mean.general-tasks').controller('SubTasksController', ['$scope',
                 subtask_trade: subtask.subtask_trade,
                 subtask: subtask.subtask,
                 subtask_name: subtask.subtask_name,
+                unit: subtask.unit._id,
                 piece_rate: subtask.piece_rate,
                 crew_rate: subtask.crew_rate,
                 piece_per_hour_rate: subtask.piece_per_hour_rate,
