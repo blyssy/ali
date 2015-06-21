@@ -36,7 +36,18 @@
 				<div class="well well-lg">
 					<div data-ng-if="p.subtasks.length">
 						<div ng-repeat="item in p.subtasks">
-							<h2 class="control-label">{{item.name}}</h2>
+							<h2 class="control-label">{{item.name}} - </h2>
+							<div data-ng-if="item.piece_rate && !item.piece_per_hour_rate">
+								<p>Piece Rate: {{item.piece_rate | currency}}</p>
+							</div>
+							<div data-ng-if="item.piece_per_hour_rate">
+								<p>Piece/Hour Rate: {{item.piece_per_hour_rate}}</p>
+							</div>
+							<div data-ng-if="!item.piece_rate && !item.piece_per_hour_rate">
+								<p>No Earning Rate</p>
+							</div>
+
+
 							<div class="col-md-2">
 								<!-- <div data-ng-if="!item.bid_hours"> -->
 									<label>Quantity</label>
@@ -48,8 +59,8 @@
 								</div> -->
 							</div>
 							<div class="col-md-2">
-								<label>Piece Rate</label>
-								<span class="form-control m-b" disabled>{{item.piece_rate | currency}}</span>
+								<label>Measurement</label>
+								<span class="form-control m-b" disabled>{{item.unit}}</span>
 							</div>
 							<div class="col-md-2">
 								<label>Crew Rate</label>
@@ -66,11 +77,11 @@
 							</div>
 							<div class="col-md-2">
 						      	<label>Hours Allowed</label>
-						      	<span class="form-control m-b" disabled>{{hoursAllowed(item.bid_hours, currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate), item.crew_rate)}}</span>
+						      	<span class="form-control m-b" disabled>{{item.hours_allowed}}</span>
 						    </div>
 							<div class="col-md-2">
 						      	<label>Direct Labor Costs</label>
-						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
+						      	<span class="form-control m-b" disabled>{{item.current_net_pay | currency}}</span>
 						    </div>
 
 							<br><br><br><br>
@@ -170,11 +181,11 @@
 							<div class="col-md-8"></div>
 							<div class="col-md-2">
 						      	<label>Hours Allowed Sub Total</label>
-						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
+						      	<span class="form-control m-b" disabled>{{p.hours_allowed_subtotal}}</span>
 						    </div>
 							<div class="col-md-2">
 						      	<label>Labor Sub Total</label>
-						      	<span class="form-control m-b" disabled>{{currentNetPay(item.bid_hours, item.crew_rate, item.quantity, item.piece_rate) | currency}}</span>
+						      	<span class="form-control m-b" disabled>{{p.current_net_pay_subtotal | currency}}</span>
 						    </div>
 						</div>
 				    </div>
@@ -378,7 +389,7 @@
   
       <div class="pull-right">
       	<button class="btn btn-primary dim" type="button" ng-click="update(p)"><i class="fa fa-save"></i> Save</button>
-      	<button class="btn btn-primary dim" type="button" ng-click="next(p._id)"><i class="fa fa-arrow-circle-o-right"></i> Next</button>
+      	<button class="btn btn-primary dim" type="button" ng-click="next(p)"><i class="fa fa-arrow-circle-o-right"></i> Next</button>
       	<button class="btn btn-primary dim" type="button" ng-click="setTaskEditId(-1)"><i class="fa fa-times"></i> Close</button>
       </div>
 	</div>

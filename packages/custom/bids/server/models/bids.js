@@ -317,6 +317,9 @@ var BidSchema = new Schema({
             name: {
                 type: String
             },
+            unit: {
+                type: String
+            },
             piece_rate: {
                 type: Number
             },

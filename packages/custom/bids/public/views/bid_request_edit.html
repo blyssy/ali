@@ -6,6 +6,7 @@
 
 	<div data-ng-if="(construction_multi)">Multi {{bid.project_plan.multi}}</div> -->
 
+
 	<div class="row">
 		<div class="col-md-1">
 		    <label>Select Plan </label>
@@ -14,132 +15,199 @@
 		        </select>
 		    </div>
 		</div>
-		<div ng-show="expanded_table == 'true'">
-			<div class="col-lg-11">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>Plan: {{current_plan.item}} Totals</h5>
-						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-						<button class="btn btn-primary btn-xs" type="button" ng-click="toggleTableColumns()"> Toggle Columns</button>
-					</div>
-					<div class="ibox-content">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Bid Total</th>
-									<th>Labor</th>
-									<th>%</th>
-									<th>Material</th>
-									<th>%</th>
-									<th>Equipment</th>
-									<th>%</th>
-									<th>General Liability</th>
-									<th>%</th>
-									<th>Work Comp</th>
-									<th>%</th>
-									<th>Overhead</th>
-									<th>%</th>
-									<th>Payroll Taxes</th>
-									<th>%</th>
-									<th>Labor Hours</th>
-									<th>Avg Hourly Wage</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{bid_total | currency}}</td>
-									<td>{{bid_total_labor | currency}}</td>
-									<td>{{ (bid_total_labor / bid_total) * 100 | number: 2}}%</td>
-									<td>{{bid_total_materials | currency}}</td>
-									<td>{{ (bid_total_materials / bid_total) * 100 | number: 2}}%</td>
-									<td>{{bid_total_equipment | currency}}</td>
-									<td>{{ (bid_total_equipment / bid_total) * 100 | number: 2}}%</td>
-									<td>{{bid_general_liability | currency}}</td>
-									<td>{{ (bid_general_liability / bid_total) * 100 | number: 2}}%</td>
-										<td>{{bid_direct_labor | currency}}</td>
-										<td>10%</td>
-										<td>{{bid_direct_labor | currency}}</td>
-										<td>10%</td>
-										<td>{{bid_direct_labor | currency}}</td>
-										<td>10%</td>
-										<td>{{bid_direct_labor}}</td>
-										<td>{{19.5 | currency}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div ng-show="expanded_table == 'false'">
-			<div class="col-lg-11">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>Plan: {{current_plan.item}} Totals</h5> 
-						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-						<button class="btn btn-primary btn-xs" type="button" ng-click="toggleTableColumns()"> Toggle Columns</button>
-					</div>
-					<div class="ibox-content">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Bid Total</th>
-									<th>Total Labor</th>
-									<th>%</th>
-									<th>Total Material</th>
-									<th>%</th>
-									<th>Total Equipment</th>
-									<th>%</th>
-									<th>General Liability</th>
-									<th>%</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{bid_total | currency}}</td>
-									<td>{{bid_total_labor | currency}}</td>
-									<td>{{ (bid_total_labor / bid_total) * 100 | number: 2}}%</td>
-									<td>{{bid_total_materials | currency}}</td>
-									<td>{{ (bid_total_materials / bid_total) * 100 | number: 2}}%</td>
-									<td>{{bid_total_equipment | currency}}</td>
-									<td>{{ (bid_total_equipment / bid_total) * 100 | number: 2}}%</td>
-									<td>{{bid_general_liability | currency}}</td>
-									<td>{{ (bid_general_liability / bid_total) * 100 | number: 2}}%</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	<!-- </div>
-	<div class="row"> -->
-		<!-- <div class="col-md-1"></div> -->
-		<div data-ng-if="current_plan.item != 'Cover'">
+		<div data-ng-if="current_plan.item == 'Cover'">
 			<div class="col-lg-11">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Plan: {{current_plan.item}} Tasks</h5>
 					</div>
 					<div class="ibox-content">
-						<table ng-table="bidTasksTableParams" class="table">
-							<tbody ng-repeat="p in $data | orderBy : '_id'">
-								<tr id="tr{{p._id}}">
-									<td class="col-sm-2" data-title="'Task #'" sortable="'task'">{{p.task}}</td>
-									<td class="col-sm-4" data-title="'Task Name'" sortable="'name'">{{p.name}}</td>
-									<td class="col-sm-2" data-title="'Labor'" sortable="'task_labor'">{{p.task_labor}}</td>
-									<td class="col-sm-2" data-title="'Material'" sortable="'task_material'">{{p.task_material}}</td>
-									<td class="col-sm-2" data-title="'Equipment'" sortable="'task_equipment'">{{p.task_equipment}}</td>
-									<td class="col-sm-1">
-		                                <button class="btn btn-primary dim" type="button" ng-click="setTaskEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
-		                            </td>                      
-		                        </tr>
-		                        <tr ng-show="taskEditId===p._id" ng-if="taskEditId===p._id">
-		                            <td colspan="6" ng-include src="'/bids/views/editRow/task.html'"></td>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Plan</th>
+									<th>Bid Total</th>
+									<th>Labor</th>
+									<th>%</th>
+									<th>Direct Labor Costs</th>
+									<th>%</th>
+									<th>Work Comp</th>
+									<th>%</th>
+									<th>Payroll Taxes</th>
+									<th>%</th>
+									<th>Overhead</th>
+									<th>%</th>
+									<th>Hours Allowed</th>
+									<th>Avg Hourly Pay</th>
+									<th>Material</th>
+									<th>%</th>
+									<th>Equipment</th>
+									<th>%</th>
+									<th>General Liability</th>
+									<th>%</th>
+								</tr>
+							</thead>
+							<tbody ng-repeat="plan in bid_menu">
+								<tr ng-hide="plan.item == 'Cover'">
+									<td>{{plan.item}}
+									<td>{{plan.bid_total | currency}}</td>
+									<td>{{plan.bid_total_labor | currency}}</td>
+									<td>{{ (plan.bid_total_labor / plan.bid_total) * 100 | number: 2}}%</td>
+									<td>{{plan.bid_direct_labor | currency}}</td>
+									<td>{{ (plan.bid_direct_labor / plan.bid_total_labor) * 100 | number: 2}}%</td>
+									<td>{{plan.bid_workers_comp | currency}}</td>
+									<td>{{ (plan.bid_workers_comp / plan.bid_total_labor) * 100 | number: 2}}%</td>
+									<td>{{plan.bid_payroll_taxes | currency}}</td>
+									<td>{{ (plan.bid_payroll_taxes / plan.bid_total_labor) * 100 | number: 2}}%</td>
+									<td>{{plan.bid_overhead_and_profit | currency}}</td>
+									<td>{{ (plan.bid_overhead_and_profit / plan.bid_total_labor) * 100 | number: 2}}%</td>
+									<td>{{plan.bid_total_hours_allowed}}</td>
+									<td>{{plan.bid_direct_labor / plan.bid_total_hours_allowed | currency}}
+									<td>{{plan.bid_total_materials | currency}}</td>
+									<td>{{ (plan.bid_total_materials / plan.bid_total) * 100 | number: 2}}%</td>
+									<td>{{plan.bid_total_equipment | currency}}</td>
+									<td>{{ (plan.bid_total_equipment / plan.bid_total) * 100 | number: 2}}%</td>
+									<td>{{plan.bid_general_liability | currency}}</td>
+									<td>{{ (plan.bid_general_liability / plan.bid_total) * 100 | number: 2}}%</td>
 		                        </tr>
 							</tbody>
 						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div data-ng-if="current_plan.item != 'Cover'">
+			<div ng-show="expanded_table == 'true'">
+				<div class="col-lg-11">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>Plan: {{current_plan.item}} Totals</h5>
+							&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+							<button class="btn btn-primary btn-xs" type="button" ng-click="toggleTableColumns()"> Toggle Columns</button>
+						</div>
+						<div class="ibox-content">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Bid Total</th>
+										<th>Labor</th>
+										<th>%</th>
+										<th>Direct Labor Costs</th>
+										<th>%</th>
+										<th>Work Comp</th>
+										<th>%</th>
+										<th>Payroll Taxes</th>
+										<th>%</th>
+										<th>Overhead</th>
+										<th>%</th>
+										<th>Hours Allowed</th>
+										<th>Avg Hourly Pay</th>
+										<th>Material</th>
+										<th>%</th>
+										<th>Equipment</th>
+										<th>%</th>
+										<th>General Liability</th>
+										<th>%</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>{{bid_total | currency}}</td>
+										<td>{{bid_total_labor | currency}}</td>
+										<td>{{ (bid_total_labor / bid_total) * 100 | number: 2}}%</td>
+										<td>{{bid_direct_labor | currency}}</td>
+										<td>{{ (bid_direct_labor / bid_total_labor) * 100 | number: 2}}%</td>
+										<td>{{bid_workers_comp | currency}}</td>
+										<td>{{ (bid_workers_comp / bid_total_labor) * 100 | number: 2}}%</td>
+										<td>{{bid_payroll_taxes | currency}}</td>
+										<td>{{ (bid_payroll_taxes / bid_total_labor) * 100 | number: 2}}%</td>
+										<td>{{bid_overhead_and_profit | currency}}</td>
+										<td>{{ (bid_overhead_and_profit / bid_total_labor) * 100 | number: 2}}%</td>
+										<td>{{bid_total_hours_allowed}}</td>
+										<td>{{bid_direct_labor / bid_total_hours_allowed | currency}}
+										<td>{{bid_total_materials | currency}}</td>
+										<td>{{ (bid_total_materials / bid_total) * 100 | number: 2}}%</td>
+										<td>{{bid_total_equipment | currency}}</td>
+										<td>{{ (bid_total_equipment / bid_total) * 100 | number: 2}}%</td>
+										<td>{{bid_general_liability | currency}}</td>
+										<td>{{ (bid_general_liability / bid_total) * 100 | number: 2}}%</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-show="expanded_table == 'false'">
+				<div class="col-lg-11">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>Plan: {{current_plan.item}} Totals</h5> 
+							&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+							<button class="btn btn-primary btn-xs" type="button" ng-click="toggleTableColumns()"> Toggle Columns</button>
+						</div>
+						<div class="ibox-content">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Bid Total</th>
+										<th>Total Labor</th>
+										<th>%</th>
+										<th>Total Material</th>
+										<th>%</th>
+										<th>Total Equipment</th>
+										<th>%</th>
+										<th>General Liability</th>
+										<th>%</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>{{bid_total | currency}}</td>
+										<td>{{bid_total_labor | currency}}</td>
+										<td>{{ (bid_total_labor / bid_total) * 100 | number: 2}}%</td>
+										<td>{{bid_total_materials | currency}}</td>
+										<td>{{ (bid_total_materials / bid_total) * 100 | number: 2}}%</td>
+										<td>{{bid_total_equipment | currency}}</td>
+										<td>{{ (bid_total_equipment / bid_total) * 100 | number: 2}}%</td>
+										<td>{{bid_general_liability | currency}}</td>
+										<td>{{ (bid_general_liability / bid_total) * 100 | number: 2}}%</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- </div>
+		<div class="row"> -->
+			<!-- <div class="col-md-1"></div> -->
+			<div data-ng-if="current_plan.item != 'Cover'">
+				<div class="col-lg-11">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>Plan: {{current_plan.item}} Tasks</h5>
+						</div>
+						<div class="ibox-content">
+							<table ng-table="bidTasksTableParams" class="table">
+								<tbody ng-repeat="p in $data | orderBy : '_id'">
+									<tr id="tr{{p._id}}">
+										<td class="col-sm-2" data-title="'Task #'" sortable="'task'">{{p.task}}</td>
+										<td class="col-sm-4" data-title="'Task Name'" sortable="'name'">{{p.name}}</td>
+										<td class="col-sm-2" data-title="'Labor'" sortable="'task_labor'">{{p.task_labor}}</td>
+										<td class="col-sm-2" data-title="'Material'" sortable="'task_material'">{{p.task_material}}</td>
+										<td class="col-sm-2" data-title="'Equipment'" sortable="'task_equipment'">{{p.task_equipment}}</td>
+										<td class="col-sm-1">
+			                                <button class="btn btn-primary dim" type="button" ng-click="setTaskEditId(p._id)"><i class="fa fa-edit"></i> Edit</button>
+			                            </td>                      
+			                        </tr>
+			                        <tr ng-show="taskEditId===p._id" ng-if="taskEditId===p._id">
+			                            <td colspan="6" ng-include src="'/bids/views/editRow/task.html'"></td>
+			                        </tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

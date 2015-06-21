@@ -149,12 +149,8 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                     if(company_factor.trade_code === $scope.my_bid_trade) {
                 
                         $scope.company_factors = company_factor;
-                    
-                        // if($scope.company_factors)
-                        $scope.applayCalculations(bid_tasks);
 
-            	    	//$scope.bid_total = '2000';
-            	    	//$scope.bid_direct_labor = '900';
+                        $scope.applayCalculations(bid_tasks);
 
             	    	data = bid_tasks;
             	        $scope.bidTasksTableParams = new NGTableParams({
@@ -286,9 +282,6 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
 
         $scope.applayCalculations(bid_tasks);
 
-        //$scope.bid_total = '2000';
-        //$scope.bid_direct_labor = '900';
-
         data = bid_tasks;
 
         $scope.bidTasksTableParams.reload();
@@ -371,6 +364,7 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         $scope.bid_total_materials = 0;
         $scope.bid_total_equipment = 0;
         $scope.bid_total = 0;
+        $scope.bid_total_hours_allowed = 0;
         var subtask_mat_subtotal;
         var subtask_mat_dev_subtotal;
         var subtask_eq_subtotal;
@@ -378,10 +372,12 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         var task_material_total;
         var task_equipment_total;
         var task_total_labor;
-        var total_labor = 0;
+        //var total_labor = 0;
         var task_total_hours_allowed = 0;
         var task_employee_benefits;
         var task_traning_and_education;
+        var task_hours_allowed_subtotal;
+        var task_current_net_pay_subtotal;
 
         tasks.forEach(function(task, index) {
             task_material_total = 0;
@@ -392,6 +388,8 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
             task_total_hours_allowed = 0;
             task_employee_benefits = 0;
             task_traning_and_education = 0;
+            task_hours_allowed_subtotal = 0;
+            task_current_net_pay_subtotal = 0;
 
             //iterate over the subtasks and add up
             task.subtasks.forEach(function(subtask, ii) {
@@ -431,8 +429,14 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 task_material_total += subtask.total_materials;
                 task_equipment_total += subtask.total_equipment;
 
-                subtask.current_net_pay = 
-                    $scope.currentNetPay(subtask.bid_hours, subtask.crew_rate, subtask.quantity, subtask.piece_rate);
+                if(!subtask.piece_per_hour_rate) {
+                    subtask.current_net_pay = 
+                        $scope.currentNetPay(subtask.bid_hours, subtask.crew_rate, subtask.quantity, subtask.piece_rate);
+                } else {
+                    var bid_hours = subtask.quantity * subtask.piece_per_hour_rate;
+                    subtask.current_net_pay = bid_hours * subtask.crew_rate;
+                }
+
                 subtask.hours_allowed = 
                     $scope.hoursAllowed(subtask.bid_hours, subtask.current_net_pay, subtask.crew_rate);
                 subtask.employee_benefits = 
@@ -440,6 +444,10 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 subtask.training_and_education = 
                     $scope.trainingAndEducation(subtask.hours_allowed, $scope.company_factors.training_education);
 
+                if(subtask.current_net_pay) {
+                    task_current_net_pay_subtotal += subtask.current_net_pay;
+                }
+                task_hours_allowed_subtotal = parseFloat(task_hours_allowed_subtotal) + parseFloat(subtask.hours_allowed);
                 task_employee_benefits += subtask.employee_benefits;
                 task_traning_and_education += subtask.training_and_education;
                 task_total_labor += subtask.current_net_pay;
@@ -447,11 +455,16 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 task_total_hours_allowed.toFixed(2);
             });
 
-            task.total_labor = task_total_labor;
-            task.total_current_net_pay = task_total_labor;
+            //task.total_labor = task_total_labor;
             task.total_hours_allowed = task_total_hours_allowed;
             task.total_employee_benefits = task_employee_benefits;
             task.total_training_and_education = task_traning_and_education;
+            task.hours_allowed_subtotal = task_hours_allowed_subtotal;
+            task.current_net_pay_subtotal = task_current_net_pay_subtotal;
+
+            //not sure if there is some extra calculations at this point (taxes) or somthing
+            task.total_current_net_pay = task.current_net_pay_subtotal;
+            task.total_labor = task.total_current_net_pay;
 
             var materials_subtotal = 0;
             var materials_dev_subtotal = 0;
@@ -492,11 +505,18 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
             if(!task.total_materials) task.total_materials = 0;
             if(!task.total_equipment) task.total_equipment = 0;
 
+            $scope.bid_total_hours_allowed += task.total_hours_allowed;
             $scope.bid_total_labor += task_total_labor;
             $scope.bid_total_materials += task.total_materials;
             $scope.bid_total_equipment += task.total_equipment;
         });
 
+        $scope.bid_direct_labor = $scope.bid_total_labor;
+        $scope.bid_workers_comp = $scope.bid_total_labor * $scope.company_factors.w_comp_high;
+        $scope.bid_payroll_taxes = $scope.bid_total_labor * $scope.company_factors.taxes;
+        $scope.bid_overhead_and_profit = $scope.bid_total_hours_allowed * ($scope.company_factors.general_contractor * 100);
+
+        $scope.bid_total_labor = $scope.bid_total_labor + $scope.bid_workers_comp + $scope.bid_payroll_taxes + $scope.bid_overhead_and_profit;
         $scope.bid_general_liability = $scope.bid_total_labor * $scope.company_factors.general_liability;
         $scope.bid_general_liability += $scope.bid_total_materials * $scope.company_factors.general_liability;
         $scope.bid_general_liability += $scope.bid_total_equipment * $scope.company_factors.general_liability;
@@ -504,13 +524,37 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         $scope.bid_total = $scope.bid_total_labor + $scope.bid_total_materials + $scope.bid_total_equipment + $scope.bid_general_liability;
         //$scope.bid_general_liability = $scope.bid_total * $scope.company_factors.general_liability;
         //$scope.bid_total_labor = total_labor;
-        console.log('setting total labor to ' + total_labor);
+
+        $scope.bid_menu.forEach(function(bid) {
+            if($scope.current_plan.item === bid.item) {
+                console.log('found the current item ' + bid.item);
+                bid.bid_total = $scope.bid_total;
+                bid.bid_direct_labor = $scope.bid_direct_labor;
+                bid.bid_total_labor = $scope.bid_total_labor;
+                bid.bid_total_materials = $scope.bid_total_materials;
+                bid.bid_total_equipment = $scope.bid_total_equipment;
+                bid.bid_general_liability = $scope.bid_general_liability;
+                bid.bid_workers_comp = $scope.bid_workers_comp;
+                bid.bid_payroll_taxes = $scope.bid_payroll_taxes;
+                bid.bid_overhead_and_profit = $scope.bid_overhead_and_profit;
+                bid.bid_total_hours_allowed = $scope.bid_total_hours_allowed;
+            }
+        });
+
+        console.log('setting totals for plan ' + $scope.current_plan.item);
+    };
+
+    $scope.buildBidCoverPage = function() {
+        $scope.bid_menu.forEach(function(bid) {
+            $scope.current_plan = bid;
+            $scope.updateTablePlan();
+        });
     };
 
     $scope.onSelect = function() {
         if($scope.current_plan.item === 'Cover') {
             data = [];
-            $scope.bidTasksTableParams.reload();
+            $scope.buildBidCoverPage();
         } else {
             $scope.updateTablePlan();
         }
@@ -520,9 +564,10 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         $scope.taskEditId = pid;
     };
 
-    $scope.next =  function(pid) {
+    $scope.next =  function(item) {
         //pid -1 is the index of the current task so lets just start with the next task and iterate
-        var current_task_idx = pid;
+        $scope.update(item);
+        var current_task_idx = item._id;
         for(; current_task_idx < $scope.bid.task_list.length; current_task_idx = current_task_idx + 1) {
             if($scope.bid.task_list[current_task_idx].trade === $scope.my_bid_trade) {
                 $scope.taskEditId = $scope.bid.task_list[current_task_idx]._id;
