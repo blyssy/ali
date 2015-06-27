@@ -447,6 +447,11 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
                 if(subtask.current_net_pay) {
                     task_current_net_pay_subtotal += subtask.current_net_pay;
                 }
+                if(!subtask.current_net_pay) subtask.current_net_pay = 0;
+                if(!subtask.employee_benefits) subtask.employee_benefits = 0;
+                if(!subtask.training_and_education) subtask.training_and_education = 0;
+                if(!subtask.hours_allowed) subtask.hours_allowed = 0;
+                
                 task_hours_allowed_subtotal = parseFloat(task_hours_allowed_subtotal) + parseFloat(subtask.hours_allowed);
                 task_employee_benefits += subtask.employee_benefits;
                 task_traning_and_education += subtask.training_and_education;
