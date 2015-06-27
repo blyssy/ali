@@ -1,11 +1,31 @@
 <div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="BidRequestEditController" data-ng-init="init()">
 	<h1>Bid Request Edit</h1>
-	<!-- <p>{{bid_menu}}</p> 
-
-	<div data-ng-if="(construction_single)">Single {{bid.project_plan.single}}</div>
-
-	<div data-ng-if="(construction_multi)">Multi {{bid.project_plan.multi}}</div> -->
-
+	<div class="row">
+		<div class="col-md-8"></div>
+		<div class="col-md-2">
+			<h3>Copy Plan Data </h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8"></div>
+		<div class="col-md-1">
+		    <label>From</label>
+		    <div class="input-group">
+		        <select chosen class="form-control" data-ng-init="from_plan = bid_menu[0]" ng-model="from_plan" ng-change='onSelect()' ng-options="s.item for s in bid_menu" autofocus>
+		        </select>
+		    </div>
+		</div>
+	    <div class="col-md-1">
+			<label>To</label>
+		    <div class="input-group">
+		        <select chosen class="form-control" data-ng-init="to_plan = bid_menu[0]" ng-model="to_plan" ng-change='onSelect()' ng-options="s.item for s in bid_menu" autofocus>
+		        </select>
+		    </div>
+		</div>
+		<div class="col-md-1" valign="bottom">
+			<button class="btn btn-primary" type="button" ng-click="copyPlanData(from_plan, to_plan)"> Copy</button>
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="col-md-1">

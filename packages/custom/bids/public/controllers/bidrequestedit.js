@@ -723,6 +723,47 @@ angular.module('mean.bids').controller('BidRequestEditController', ['$scope', 'U
         });
     };
 
+    $scope.copyPlanData = function(from_plan, to_plan) {
+        console.log('in copy function ' + $scope);
+        to_plan.bid_direct_labor = from_plan.bid_direct_labor;
+        to_plan.bid_general_liability = from_plan.bid_general_liability;
+        to_plan.bid_overhead_and_profit = from_plan.bid_overhead_and_profit;
+        to_plan.bid_payroll_taxes = from_plan.bid_payroll_taxes;
+        to_plan.bid_total = from_plan.bid_total;
+        to_plan.bid_total_equipment = from_plan.bid_total_equipment;
+        to_plan.bid_total_hours_allowed = from_plan.bid_total_hours_allowed;
+        to_plan.bid_total_labor = from_plan.bid_total_labor;
+        to_plan.bid_total_materials = from_plan.bid_total_materials;
+        to_plan.bid_workers_comp = from_plan.bid_workers_comp;
+
+        $scope.bid.bidding_trades.forEach(function(trade_bid, idx) {
+            if($scope.getTradeCode(trade_bid.trade) === $scope.my_bid_trade) {
+                //found my trade bid list erase all entries for to_plan
+                trade_bid.bid = $filter('filter')(trade_bid.bid, {plan_code: '!'+to_plan.item});
+
+                var temp_list = [];
+                //now add the plan entries
+                trade_bid.bid.forEach(function(bid) {
+                    if(bid.plan_code === from_plan.item) {
+                        var temp_bid = {};
+                        angular.copy(bid, temp_bid);
+                        delete temp_bid._id;
+                        var idx = temp_list.push(temp_bid) - 1;
+                        temp_list[idx].plan_code = to_plan.item;
+                    }
+                });
+
+                temp_list.forEach(function(add) {
+                    trade_bid.bid.push(add);
+                });
+            }
+        });
+
+        $scope.bid.$update();
+                
+        $scope.updateTablePlan();
+    };
+
     $scope.getTradeCode = function(trade) {
     	var value;
     	switch(trade){
