@@ -46,6 +46,7 @@
     "grunt-env": "^0.4.1",
     "grunt-hook": "~0.3.0",
     "grunt-nodemon": "^0.3.0",
+    "jade": "^1.11.0",
     "jsonwebtoken": "^4.0.0",
     "load-grunt-tasks": "^0.6.0",
     "lodash": "2.4.1",
